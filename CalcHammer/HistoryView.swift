@@ -6,9 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HistoryView: View {
+    
+    @Environment(\.modelContext) private var context
+    
+    @Query private var conversionItems: [ConversionHistoryItem]
+    
     var body: some View {
-        Text("History Content Goes Here")
+        List{
+            ForEach (conversionItems) { item in
+                Text("\(item.inputNum) \(item.inputUnit) to \(item.outputNum) \(item.outputUnit)")
+            }
+        }
     }
 }

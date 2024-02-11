@@ -88,7 +88,6 @@
 		B8D9DF2F2B5851C5000651B1 = {
 			isa = PBXGroup;
 			children = (
-				B8C7F1352B794FE9008BB15D /* DataManager.swift */,
 				B8D9DF3A2B5851C5000651B1 /* CalcHammer */,
 				B8D9DF4B2B5851C6000651B1 /* CalcHammerTests */,
 				B8D9DF552B5851C6000651B1 /* CalcHammerUITests */,
@@ -109,6 +108,7 @@
 		B8D9DF3A2B5851C5000651B1 /* CalcHammer */ = {
 			isa = PBXGroup;
 			children = (
+				B8C7F1352B794FE9008BB15D /* DataManager.swift */,
 				B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */,
 				B8D9DF3D2B5851C5000651B1 /* ContentView.swift */,
 				B83781AC2B5DA01E007FDC6C /* FavouritesView.swift */,
