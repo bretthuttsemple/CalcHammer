@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 //global static variables
 struct GlobalData{
@@ -35,4 +36,22 @@ struct GlobalData{
     static var angleUnit:Array = ["Degrees (°)","Radians (rad)"]
     
     static var numberSystem:Array = ["Binary","Octal","Decimal","Hexadecimal"]
+}
+
+//History Manager Class
+@Model
+class ConversionHistoryItem: Identifiable {
+    var id: String
+    var inputUnit: String
+    var outputUnit: String
+    var inputNum: Double
+    var outputNum: Double
+    
+    init(inputUnit: String, outputUnit: String, inputNum: Double, outputNum: Double) {
+        self.id = UUID().uuidString
+        self.inputUnit = inputUnit
+        self.outputUnit = outputUnit
+        self.inputNum = inputNum
+        self.outputNum = outputNum
+    }
 }
