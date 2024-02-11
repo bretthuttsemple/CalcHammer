@@ -19,6 +19,15 @@ struct HistoryView: View {
             ForEach (conversionItems) { item in
                 Text("\(item.inputNum) \(item.inputUnit) to \(item.outputNum) \(item.outputUnit)")
             }
+            .onDelete{ indexes in
+                for index in indexes {
+                    deleteItem(conversionItems[index])
+                }
+                
+            }
         }
+    }
+    func deleteItem(_ item: ConversionHistoryItem){
+        context.delete(item)
     }
 }
