@@ -48,13 +48,11 @@ struct CalculatorView: View {
             .background(
                 NavigationLink(
                     destination: destinationView(),
-                    isActive: Binding<Bool>(
-                        get: { selectedCalculator != nil },
-                        set: { _ in selectedCalculator = nil } // Reset selection after navigation
-                    )
-                ) {
-                    EmptyView()
-                }
+                    label: {
+                        EmptyView()
+                    }
+                )
+                .isDetailLink(false) // Add this to prevent duplicate navigation bars
             )
         }
     }
