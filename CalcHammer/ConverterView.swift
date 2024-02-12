@@ -439,9 +439,10 @@ struct ConverterView: View {
         VStack {
             // Picker that selects system of unit
             Picker("Select Unit Type", selection: $selectedUnitIndex) {
-                ForEach(0..<GlobalData.unitSystems.count) { index in
-                    Text(GlobalData.unitSystems[index])
+                ForEach(Array(GlobalData.unitSystems.enumerated()), id: \.offset) { index, unit in
+                    Text(unit)
                 }
+
             }
             .pickerStyle(DefaultPickerStyle())
             .padding()
@@ -461,53 +462,78 @@ struct ConverterView: View {
                 switch selectedUnitIndex{
                 case 1:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.lengthUnit.count){index in Text(GlobalData.lengthUnit[index])
+                        ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
+
                     }
                 case 2:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.massUnit.count){index in Text(GlobalData.massUnit[index])
+                        ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
+
                     }
                 case 3:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.speedUnit.count){index in Text(GlobalData.speedUnit[index])
+                        ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
+
                     }
                 case 4:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.tempUnit.count){index in Text(GlobalData.tempUnit[index])
+                        ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
+
                     }
                 case 5:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.timeUnit.count){index in Text(GlobalData.timeUnit[index])
+                        ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
+
                     }
                 case 6:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.volumeUnit.count){index in Text(GlobalData.volumeUnit[index])
+                        ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 7:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.forceUnit.count){index in Text(GlobalData.forceUnit[index])
+                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 8:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.densityUnit.count){index in Text(GlobalData.densityUnit[index])
+                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 9:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.angleUnit.count){index in Text(GlobalData.angleUnit[index])
+                        ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 10:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(0..<GlobalData.numberSystem.count){index in Text(GlobalData.numberSystem[index])
+                        ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 default:
                     Text("Please Select a Unit Type")
@@ -525,53 +551,66 @@ struct ConverterView: View {
                 switch selectedUnitIndex{
                 case 1:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.lengthUnit.count){index in Text(GlobalData.lengthUnit[index])
+                        ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 2:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.massUnit.count){index in Text(GlobalData.massUnit[index])
+                        ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 3:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.speedUnit.count){index in Text(GlobalData.speedUnit[index])
+                        ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 4:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.tempUnit.count){index in Text(GlobalData.tempUnit[index])
+                        ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 5:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.timeUnit.count){index in Text(GlobalData.timeUnit[index])
+                        ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 6:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.volumeUnit.count){index in Text(GlobalData.volumeUnit[index])
+                        ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 7:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.forceUnit.count){index in Text(GlobalData.forceUnit[index])
+                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 8:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.densityUnit.count){index in Text(GlobalData.densityUnit[index])
+                        ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
+
                     }
                 case 9:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.angleUnit.count){index in Text(GlobalData.angleUnit[index])
+                        ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                            Text(unit)
                         }
-                    }
-                case 10:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(0..<GlobalData.numberSystem.count){index in Text(GlobalData.numberSystem[index])
-                        }
+
                     }
                 default:
                     Text("Please Select a Unit Type")
