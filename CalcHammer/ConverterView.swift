@@ -516,19 +516,12 @@ struct ConverterView: View {
                     }
                 case 8:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                case 9:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
                         ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
                             Text(unit)
                         }
 
                     }
-                case 10:
+                case 9:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
                         ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
                             Text(unit)

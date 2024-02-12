@@ -11,7 +11,7 @@ import SwiftData
 //global static variables
 struct GlobalData{
     static var unitSystems:Array = ["Select Unit Type","Length", "Mass", "Speed", "Temperature","Time"
-                                    ,"Volume","Force","/Density","/Angles","/Number Systems"]
+                                    ,"Volume","Force","/Angles","/Number Systems"]
     
     static var lengthUnit:Array = ["Micrometers (μm)", "Millimeters (mm)","Centimeters (cm)","Meters (m)","Kilometers (km)",
                                    "Inches (in)","Feet (ft)","Yards (yd)","Mile (mi)","Nautical Miles (nmi)"]
