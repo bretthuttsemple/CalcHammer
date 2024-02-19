@@ -5,10 +5,9 @@ import SwiftUI
 struct CalculatorView: View {
     let calculators = [
         "Date Difference Calculator",
-        "Accumulated Depreciation",
+        "Accumulated Depreciation Calculator",
         "Accumulated Apreciation Calculator",
         "Grade Calculator",
-        "Mean Average Calculator",
         "BMI Calculator",
         "Compound Interest Calculator",
         "Caffeine Half-Life Calculator",
@@ -17,9 +16,11 @@ struct CalculatorView: View {
         "Random Number Generator",
         "Calorie Serving Size Calculator",
         "Unit Price Calculator",
-        "Pizza Area Calculator",
+        "Pizza Area Cost Calculator",
         "Exact Age Calculator",
-        "Speed of Sound Calculator"
+        "Speed of Sound Calculator",
+        "Percantage Calculator",
+        "Fuel Cost Calculator"
     ]
     
     @State private var selectedCalculator: Int?
@@ -71,29 +72,31 @@ struct CalculatorView: View {
             case 3:
                 GradeCalculatorView()
             case 4:
-                MeanAverageCalculatorView()
-            case 5:
                 BMICalculatorView()
-            case 6:
+            case 5:
                 CompoundInterestCalculatorView()
-            case 7:
+            case 6:
                 CaffeineHalfLifeCalculatorView()
-            case 8:
+            case 7:
                 LiquidDilutionCalculatorView()
-            case 9:
+            case 8:
                 PermutationCalculatorView()
-            case 10:
+            case 9:
                 RandomNumberGeneratorView()
-            case 11:
+            case 10:
                 CalorieServingSizeCalculatorView()
-            case 12:
+            case 11:
                 UnitPriceCalculatorView()
-            case 13:
+            case 12:
                 PizzaAreaCalculatorView()
-            case 14:
+            case 13:
                 ExactAgeCalculatorView()
-            case 15:
+            case 14:
                 SpeedOfSoundCalculatorView()
+            case 15:
+                PercantageCalculator()
+            case 16:
+                FuelCostCalculator()
             default:
                 EmptyView()
             }
@@ -106,13 +109,6 @@ struct CalculatorView: View {
         var body: some View {
             Text("Accumulated Appreciation Calculator View")
                 .navigationTitle("Accumulated Appreciation Calculator")
-        }
-    }
-
-    struct MeanAverageCalculatorView: View {
-        var body: some View {
-            Text("Mean Average Calculator View")
-                .navigationTitle("Mean Average Calculator")
         }
     }
 
@@ -210,6 +206,20 @@ struct CalculatorView: View {
         var body: some View {
             Text("Speed of Sound Calculator View")
                 .navigationTitle("Speed of Sound Calculator")
+        }
+    }
+    
+    struct PercantageCalculator: View {
+        var body: some View {
+            Text("Percantage Calculator View")
+                .navigationTitle("Percantage Calculator")
+        }
+    }
+    
+    struct FuelCostCalculator: View {
+        var body: some View {
+            Text("Fuel cost calcualtor view")
+                .navigationTitle("Fuel Cost Calculator")
         }
     }
 }
