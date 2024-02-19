@@ -30,18 +30,22 @@ struct CalculatorView: View {
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
                     ForEach(calculators.indices, id: \.self) { index in
-                        Text(calculators[index])
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(width: 175, height: 150)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .multilineTextAlignment(.center) 
-                            .alignmentGuide(.leading) { _ in CGFloat(-10) }
-                            .onTapGesture {
-                                selectedCalculator = index                            }
-                    }
+                        Button(action: {
+                            selectedCalculator = index
+                        }) {
+                            Text(calculators[index])
+                                .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(width: 175, height: 150)
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                                    .multilineTextAlignment(.center)
+                                                }
+                                    .alignmentGuide(.leading) { _ in CGFloat(-10) }
+                                    .onTapGesture {
+                                        selectedCalculator = index                            }
+                            }
                 }
                 .padding()
             }
@@ -49,11 +53,13 @@ struct CalculatorView: View {
             .navigationTitle("Calculators")
             .background(
                 NavigationLink(
-                    destination: destinationView(),
-                    label: {
-                        EmptyView()
-                    }
-                )
+                            destination: destinationView(),
+                            tag: selectedCalculator ?? -1, // Use a default value if selectedCalculator is nil
+                            selection: $selectedCalculator,
+                            label: {
+                                EmptyView()
+                            }
+                        )
                 .isDetailLink(false) // Add this to prevent duplicate navigation bars
             )
         }
@@ -61,7 +67,7 @@ struct CalculatorView: View {
     
     @ViewBuilder
     func destinationView() -> some View {
-        if let index = selectedCalculator {            
+        if let index = selectedCalculator {
             switch index {
             case 0:
                 DateDifferenceCalculatorView()
@@ -112,13 +118,68 @@ struct CalculatorView: View {
         }
     }
 
+    //edit this later :)
     struct BMICalculatorView: View {
+        @State private var weight = ""
+        @State private var height = ""
+        @State private var isMetric = true // Toggle for metric/imperial system
+        @State private var bmi = "" // Output BMI value
+
         var body: some View {
-            Text("BMI Calculator View")
-                .navigationTitle("BMI Calculator")
+            VStack {
+                Toggle(isOn: $isMetric) {
+                    Text("Metric")
+                }
+                .padding()
+                
+                TextField(isMetric ? "Enter weight (kg)" : "Enter weight (lbs)", text: $weight)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                TextField(isMetric ? "Enter height (m)" : "Enter height (in)", text: $height)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                Button("Calculate BMI") {
+                    calculateBMI()
+                }
+                .padding()
+
+                Text("BMI: \(bmi)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+                    .navigationTitle("BMI Calculator")
+                    .background(
+                        Color.white.opacity(0.0001) // Color makes it so tap gesture works, don't question it
+                            .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            }
+                    )
+            
+        }
+        
+
+        private func calculateBMI() {
+            guard let weight = Double(weight),
+                  let height = Double(height),
+                  height != 0 else {
+                return
+            }
+            
+            let bmiValue: Double
+            if isMetric {
+                bmiValue = weight / (height * height)
+            } else {
+                bmiValue = (weight / (height * height)) * 703 // Conversion for imperial system
+            }
+            
+            bmi = String(format: "%.2f", bmiValue)
         }
     }
-
+    
     struct CompoundInterestCalculatorView: View {
         var body: some View {
             Text("Compound Interest Calculator View")
