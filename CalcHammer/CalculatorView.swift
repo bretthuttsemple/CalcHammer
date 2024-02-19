@@ -33,9 +33,10 @@ struct CalculatorView: View {
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
-                            .frame(maxWidth: .infinity)
+                            .frame(width: 175, height: 150)
                             .background(Color.blue)
                             .cornerRadius(10)
+                            .multilineTextAlignment(.center) 
                             .alignmentGuide(.leading) { _ in CGFloat(-10) }
                             .onTapGesture {
                                 selectedCalculator = index                            }
