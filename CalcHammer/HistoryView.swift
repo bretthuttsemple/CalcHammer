@@ -12,12 +12,12 @@ struct HistoryView: View {
     
     @Environment(\.modelContext) private var context
     
-    @Query private var conversionItems: [ConversionHistoryItem]
+    @Query private var conversionItems: [HistoryItem]
     
     var body: some View {
         List{
             ForEach (conversionItems) { item in
-                Text("\(String(format: "%.3f", item.inputNum)) \(item.inputUnit) to \(String(format: "%.3f", item.outputNum)) \(item.outputUnit)")
+                Text("\(item.historyText)")
             }
             .onDelete{ indexes in
                 for index in indexes {
@@ -27,7 +27,7 @@ struct HistoryView: View {
             }
         }
     }
-    func deleteItem(_ item: ConversionHistoryItem){
+    func deleteItem(_ item: HistoryItem){
         context.delete(item)
     }
 }

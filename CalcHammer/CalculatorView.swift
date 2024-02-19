@@ -209,9 +209,50 @@ struct CalculatorView: View {
     }
 
     struct RandomNumberGeneratorView: View {
+        @State private var lowerEnd = "0"
+        @State private var upperEnd = "10"
+        @State private var randomNumber = ""
+        
         var body: some View {
-            Text("Random Number Generator View")
-                .navigationTitle("Random Number Generator")
+            VStack {
+                TextField("Lower end", text: $lowerEnd)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextField("Upper end", text: $upperEnd)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Button("Generate Random Number") {
+                    generateRandomNumber()
+                }
+                .padding()
+                
+                Text("Random Number: \(randomNumber)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Random Number Generator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works, don't question it
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func generateRandomNumber() {
+            guard let lower = Int(lowerEnd), let upper = Int(upperEnd) else {
+                return
+            }
+            guard lower <= upper else {
+                return // Lower end should be less than or equal to upper end
+            }
+            
+            let random = Int.random(in: lower...upper)
+            randomNumber = "\(random)"
         }
     }
 

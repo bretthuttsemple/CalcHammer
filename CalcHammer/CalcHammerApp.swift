@@ -14,6 +14,6 @@ struct CalcHammerApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: ConversionHistoryItem.self)
+        .modelContainer(for: HistoryItem.self)
     }
 }

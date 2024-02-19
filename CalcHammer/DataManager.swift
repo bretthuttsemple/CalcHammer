@@ -40,18 +40,13 @@ struct GlobalData{
 
 //History Manager Class
 @Model
-class ConversionHistoryItem: Identifiable {
+class HistoryItem: Identifiable {
     var id: String
-    var inputUnit: String
-    var outputUnit: String
-    var inputNum: Double
-    var outputNum: Double
+    var historyText: String
     
-    init(inputUnit: String, outputUnit: String, inputNum: Double, outputNum: Double) {
+    init(historyText: String) {
         self.id = UUID().uuidString
-        self.inputUnit = inputUnit
-        self.outputUnit = outputUnit
-        self.inputNum = inputNum
-        self.outputNum = outputNum
+        self.historyText = historyText
+        
     }
 }

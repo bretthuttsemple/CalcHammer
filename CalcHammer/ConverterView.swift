@@ -441,8 +441,8 @@ struct ConverterView: View {
     }
     
     func addHistoryItem(inputUnitW:String,outputUnitW:String,inputNum:Double,outputNum: Double) {
-        let item = ConversionHistoryItem(inputUnit: inputUnitW, outputUnit: outputUnitW, inputNum: inputNum, outputNum: outputNum)
-        
+        let item = HistoryItem(historyText: "\(String(format: "%.3f", inputNum)) \(inputUnitW) to \(String(format: "%.3f", outputNum)) \(outputUnitW)")
+                
         context.insert(item)
     }
     
@@ -468,8 +468,8 @@ struct ConverterView: View {
                     .padding([.top, .leading, .bottom])
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                
                 //Switch for deciding which unit array for input 1
                 switch selectedUnitIndex{
                 case 1:
