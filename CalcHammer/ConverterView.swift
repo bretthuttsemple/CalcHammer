@@ -549,7 +549,8 @@ struct ConverterView: View {
             HStack{
                 //Visual stack for output box and unit selection for output
                 Spacer()
-                Text("Your output is \(output)")
+                Text("Your output is \(String(format: "%.3f", output))")
+
                 Spacer()
                 
                 //Switch for deciding which unit array for output

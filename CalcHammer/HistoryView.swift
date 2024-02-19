@@ -17,7 +17,7 @@ struct HistoryView: View {
     var body: some View {
         List{
             ForEach (conversionItems) { item in
-                Text("\(item.inputNum) \(item.inputUnit) to \(item.outputNum) \(item.outputUnit)")
+                Text("\(String(format: "%.3f", item.inputNum)) \(item.inputUnit) to \(String(format: "%.3f", item.outputNum)) \(item.outputUnit)")
             }
             .onDelete{ indexes in
                 for index in indexes {
