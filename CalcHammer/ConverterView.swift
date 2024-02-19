@@ -8,6 +8,15 @@
 import SwiftUI
 import UIKit
 
+extension NumberFormatter {
+    var decimalNumberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }
+}
+
+
 struct ConverterView: View {
     // Add a state variable to store the selected unit
     @State private var selectedUnitIndex = 0
@@ -18,6 +27,8 @@ struct ConverterView: View {
     @State var output:Double = 0
     
     @Environment(\.modelContext) private var context
+    
+    
     
     func buttonPressConvert(unitType: Int,inputUnit:Int,outputUnit:Int,inputNum:Double) -> Double{
         //Function for deciding which conversion function to call
@@ -453,10 +464,11 @@ struct ConverterView: View {
                 //Visual stack for input box and unit selection for input
                 Spacer()
                 //textfield for first input
-                TextField("Enter Number", value: $inputValue,formatter: NumberFormatter())
-                    .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .bottom]/*@END_MENU_TOKEN@*/)
+                TextField("Enter Number", value: $inputValue, formatter: NumberFormatter().decimalNumberFormatter)
+                    .padding([.top, .leading, .bottom])
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
+
                 
                 //Switch for deciding which unit array for input 1
                 switch selectedUnitIndex{
