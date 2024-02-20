@@ -202,11 +202,69 @@ struct CalculatorView: View {
     }
 
     struct PermutationCalculatorView: View {
+        @State private var nValue = ""
+        @State private var rValue = ""
+        @State private var result = ""
+        
         var body: some View {
-            Text("Permutation Calculator View")
-                .navigationTitle("Permutation Calculator")
+            VStack {
+                TextField("Enter N", text: $nValue)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                
+                TextField("Enter R", text: $rValue)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                
+                Button("Calculate Permutation") {
+                    calculatePermutation()
+                }
+                .padding()
+                
+                Text("Result: \(result)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+                    .navigationTitle("Permutation Calculator")
+                    .background(
+                        Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard
+                            .onTapGesture {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            }
+                    )
+        }
+        
+        private func calculatePermutation() {
+            guard let n = Int(nValue),
+                  let r = Int(rValue) else {
+                result = "Invalid input"
+                return
+            }
+            
+            if r > n {
+                result = "R should be less than or equal to N"
+            } else {
+                result = "\(permutation(n: n, r: r))"
+            }
+        }
+        
+        private func permutation(n: Int, r: Int) -> Int {
+            return factorial(n) / factorial(n - r)
+        }
+        
+        private func factorial(_ n: Int) -> Int {
+            if n == 0 {
+                return 1
+            } else {
+                return n * factorial(n - 1)
+            }
         }
     }
+
 
     struct RandomNumberGeneratorView: View {
         @State private var lowerEnd = "0"
