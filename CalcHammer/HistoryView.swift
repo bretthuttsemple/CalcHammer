@@ -16,9 +16,10 @@ struct HistoryView: View {
     
     var body: some View {
         List{
-            ForEach (conversionItems) { item in
-                Text("\(item.historyText)")
-            }
+            ForEach(conversionItems.indices.reversed(), id: \.self) { index in
+                            let item = conversionItems[index]
+                            Text("\(item.historyText)")
+                        }
             .onDelete{ indexes in
                 for index in indexes {
                     deleteItem(conversionItems[index])
