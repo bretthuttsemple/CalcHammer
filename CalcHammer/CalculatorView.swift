@@ -118,7 +118,6 @@ struct CalculatorView: View {
         }
     }
 
-    //edit this later :)
     struct BMICalculatorView: View {
         @State private var weight = ""
         @State private var height = ""
