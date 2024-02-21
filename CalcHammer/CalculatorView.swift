@@ -434,11 +434,50 @@ struct CalculatorView: View {
     }
 
     struct ExactAgeCalculatorView: View {
+        @State private var birthDate = Date()
+        @State private var exactAge = ""
+        
         var body: some View {
-            Text("Exact Age Calculator View")
-                .navigationTitle("Exact Age Calculator")
+            VStack {
+                DatePicker("Select birth date", selection: $birthDate, displayedComponents: .date)
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    .padding()
+                
+                Button("Calculate Exact Age") {
+                    calculateExactAge()
+                }
+                .padding()
+                
+                if !exactAge.isEmpty {
+                    Text("Exact Age: \(exactAge)")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Exact Age Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateExactAge() {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            
+            let ageComponents = calendar.dateComponents([.year, .month, .day], from: birthDate, to: currentDate)
+            
+            if let years = ageComponents.year, let months = ageComponents.month, let days = ageComponents.day {
+                exactAge = "\(years) years, \(months) months, \(days) days"
+            }
         }
     }
+    
     struct DateDifferenceCalculatorView: View {
         var body: some View {
             Text("Date Difference Calculator View")
