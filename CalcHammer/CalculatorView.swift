@@ -321,16 +321,115 @@ struct CalculatorView: View {
     }
 
     struct UnitPriceCalculatorView: View {
+        @State private var cost = ""
+        @State private var amount = ""
+        @State private var unitPrice = ""
+        
         var body: some View {
-            Text("Unit Price Calculator View")
-                .navigationTitle("Unit Price Calculator")
+            VStack {
+                TextField("Enter cost", text: $cost)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextField("Enter amount", text: $amount)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Button("Calculate Unit Price") {
+                    calculateUnitPrice()
+                }
+                .padding()
+                
+                if !unitPrice.isEmpty {
+                    Text("Unit price: $\(unitPrice) per unit")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Unit Price Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateUnitPrice() {
+            guard let costValue = Double(cost), let amountValue = Double(amount), amountValue != 0 else {
+                return
+            }
+            
+            let price = costValue / amountValue
+            unitPrice = String(format: "%.2f", price)
         }
     }
 
     struct PizzaAreaCalculatorView: View {
+        @State private var pizzaSize = ""
+        @State private var pizzaCost = ""
+        @State private var selectedShape = "Square"
+        @State private var unitCost: Double?
+        
         var body: some View {
-            Text("Pizza Area Calculator View")
-                .navigationTitle("Pizza Area Calculator")
+            VStack {
+                TextField("Pizza Size (inches)", text: $pizzaSize)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextField("Pizza Cost ($)", text: $pizzaCost)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Picker("Pizza Shape", selection: $selectedShape) {
+                    Text("Square").tag("Square")
+                    Text("Circular").tag("Circular")
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                Button("Calculate Unit Cost") {
+                    calculateUnitCost()
+                }
+                .padding()
+                
+                if let unitCost = unitCost {
+                    Text("Cost per Square Inch: $\(String(format: "%.2f", unitCost))")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Pizza Area Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateUnitCost() {
+            guard let size = Double(pizzaSize),
+                  let cost = Double(pizzaCost),
+                  size > 0, cost > 0 else {
+                unitCost = nil
+                return
+            }
+            
+            let area: Double
+            if selectedShape == "Circular" {
+                area = pow(size / 2, 2) * Double.pi
+            } else {
+                let width = sqrt(pow(size, 2) / 2)
+                let length = width * 2
+                area = length * width
+            }
+            
+            unitCost = cost / area
         }
     }
 
@@ -362,9 +461,67 @@ struct CalculatorView: View {
     }
 
     struct SpeedOfSoundCalculatorView: View {
+        @State private var temperature = ""
+        @State private var temperatureUnit = "Celsius"
+        @State private var speedOfSound = ""
+        
         var body: some View {
-            Text("Speed of Sound Calculator View")
-                .navigationTitle("Speed of Sound Calculator")
+            VStack {
+                TextField("Enter temperature", text: $temperature)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Picker("Temperature Unit", selection: $temperatureUnit) {
+                    Text("Celsius").tag("Celsius")
+                    Text("Fahrenheit").tag("Fahrenheit")
+                    Text("Kelvin").tag("Kelvin")
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                Button("Calculate Speed of Sound") {
+                    calculateSpeedOfSound()
+                }
+                .padding()
+                
+                if !speedOfSound.isEmpty {
+                    Text("Speed of sound: \(speedOfSound) m/s")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Speed of Sound Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateSpeedOfSound() {
+            guard let temperatureValue = Double(temperature) else {
+                return
+            }
+            
+            var convertedTemperature: Double
+            
+            switch temperatureUnit {
+            case "Celsius":
+                convertedTemperature = temperatureValue
+            case "Fahrenheit":
+                convertedTemperature = (temperatureValue - 32) * 5/9
+            case "Kelvin":
+                convertedTemperature = temperatureValue - 273.15
+            default:
+                return
+            }
+            
+            // Calculate speed of sound using formula
+            let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
+            speedOfSound = String(format: "%.2f", speed)
         }
     }
     
