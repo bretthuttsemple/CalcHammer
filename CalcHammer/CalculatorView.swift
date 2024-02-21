@@ -479,9 +479,46 @@ struct CalculatorView: View {
     }
     
     struct DateDifferenceCalculatorView: View {
+        @State private var startDate = Date()
+        @State private var endDate = Date()
+        @State private var dateDifference = ""
+        
         var body: some View {
-            Text("Date Difference Calculator View")
-                .navigationTitle("Date Difference Calculator")
+            VStack {
+                DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    .padding(.horizontal)
+                
+                DatePicker("End Date", selection: $endDate, displayedComponents: .date)
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    .padding(.horizontal)
+                
+                Button("Calculate Date Difference") {
+                    calculateDateDifference()
+                }
+                .padding()
+                
+                if !dateDifference.isEmpty {
+                    Text("Date Difference: \(dateDifference)")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Date Difference Calculator")
+        }
+        
+        private func calculateDateDifference() {
+            let calendar = Calendar.current
+            
+            let components = calendar.dateComponents([.year, .month, .day], from: startDate, to: endDate)
+            
+            if let years = components.year, let months = components.month, let days = components.day {
+                dateDifference = "\(years) years, \(months) months, \(days) days"
+            }
         }
     }
 
