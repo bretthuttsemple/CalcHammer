@@ -19,9 +19,9 @@ extension NumberFormatter {
 
 struct ConverterView: View {
     // Add a state variable to store the selected unit
-    @State private var selectedUnitIndex = 0
-    @State private var selectedUnitIndex2 = 0
-    @State private var selectedUnitIndex3 = 0
+    @State private var selectedUnitIndex = 0 //unit type
+    @State private var selectedUnitIndex2 = 0 //input unit 1
+    @State private var selectedUnitIndex3 = 0 //output unit
     
     @State private var inputValue:Double = 0
     @State var output:Double = 0
@@ -32,6 +32,7 @@ struct ConverterView: View {
     
     func buttonPressConvert(unitType: Int,inputUnit:Int,outputUnit:Int,inputNum:Double) -> Double{
         //Function for deciding which conversion function to call
+        //after converting the input, the output is added to historyItems
         var convertedOutput:Double = 0
         
         if unitType == 1 //length
@@ -440,9 +441,16 @@ struct ConverterView: View {
         return convertedForce
     }
     
-    func addHistoryItem(inputUnitW:String,outputUnitW:String,inputNum:Double,outputNum: Double) {
-        let item = HistoryItem(historyText: "\(String(format: "%.3f", inputNum)) \(inputUnitW) to \(String(format: "%.3f", outputNum)) \(outputUnitW)")
-                
+    func addHistoryItem(inputUnitW: String, outputUnitW: String, inputNum: Double, outputNum: Double) {
+        let formatter = NumberFormatter() //dynamic number formatter made for this local scope
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 3
+        
+        let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
+        let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
+        
+        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) to \(formattedOutputNum) \(outputUnitW)")
+        
         context.insert(item)
     }
     
@@ -549,7 +557,31 @@ struct ConverterView: View {
             HStack{
                 //Visual stack for output box and unit selection for output
                 Spacer()
-                Text("Your output is \(String(format: "%.3f", output))")
+                Text("Your output is \(output)")
+                    .modifier(DynamicNumberFormat(number: output))
+                //switch for text displaying the unit
+                switch selectedUnitIndex{
+                case 1:
+                    Text("\(GlobalData.lengthUnit[selectedUnitIndex3])")
+                case 2:
+                    Text("\(GlobalData.massUnit[selectedUnitIndex3])")
+                case 3:
+                    Text("\(GlobalData.speedUnit[selectedUnitIndex3])")
+                case 4:
+                    Text("\(GlobalData.tempUnit[selectedUnitIndex3])")
+                case 5:
+                    Text("\(GlobalData.timeUnit[selectedUnitIndex3])")
+                case 6:
+                    Text("\(GlobalData.volumeUnit[selectedUnitIndex3])")
+                case 7:
+                    Text("\(GlobalData.forceUnit[selectedUnitIndex3])")
+                case 8:
+                    Text("\(GlobalData.angleUnit[selectedUnitIndex3])")
+                case 9:
+                    Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
+                default:
+                    Text("")
+                }
 
                 Spacer()
                 

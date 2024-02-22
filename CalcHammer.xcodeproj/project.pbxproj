@@ -14,6 +14,7 @@
 		B83781B32B5DA22F007FDC6C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83781B22B5DA22F007FDC6C /* HistoryView.swift */; };
 		B83781B52B5DA256007FDC6C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83781B42B5DA256007FDC6C /* SettingsView.swift */; };
 		B8C7F1362B794FE9008BB15D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C7F1352B794FE9008BB15D /* DataManager.swift */; };
+		B8C7F1382B869BA7008BB15D /* DynamicNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C7F1372B869BA7008BB15D /* DynamicNumberFormatter.swift */; };
 		B8D9DF3C2B5851C5000651B1 /* CalcHammerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */; };
 		B8D9DF3E2B5851C5000651B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9DF3D2B5851C5000651B1 /* ContentView.swift */; };
 		B8D9DF402B5851C6000651B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8D9DF3F2B5851C6000651B1 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		B83781B22B5DA22F007FDC6C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		B83781B42B5DA256007FDC6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B8C7F1352B794FE9008BB15D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B8C7F1372B869BA7008BB15D /* DynamicNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicNumberFormatter.swift; sourceTree = "<group>"; };
 		B8D9DF382B5851C5000651B1 /* CalcHammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcHammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcHammerApp.swift; sourceTree = "<group>"; };
 		B8D9DF3D2B5851C5000651B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B83781AC2B5DA01E007FDC6C /* FavouritesView.swift */,
 				B83781B22B5DA22F007FDC6C /* HistoryView.swift */,
 				B83781B42B5DA256007FDC6C /* SettingsView.swift */,
+				B8C7F1372B869BA7008BB15D /* DynamicNumberFormatter.swift */,
 				B83781AA2B5D9FC1007FDC6C /* Header.swift */,
 				B83781AE2B5DA051007FDC6C /* ConverterView.swift */,
 				B83781B02B5DA16C007FDC6C /* CalculatorView.swift */,
@@ -285,6 +288,7 @@
 				B83781AD2B5DA01E007FDC6C /* FavouritesView.swift in Sources */,
 				B83781AF2B5DA051007FDC6C /* ConverterView.swift in Sources */,
 				B83781B12B5DA16C007FDC6C /* CalculatorView.swift in Sources */,
+				B8C7F1382B869BA7008BB15D /* DynamicNumberFormatter.swift in Sources */,
 				B8C7F1362B794FE9008BB15D /* DataManager.swift in Sources */,
 				B8D9DF3C2B5851C5000651B1 /* CalcHammerApp.swift in Sources */,
 			);
