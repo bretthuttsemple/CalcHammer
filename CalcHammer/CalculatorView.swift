@@ -701,16 +701,168 @@ struct CalculatorView: View {
     }
 
     struct AccumulatedDepreciationView: View {
+        @State private var initialCost = ""
+        @State private var depreciationRate = ""
+        @State private var years = ""
+        @State private var updatedCost = ""
+        
         var body: some View {
-            Text("Accumulated Depreciation View")
-                .navigationTitle("Accumulated Depreciation")
+            VStack {
+                TextField("Initial Cost", text: $initialCost)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Depreciation Rate (%)", text: $depreciationRate)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Number of Years", text: $years)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                
+                Button("Calculate") {
+                    calculateDepreciation()
+                }
+                .padding()
+                
+                Text("Updated Cost: $\(updatedCost)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Accumulated Depreciation Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateDepreciation() {
+            guard let initialCostValue = Double(initialCost),
+                  let depreciationRateValue = Double(depreciationRate),
+                  let yearsValue = Int(years) else {
+                return
+            }
+            
+            var updatedCostValue = initialCostValue
+            for _ in 1...yearsValue {
+                updatedCostValue -= updatedCostValue * depreciationRateValue / 100
+            }
+            
+            // Ensure cost doesn't go below zero
+            updatedCostValue = max(updatedCostValue, 0)
+            
+            updatedCost = String(format: "%.2f", updatedCostValue)
         }
     }
 
     struct GradeCalculatorView: View {
+        @State private var currentGrade = 0.0
+        @State private var examWeight = 0.0
+        @State private var desiredGrade = 0.0
+        @State private var isCalculateNeededGrade = true
+        
         var body: some View {
-            Text("Grade Calculator View")
-                .navigationTitle("Grade Calculator")
+            VStack {
+                // Current Grade
+                HStack {
+                    Text("Current Grade (%)")
+                    Spacer()
+                    TextField("", value: $currentGrade, formatter: NumberFormatter())
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                }
+                .padding()
+                
+                // Exam Weight
+                HStack {
+                    Text("Exam Weight (%)")
+                    Spacer()
+                    TextField("", value: $examWeight, formatter: NumberFormatter())
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                }
+                .padding()
+                
+                // Desired Grade or Final Exam Grade
+                HStack {
+                    Text(isCalculateNeededGrade ? "Desired Grade (%)" : "Final Exam Grade (%)")
+                    Spacer()
+                    TextField("", value: $desiredGrade, formatter: NumberFormatter())
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                }
+                .padding()
+                
+                // Toggle for switching between calculating needed grade or final grade
+                Toggle("Calculate Needed Grade", isOn: $isCalculateNeededGrade)
+                    .padding()
+                
+                // Button to trigger calculation
+                Button("Calculate") {
+                    calculateGrade()
+                }
+                .padding()
+                
+                // Result text
+                Text(resultText())
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Grade Calculator")
+            .onTapGesture {
+                // Dismiss keyboard when tapping outside of text fields
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+        }
+        
+        // Function to calculate the grade
+        private func calculateGrade() {
+            if isCalculateNeededGrade {
+                let neededGrade = (desiredGrade - (1 - examWeight / 100) * currentGrade) / (examWeight / 100)
+                showResult(neededGrade: neededGrade)
+            } else {
+                let finalGrade = currentGrade * (1 - examWeight / 100) + examWeight / 100 * desiredGrade
+                showResult(finalGrade: finalGrade)
+            }
+        }
+        
+        // Function to display the result
+        private func showResult(neededGrade: Double? = nil, finalGrade: Double? = nil) {
+            if let neededGrade = neededGrade {
+                // Show the needed grade result
+                print("To achieve \(desiredGrade)% overall, you need to score \(neededGrade)% on the final exam.")
+            } else if let finalGrade = finalGrade {
+                // Show the final grade result
+                print("If you score \(desiredGrade)% on the final exam, your overall grade will be \(finalGrade)%.")
+            }
+        }
+        
+        // Function to format the result text
+        private func resultText() -> String {
+            if isCalculateNeededGrade {
+                return "To achieve \(desiredGrade)% overall, you need to score \(neededGrade())% on the final exam."
+            } else {
+                return "If you score \(desiredGrade)% on the final exam, your overall grade will be \(finalGrade())%."
+            }
+        }
+        
+        // Function to calculate the needed grade
+        private func neededGrade() -> Double {
+            return (desiredGrade - (1 - examWeight / 100) * currentGrade) / (examWeight / 100)
+        }
+        
+        // Function to calculate the final grade
+        private func finalGrade() -> Double {
+            return currentGrade * (1 - examWeight / 100) + examWeight / 100 * desiredGrade
         }
     }
 
