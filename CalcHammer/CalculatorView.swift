@@ -100,9 +100,9 @@ struct CalculatorView: View {
             case 14:
                 SpeedOfSoundCalculatorView()
             case 15:
-                PercantageCalculator()
+                PercentageCalculatorView()
             case 16:
-                FuelCostCalculator()
+                FuelCostCalculatorView()
             default:
                 EmptyView()
             }
@@ -180,16 +180,144 @@ struct CalculatorView: View {
     }
     
     struct CompoundInterestCalculatorView: View {
+        @State private var principal = ""
+        @State private var interestRate = ""
+        @State private var time = ""
+        @State private var compoundFrequency = "Annually"
+        @State private var result = ""
+
+        let compoundFrequencies = ["Annually", "Semi-Annually", "Quarterly", "Monthly"]
+
         var body: some View {
-            Text("Compound Interest Calculator View")
-                .navigationTitle("Compound Interest Calculator")
+            VStack {
+                TextField("Principal", text: $principal)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+
+                TextField("Interest Rate (%)", text: $interestRate)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+
+                TextField("Time (years)", text: $time)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+
+                Picker("Compound Frequency", selection: $compoundFrequency) {
+                    ForEach(compoundFrequencies, id: \.self) {
+                        Text($0)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+
+                Button("Calculate") {
+                    calculateCompoundInterest()
+                }
+                .padding()
+
+                if !result.isEmpty {
+                    Text("Compound Interest: \(result)")
+                        .padding()
+                }
+
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Compound Interest Calculator")
+            .background(
+                Color.white.opacity(0.0001)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+
+        private func calculateCompoundInterest() {
+            guard let principalValue = Double(principal),
+                  let interestRateValue = Double(interestRate),
+                  let timeValue = Double(time) else {
+                result = "Invalid input"
+                return
+            }
+
+            let n: Double
+            switch compoundFrequency {
+            case "Semi-Annually":
+                n = 2
+            case "Quarterly":
+                n = 4
+            case "Monthly":
+                n = 12
+            default:
+                n = 1
+            }
+
+            let compoundInterest = principalValue * pow(1 + interestRateValue / (100 * n), n * timeValue) - principalValue
+            result = String(format: "%.2f", compoundInterest)
         }
     }
 
     struct CaffeineHalfLifeCalculatorView: View {
+        @State private var initialAmount = ""
+        @State private var timePassed = ""
+        @State private var halfLife = "5.7" // Default half-life of caffeine in hours
+        @State private var result = ""
+
         var body: some View {
-            Text("Caffeine Half-Life Calculator View")
-                .navigationTitle("Caffeine Half-Life Calculator")
+            VStack {
+                TextField("Initial Amount (mg)", text: $initialAmount)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+
+                TextField("Time Passed (hours)", text: $timePassed)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+
+                HStack {
+                    Text("Half-Life (hours):")
+                    TextField("Half-Life", text: $halfLife)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                }
+
+                Button("Calculate") {
+                    calculateCaffeineHalfLife()
+                }
+                .padding()
+
+                if !result.isEmpty {
+                    Text("Remaining Caffeine: \(result) mg")
+                        .padding()
+                }
+
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Caffeine Half-Life Calculator")
+            .background(
+                Color.white.opacity(0.0001)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+
+        private func calculateCaffeineHalfLife() {
+            guard let initialAmountValue = Double(initialAmount),
+                  let timePassedValue = Double(timePassed),
+                  let halfLifeValue = Double(halfLife) else {
+                result = "Invalid input"
+                return
+            }
+
+            let remainingCaffeine = initialAmountValue * pow(0.5, timePassedValue / halfLifeValue)
+            result = String(format: "%.2f", remainingCaffeine)
         }
     }
 
@@ -264,7 +392,6 @@ struct CalculatorView: View {
         }
     }
 
-
     struct RandomNumberGeneratorView: View {
         @State private var lowerEnd = "0"
         @State private var upperEnd = "10"
@@ -314,9 +441,60 @@ struct CalculatorView: View {
     }
 
     struct CalorieServingSizeCalculatorView: View {
+        @State private var caloriesPerServing = ""
+        @State private var boxServingSize = ""
+        @State private var actualServingSize = ""
+        @State private var caloriesInActualServing = ""
+        
         var body: some View {
-            Text("Calorie Serving Size Calculator View")
-                .navigationTitle("Calorie Serving Size Calculator")
+            VStack {
+                TextField("Calories per serving", text: $caloriesPerServing)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Serving size on box", text: $boxServingSize)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Actual serving size", text: $actualServingSize)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                Button("Calculate Calories in Actual Serving") {
+                    calculateCaloriesInActualServing()
+                }
+                .padding()
+                
+                if !caloriesInActualServing.isEmpty {
+                    Text("Calories in actual serving: \(caloriesInActualServing)")
+                        .padding()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Calorie Serving Size Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works
+                    .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateCaloriesInActualServing() {
+            guard let caloriesPerServingValue = Double(caloriesPerServing),
+                  let boxServingSizeValue = Double(boxServingSize),
+                  let actualServingSizeValue = Double(actualServingSize),
+                  boxServingSizeValue != 0 else {
+                return
+            }
+            
+            let caloriesInActualServingValue = (caloriesPerServingValue / boxServingSizeValue) * actualServingSizeValue
+            caloriesInActualServing = String(format: "%.2f", caloriesInActualServingValue)
         }
     }
 
@@ -601,17 +779,109 @@ struct CalculatorView: View {
         }
     }
     
-    struct PercantageCalculator: View {
+    struct PercentageCalculatorView: View {
+        @State private var originalValue = ""
+        @State private var percentage = ""
+        @State private var result = ""
+        
         var body: some View {
-            Text("Percantage Calculator View")
-                .navigationTitle("Percantage Calculator")
+            VStack {
+                TextField("Original Value", text: $originalValue)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                
+                TextField("Percentage", text: $percentage)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                
+                Button("Calculate") {
+                    calculatePercentage()
+                }
+                .padding()
+                
+                Text("Result: \(result)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Percentage Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculatePercentage() {
+            guard let originalValue = Double(originalValue),
+                  let percentage = Double(percentage) else {
+                result = "Invalid input"
+                return
+            }
+            
+            let percentageValue = originalValue * percentage / 100
+            result = "\(percentageValue)"
         }
     }
     
-    struct FuelCostCalculator: View {
+    struct FuelCostCalculatorView: View {
+        @State private var tripDistance = ""
+        @State private var fuelEfficiency = ""
+        @State private var fuelPrice = ""
+        @State private var result = ""
+        
         var body: some View {
-            Text("Fuel cost calcualtor view")
-                .navigationTitle("Fuel Cost Calculator")
+            VStack {
+                TextField("Trip Distance (km)", text: $tripDistance)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Fuel Efficiency (km/l)", text: $fuelEfficiency)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Fuel Price per Liter", text: $fuelPrice)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                Button("Calculate") {
+                    calculateFuelCost()
+                }
+                .padding()
+                
+                Text("Result: \(result)")
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Fuel Cost Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
         }
+        
+        private func calculateFuelCost() {
+            guard let tripDistance = Double(tripDistance),
+                  let fuelEfficiency = Double(fuelEfficiency),
+                  let fuelPrice = Double(fuelPrice) else {
+                result = "Invalid input"
+                return
+            }
+            
+            let fuelNeeded = tripDistance / fuelEfficiency
+            let cost = fuelNeeded * fuelPrice
+            
+            result = "Fuel needed: \(String(format: "%.2f", fuelNeeded)) liters, Cost: $\(String(format: "%.2f", cost))"        }
     }
 }
