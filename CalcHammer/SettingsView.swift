@@ -7,16 +7,25 @@
 
 import SwiftUI
 
+class UserSettings: ObservableObject {
+    @AppStorage("showFavouritesTab") var showFavouritesTab: Bool = false
+    @AppStorage("showHistoryTab") var showHistoryTab: Bool = false
+    @AppStorage("toggleFictionalUnits") var toggleFictionalUnits: Bool = false
+}
+
 struct SettingsView: View {
-    @Binding var showFavouritesTab: Bool
-    @Binding var showHistoryTab: Bool
-    
+    @StateObject var userSettings = UserSettings()
+
     var body: some View {
         VStack {
-            Toggle("Show Favourites Tab:", isOn: $showFavouritesTab)
-                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-            Toggle("Show History Tab", isOn: $showHistoryTab)
-                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
-        }
+                    Toggle("Show Favourites Tab:", isOn: $userSettings.showFavouritesTab)
+                        .padding(.horizontal)
+                    Toggle("Show History Tab", isOn: $userSettings.showHistoryTab)
+                        .padding(.horizontal)
+                    Toggle("Include Fictional Units", isOn: $userSettings.toggleFictionalUnits)
+                        .padding(.horizontal)
+                }
+        // Provide UserSettings to the environment
+        .environmentObject(userSettings)
     }
 }

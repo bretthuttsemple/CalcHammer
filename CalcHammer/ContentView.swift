@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     //Vars used in SettingsView
-    @State private var showFavouritesTab = false
-    @State private var showHistoryTab = true
+    @EnvironmentObject var userSettings: UserSettings
     
     var body: some View {
         VStack{
             CalcHammerHeader()
             
             TabView {
-                if showFavouritesTab {
+                if true{
                     FavouritesView()
                         .tabItem {
                             Image(systemName: "star")
@@ -36,7 +35,7 @@ struct ContentView: View {
                         Image(systemName: "minus.slash.plus")
                         Text("Calculators")
                     }
-                if showHistoryTab {
+                if true {
                     HistoryView()
                         .tabItem {
                             Image(systemName: "clock")
@@ -44,7 +43,7 @@ struct ContentView: View {
                         }
                 }
                 
-                SettingsView(showFavouritesTab: $showFavouritesTab, showHistoryTab: $showHistoryTab) //passes stateful vars to settings
+                SettingsView()
                     .tabItem {
                         Image(systemName: "gear")
                         Text("Settings")
@@ -58,6 +57,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserSettings()) // Provide UserSettings to ContentView
     }
 }
 

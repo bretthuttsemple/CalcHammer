@@ -29,7 +29,6 @@ struct ConverterView: View {
     @Environment(\.modelContext) private var context
     
     
-    
     func buttonPressConvert(unitType: Int,inputUnit:Int,outputUnit:Int,inputNum:Double) -> Double{
         //Function for deciding which conversion function to call
         //after converting the input, the output is added to historyItems
@@ -38,42 +37,42 @@ struct ConverterView: View {
         if unitType == 1 //length
         {
             convertedOutput = lengthConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.lengthUnit[inputUnit], outputUnitW: GlobalData.lengthUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.lengthSymbol[inputUnit], outputUnitW: GlobalData.lengthSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
         }
         else if unitType == 2 //mass
         {
             convertedOutput = massConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.massUnit[inputUnit], outputUnitW: GlobalData.massUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.massSymbol[inputUnit], outputUnitW: GlobalData.massSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 3 //speed
         {
             convertedOutput = speedConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.speedUnit[inputUnit], outputUnitW: GlobalData.speedUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.speedSymbol[inputUnit], outputUnitW: GlobalData.speedSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 4 //temp
         {
             convertedOutput = tempConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.tempUnit[inputUnit], outputUnitW: GlobalData.tempUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.tempSymbol[inputUnit], outputUnitW: GlobalData.tempSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 5 //time
         {
             convertedOutput = timeConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.timeUnit[inputUnit], outputUnitW: GlobalData.timeUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.timeSymbol[inputUnit], outputUnitW: GlobalData.timeSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 6 //volume
         {
             convertedOutput = volumeConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.volumeUnit[inputUnit], outputUnitW: GlobalData.volumeUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.volumeSymbol[inputUnit], outputUnitW: GlobalData.volumeSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 7 //force
         {
             convertedOutput = forceConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
-            addHistoryItem(inputUnitW: GlobalData.forceUnit[inputUnit], outputUnitW: GlobalData.forceUnit[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+            addHistoryItem(inputUnitW: GlobalData.forceSymbol[inputUnit], outputUnitW: GlobalData.forceSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
         else if unitType == 8 //density
@@ -562,21 +561,21 @@ struct ConverterView: View {
                 //switch for text displaying the unit
                 switch selectedUnitIndex{
                 case 1:
-                    Text("\(GlobalData.lengthUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
                 case 2:
-                    Text("\(GlobalData.massUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.massSymbol[selectedUnitIndex3])")
                 case 3:
-                    Text("\(GlobalData.speedUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.speedSymbol[selectedUnitIndex3])")
                 case 4:
-                    Text("\(GlobalData.tempUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.tempSymbol[selectedUnitIndex3])")
                 case 5:
-                    Text("\(GlobalData.timeUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.timeSymbol[selectedUnitIndex3])")
                 case 6:
-                    Text("\(GlobalData.volumeUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.volumeSymbol[selectedUnitIndex3])")
                 case 7:
-                    Text("\(GlobalData.forceUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.forceSymbol[selectedUnitIndex3])")
                 case 8:
-                    Text("\(GlobalData.angleUnit[selectedUnitIndex3])")
+                    Text("\(GlobalData.angleSymbol[selectedUnitIndex3])")
                 case 9:
                     Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
                 default:
@@ -664,6 +663,7 @@ struct ConverterView: View {
                                 selectedUnitIndex2 = 0
                                 selectedUnitIndex3 = 0
                                 inputValue = 0
+                                output = 0
 
                             }) {
                                 Image(systemName: "trash")
@@ -671,6 +671,8 @@ struct ConverterView: View {
                                     .font(.title) // Adjust the size if needed
                             }
                             .padding()
+                
+                //area for dual input
             }
             Button("Convert") {
                 //Calculate value of conversion

@@ -15,5 +15,6 @@ struct CalcHammerApp: App {
             ContentView()
         }
         .modelContainer(for: HistoryItem.self)
+
     }
 }
