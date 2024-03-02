@@ -655,6 +655,23 @@ struct ConverterView: View {
                 }
                 Spacer()
             }
+            
+            HStack{
+                //Visual stack for button that clears input and toggle dual input
+                Button(action: {
+                                // Clear the user input
+                                selectedUnitIndex = 0
+                                selectedUnitIndex2 = 0
+                                selectedUnitIndex3 = 0
+                                inputValue = 0
+
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red) // Customize the color if needed
+                                    .font(.title) // Adjust the size if needed
+                            }
+                            .padding()
+            }
             Button("Convert") {
                 //Calculate value of conversion
                 output = buttonPressConvert(unitType:selectedUnitIndex,inputUnit: selectedUnitIndex2,outputUnit: selectedUnitIndex3,inputNum: inputValue)
