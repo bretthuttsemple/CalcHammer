@@ -10,11 +10,14 @@ import SwiftData
 
 @main
 struct CalcHammerApp: App {
+    @StateObject var userSettings = UserSettings() // Initialize UserSettings
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
         .modelContainer(for: HistoryItem.self)
+        .environmentObject(userSettings)
 
     }
 }
