@@ -9,8 +9,9 @@ import SwiftUI
 
 class UserSettings: ObservableObject {
     @AppStorage("showFavouritesTab") var showFavouritesTab: Bool = false
-    @AppStorage("showHistoryTab") var showHistoryTab: Bool = false
+    @AppStorage("showHistoryTab") var showHistoryTab: Bool = true
     @AppStorage("toggleFictionalUnits") var toggleFictionalUnits: Bool = false
+    @AppStorage("toggleMultiConvert") var toggleMultiConvert:Bool = false
 }
 
 struct SettingsView: View {
@@ -23,6 +24,8 @@ struct SettingsView: View {
                     Toggle("Show History Tab", isOn: $userSettings.showHistoryTab)
                         .padding(.horizontal)
                     Toggle("Include Fictional Units", isOn: $userSettings.toggleFictionalUnits)
+                        .padding(.horizontal)
+                    Toggle("Include Multi Convert Toggle", isOn: $userSettings.toggleMultiConvert)
                         .padding(.horizontal)
                 }
         // Provide UserSettings to the environment

@@ -22,13 +22,18 @@ struct ConverterView: View {
     @State private var selectedUnitIndex = 0 //unit type
     @State private var selectedUnitIndex2 = 0 //input unit 1
     @State private var selectedUnitIndex3 = 0 //output unit
+    @State private var selectedUnitIndex4 = 0 //input unit 2
     
     @State private var inputValue:Double = 0
+    @State private var inputValue2:Double = 0
     @State var output:Double = 0
     
-    @Environment(\.modelContext) private var context
+    @State private var multiConvert:Bool = false
     
+    @Environment(\.modelContext) private var context //links to historyItems
     
+    @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
     func buttonPressConvert(unitType: Int,inputUnit:Int,outputUnit:Int,inputNum:Double) -> Double{
         //Function for deciding which conversion function to call
         //after converting the input, the output is added to historyItems
@@ -79,6 +84,69 @@ struct ConverterView: View {
         {
             convertedOutput = angleConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
             addHistoryItem(inputUnitW: GlobalData.angleSymbol[inputUnit], outputUnitW: GlobalData.angleSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
+        }
+        else if unitType == 9 //num systems
+        {
+            //tbd
+        }
+        else //no unit selected
+        {
+            print("ERROR: conversion with out inputs")
+        }
+        return convertedOutput
+        
+    }
+    
+    func buttonPressMultiConvert(unitType: Int,inputUnit:Int,inputUnit2:Int,outputUnit:Int,inputNum:Double,inputNum2:Double) -> Double{
+        //Function for deciding which conversion function to call
+        //after converting the input, the output is added to historyItems
+        var convertedOutput:Double = 0
+        
+        if unitType == 1 //length
+        {
+            convertedOutput = lengthConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + lengthConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.lengthSymbol[inputUnit], inputUnitW2: GlobalData.lengthSymbol[inputUnit2], outputUnitW: GlobalData.lengthSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+        }
+        else if unitType == 2 //mass
+        {
+            convertedOutput = massConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + massConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.massSymbol[inputUnit], inputUnitW2: GlobalData.massSymbol[inputUnit2], outputUnitW: GlobalData.massSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 3 //speed
+        {
+            convertedOutput = speedConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + speedConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.speedSymbol[inputUnit], inputUnitW2: GlobalData.speedSymbol[inputUnit2], outputUnitW: GlobalData.speedSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 4 //temp
+        {
+            convertedOutput = tempConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + tempConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.tempSymbol[inputUnit], inputUnitW2: GlobalData.tempSymbol[inputUnit2], outputUnitW: GlobalData.tempSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 5 //time
+        {
+            convertedOutput = timeConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + timeConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.timeSymbol[inputUnit], inputUnitW2: GlobalData.timeSymbol[inputUnit2], outputUnitW: GlobalData.timeSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 6 //volume
+        {
+            convertedOutput = volumeConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + volumeConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.volumeSymbol[inputUnit], inputUnitW2: GlobalData.volumeSymbol[inputUnit2], outputUnitW: GlobalData.volumeSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 7 //force
+        {
+            convertedOutput = forceConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + forceConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.forceSymbol[inputUnit], inputUnitW2: GlobalData.forceSymbol[inputUnit2], outputUnitW: GlobalData.forceSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
+
+        }
+        else if unitType == 8 //angles
+        {
+            convertedOutput = angleConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum) + angleConverter(inputUnit: inputUnit2, outputUnit: outputUnit, inputNum: inputNum2)
+            addMultiHistoryItem(inputUnitW: GlobalData.angleSymbol[inputUnit], inputUnitW2: GlobalData.angleSymbol[inputUnit2], outputUnitW: GlobalData.angleSymbol[outputUnit], inputNum: inputNum, inputNum2: inputNum2, outputNum: convertedOutput)
         }
         else if unitType == 9 //num systems
         {
@@ -462,6 +530,20 @@ struct ConverterView: View {
         context.insert(item)
     }
     
+    func addMultiHistoryItem(inputUnitW: String,inputUnitW2: String, outputUnitW: String, inputNum: Double, inputNum2: Double, outputNum: Double) {
+        let formatter = NumberFormatter() //dynamic number formatter made for this local scope
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 3
+        
+        let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
+        let formattedInputNum2 = formatter.string(from: NSNumber(value: inputNum2)) ?? ""
+        let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
+        
+        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) + \(formattedInputNum2) \(inputUnitW2) to \(formattedOutputNum) \(outputUnitW)")
+        
+        context.insert(item)
+    }
+    
     var body: some View {
         VStack {
             // Picker that selects system of unit
@@ -560,8 +642,95 @@ struct ConverterView: View {
                     Text("Please Select a Unit Type")
                 }
                 
+                
+                
                 Spacer()
             }
+            HStack{
+                if $multiConvert.wrappedValue{
+                    TextField("Enter Number", value: $inputValue2, formatter: NumberFormatter().decimalNumberFormatter)
+                        .padding([.top, .leading, .bottom])
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                    //Switch for deciding which unit array for input 1
+                    switch selectedUnitIndex{
+                    case 1:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+
+                        }
+                    case 2:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+
+                        }
+                    case 3:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+
+                        }
+                    case 4:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+
+                        }
+                    case 5:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+
+                        }
+                    case 6:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+                        }
+                    case 7:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+                        }
+                    case 8:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+                        }
+                    case 9:
+                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                            ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
+
+                        }
+                    default:
+                        Text("Please Select a Unit Type")
+                    }
+                    Spacer()
+                }
+            }
+            
             HStack{
                 //Visual stack for output box and unit selection for output
                 Spacer()
@@ -671,7 +840,9 @@ struct ConverterView: View {
                                 selectedUnitIndex = 0
                                 selectedUnitIndex2 = 0
                                 selectedUnitIndex3 = 0
+                                selectedUnitIndex4 = 0
                                 inputValue = 0
+                                inputValue2 = 0
                                 output = 0
 
                             }) {
@@ -682,10 +853,19 @@ struct ConverterView: View {
                             .padding()
                 
                 //area for dual input
+                if userSettings.toggleMultiConvert{
+                    Toggle("", isOn: $multiConvert)
+                        .padding(.horizontal)
+                }
             }
             Button("Convert") {
                 //Calculate value of conversion
-                output = buttonPressConvert(unitType:selectedUnitIndex,inputUnit: selectedUnitIndex2,outputUnit: selectedUnitIndex3,inputNum: inputValue)
+                if $multiConvert.wrappedValue{
+                    output = buttonPressMultiConvert(unitType: selectedUnitIndex, inputUnit: selectedUnitIndex2, inputUnit2: selectedUnitIndex4, outputUnit: selectedUnitIndex3, inputNum: inputValue, inputNum2: inputValue2)
+                }
+                else{
+                    output = buttonPressConvert(unitType:selectedUnitIndex,inputUnit: selectedUnitIndex2,outputUnit: selectedUnitIndex3,inputNum: inputValue)
+                }
             }
             Spacer()
         }
