@@ -75,15 +75,12 @@ struct ConverterView: View {
             addHistoryItem(inputUnitW: GlobalData.forceSymbol[inputUnit], outputUnitW: GlobalData.forceSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
 
         }
-        else if unitType == 8 //density
+        else if unitType == 8 //angles
         {
-            //tbd
+            convertedOutput = angleConverter(inputUnit: inputUnit, outputUnit: outputUnit, inputNum: inputNum)
+            addHistoryItem(inputUnitW: GlobalData.angleSymbol[inputUnit], outputUnitW: GlobalData.angleSymbol[outputUnit], inputNum: inputNum, outputNum: convertedOutput)
         }
-        else if unitType == 9 //angles
-        {
-            //tbd
-        }
-        else if unitType == 10 //num systems
+        else if unitType == 9 //num systems
         {
             //tbd
         }
@@ -439,6 +436,18 @@ struct ConverterView: View {
         
         return convertedForce
     }
+    
+    func angleConverter(inputUnit:Int,outputUnit:Int,inputNum:Double) -> Double{
+        if inputUnit == 0 && outputUnit == 1 { 
+                return inputNum * .pi / 180
+            } else if inputUnit == 1 && outputUnit == 0 {
+                // Convert radians to degrees
+                return inputNum * 180 / .pi
+            } else {
+                // No conversion needed, return input as is
+                return inputNum
+            }
+        }
     
     func addHistoryItem(inputUnitW: String, outputUnitW: String, inputNum: Double, outputNum: Double) {
         let formatter = NumberFormatter() //dynamic number formatter made for this local scope
