@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-extension NumberFormatter {
+extension NumberFormatter {//number formatter used to assign the minimal number of decimal digits for output
     var decimalNumberFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -98,8 +98,8 @@ struct ConverterView: View {
     }
     
     func buttonPressMultiConvert(unitType: Int,inputUnit:Int,inputUnit2:Int,outputUnit:Int,inputNum:Double,inputNum2:Double) -> Double{
-        //Function for deciding which conversion function to call
-        //after converting the input, the output is added to historyItems
+        //Function for which adds two different measurements of the same type together
+        //after converting the sum of the inputs, the output is added to historyItems
         var convertedOutput:Double = 0
         
         if unitType == 1 //length
@@ -571,51 +571,90 @@ struct ConverterView: View {
                 //Switch for deciding which unit array for input 1
                 switch selectedUnitIndex{
                 case 1:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex2){
+                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex2) {
+                            ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                                let unit = GlobalData.lengthUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 2:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex2){
+                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex2) {
+                            ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.massUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 3:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex2){
+                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex2) {
+                            ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.speedUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 4:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
                         ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
                             Text(unit)
                         }
-
-
                     }
                 case 5:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex2){
+                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex2) {
+                            ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.timeUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 6:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex2){
+                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex2) {
+                            ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                let unit = GlobalData.volumeUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 7:
                     Picker("Select Unit", selection: $selectedUnitIndex2){
@@ -654,54 +693,93 @@ struct ConverterView: View {
                         .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                    //Switch for deciding which unit array for input 1
+                    //Switch for deciding which unit array for input 2
                     switch selectedUnitIndex{
                     case 1:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        if userSettings.toggleFictionalUnits{
+                            Picker("Select Unit", selection: $selectedUnitIndex4){
+                                ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-
-
+                        }
+                        else{
+                            Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                                    let unit = GlobalData.lengthUnit[index]
+                                    Text(unit)
+                                }
+                            }
                         }
                     case 2:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        if userSettings.toggleFictionalUnits{
+                            Picker("Select Unit", selection: $selectedUnitIndex4){
+                                ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-
-
+                        }
+                        else{
+                            Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                    let unit = GlobalData.massUnit[index]
+                                    Text(unit)
+                                }
+                            }
                         }
                     case 3:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        if userSettings.toggleFictionalUnits{
+                            Picker("Select Unit", selection: $selectedUnitIndex4){
+                                ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-
-
+                        }
+                        else{
+                            Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                    let unit = GlobalData.speedUnit[index]
+                                    Text(unit)
+                                }
+                            }
                         }
                     case 4:
                         Picker("Select Unit", selection: $selectedUnitIndex4){
                             ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
                                 Text(unit)
                             }
-
-
                         }
                     case 5:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        if userSettings.toggleFictionalUnits{
+                            Picker("Select Unit", selection: $selectedUnitIndex4){
+                                ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-
-
+                        }
+                        else{
+                            Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                    let unit = GlobalData.timeUnit[index]
+                                    Text(unit)
+                                }
+                            }
                         }
                     case 6:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        if userSettings.toggleFictionalUnits{
+                            Picker("Select Unit", selection: $selectedUnitIndex4){
+                                ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-
+                        }
+                        else{
+                            Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                    let unit = GlobalData.volumeUnit[index]
+                                    Text(unit)
+                                }
+                            }
                         }
                     case 7:
                         Picker("Select Unit", selection: $selectedUnitIndex4){
@@ -765,46 +843,90 @@ struct ConverterView: View {
                 //Switch for deciding which unit array for output
                 switch selectedUnitIndex{
                 case 1:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex3){
+                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex3) {
+                            ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                                let unit = GlobalData.lengthUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 2:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex3){
+                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex3) {
+                            ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.massUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 3:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex3){
+                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex3) {
+                            ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.speedUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 4:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
                         ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
                             Text(unit)
                         }
-
                     }
                 case 5:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex3){
+                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex3) {
+                            ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                let unit = GlobalData.timeUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 6:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
+                    if userSettings.toggleFictionalUnits{
+                        Picker("Select Unit", selection: $selectedUnitIndex3){
+                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                Text(unit)
+                            }
                         }
-
+                    }
+                    else{
+                        Picker("Select Unit", selection: $selectedUnitIndex3) {
+                            ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                let unit = GlobalData.volumeUnit[index]
+                                Text(unit)
+                            }
+                        }
                     }
                 case 7:
                     Picker("Select Unit", selection: $selectedUnitIndex3){
@@ -835,8 +957,7 @@ struct ConverterView: View {
             
             HStack{
                 //Visual stack for button that clears input and toggle dual input
-                Button(action: {
-                                // Clear the user input
+                Button(action: { //trash icon button to clear all inputs
                                 selectedUnitIndex = 0
                                 selectedUnitIndex2 = 0
                                 selectedUnitIndex3 = 0
