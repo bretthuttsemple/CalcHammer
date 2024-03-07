@@ -189,11 +189,20 @@ struct ConverterView: View {
         else if inputUnit == 8{//mile to meters
             convertedLength = convertedLength * 1609.35
         }
-        else if inputUnit == 8{//mile to meters
-            convertedLength = convertedLength * 1609.35
-        }
         else if inputUnit == 9{//nautical mile to meters
             convertedLength = convertedLength * 1852
+        }
+        else if inputUnit == 10{//football to meters
+            convertedLength = convertedLength * 91.44
+        }
+        else if inputUnit == 11{//marathons to meters
+            convertedLength = convertedLength * 42195
+        }
+        else if inputUnit == 12{//furlong to meters
+            convertedLength = convertedLength * 201
+        }
+        else if inputUnit == 13{//hammer units to meters
+            convertedLength = convertedLength * 0.01905
         }
         
         //Next, based on outputUnit, convert the inputNum from meters into desired output unit
@@ -225,6 +234,18 @@ struct ConverterView: View {
         else if outputUnit == 9{//meters to nautical miles
             convertedLength = convertedLength * 0.0005399568
         }
+        else if outputUnit == 10{//meters to football fields
+            convertedLength = convertedLength * 0.010936
+        }
+        else if outputUnit == 11{//meters to marathons
+            convertedLength = convertedLength * 0.000023709
+        }
+        else if outputUnit == 12{//meters to furlongs
+            convertedLength = convertedLength * 0.004975
+        }
+        else if outputUnit == 12{//meters to hammer units
+            convertedLength = convertedLength * 52.356
+        }
         return convertedLength
     }
 
@@ -254,6 +275,15 @@ struct ConverterView: View {
         else if inputUnit == 7{//short ton to grams
             convertedMass = convertedMass * 907184
         }
+        else if inputUnit == 8{//firkins to grams
+            convertedMass = convertedMass * 25401.17272
+        }
+        else if inputUnit == 9{//bricks to grams
+            convertedMass = convertedMass * 3100
+        }
+        else if inputUnit == 10{//loonies to grams
+            convertedMass = convertedMass * 6.998
+        }
         
         //Next, based on output unit,convert the inputNum from grams into desired unit
         if outputUnit == 0{//grams to milligrams
@@ -277,6 +307,15 @@ struct ConverterView: View {
         }
         else if outputUnit == 7{//grams to short ton
             convertedMass = convertedMass * 0.0000011023
+        }
+        else if outputUnit == 8{//grams to firkins
+            convertedMass = convertedMass * 0.00003936838
+        }
+        else if outputUnit == 9{//grams to bricks
+            convertedMass = convertedMass * 0.00032258
+        }
+        else if outputUnit == 10{//grams to loonies
+            convertedMass = convertedMass * 0.142914546441983
         }
         
         return convertedMass
@@ -311,6 +350,15 @@ struct ConverterView: View {
         else if inputUnit == 8{// knots to km/hr
             convertedSpeed = convertedSpeed * 1.852
         }
+        else if inputUnit == 9{// light years to km/hr
+            convertedSpeed = convertedSpeed * 94688221709.6317
+        }
+        else if inputUnit == 10{// beard seconds to km/hr
+            convertedSpeed = convertedSpeed * 0.02778
+        }
+        else if inputUnit == 11{// Hammer units / second to km/hr
+            convertedSpeed = convertedSpeed * 0.06858125
+        }
         
         //Next, based on output unit,convert the inputNum from grams into desired unit
         if outputUnit == 0{//km/hr to m/s
@@ -337,6 +385,15 @@ struct ConverterView: View {
         }
         else if outputUnit == 8{//km/hr to knot
             convertedSpeed = convertedSpeed * 0.5399568035
+        }
+        else if outputUnit == 9{//km/hr to light years
+            convertedSpeed = convertedSpeed * 0.00000000000010570
+        }
+        else if outputUnit == 10{//km/hr to beard seconds
+            convertedSpeed = convertedSpeed * 36
+        }
+        else if outputUnit == 11{//km/hr to hammer units per second
+            convertedSpeed = convertedSpeed * 14.574
         }
 
         return convertedSpeed
@@ -391,6 +448,15 @@ struct ConverterView: View {
         else if inputUnit == 5{//year to minutes
             convertedTime = convertedTime * 525960
         }
+        else if inputUnit == 6{//jiffy to minutes
+            convertedTime = convertedTime * 0.00000000000055593333333337
+        }
+        else if inputUnit == 7{//nanocentury to minutes
+            convertedTime = convertedTime * 0.0526
+        }
+        else if inputUnit == 8{//fortnight to minutes
+            convertedTime = convertedTime * 20160
+        }
         //Next, based on outputUnit, convert inputNum into desired unit
         if outputUnit == 0{//minutes to milliseconds
             convertedTime = convertedTime * 60000
@@ -407,6 +473,15 @@ struct ConverterView: View {
         }
         else if outputUnit == 5{//minutes to years
             convertedTime = convertedTime * 0.0000019013
+        }
+        else if outputUnit == 6{//minutes to jiffy
+            convertedTime = convertedTime * 1798776831754.3
+        }
+        else if outputUnit == 7{//minutes to nanocentury
+            convertedTime = convertedTime * 19.01
+        }
+        else if outputUnit == 8{//minutes to fortnight
+            convertedTime = convertedTime * 0.0000496
         }
         return convertedTime
     }
@@ -431,6 +506,12 @@ struct ConverterView: View {
         else if inputUnit == 5{//cup to litre
             convertedVolume = convertedVolume * 0.2365882365
         }
+        else if inputUnit == 6{//standard shots to litre
+            convertedVolume = convertedVolume * 0.0444
+        }
+        else if inputUnit == 7{//standard cans to litre
+            convertedVolume = convertedVolume * 0.355
+        }
         //Next, based on outputUnit, convert inputNum into desired unit
         if outputUnit == 0{//litres to millilitres
             convertedVolume = convertedVolume * 1000
@@ -447,6 +528,12 @@ struct ConverterView: View {
         }
         else if outputUnit == 4{//litres to cup
             convertedVolume = convertedVolume * 4.2267528377
+        }
+        else if outputUnit == 5{//litres to standard shot
+            convertedVolume = convertedVolume * 22.5225
+        }
+        else if outputUnit == 6{//litres to standard shot
+            convertedVolume = convertedVolume * 0.0444
         }
         
         return convertedVolume
@@ -580,7 +667,7 @@ struct ConverterView: View {
                     }
                     else{
                         Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                            ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
                                 let unit = GlobalData.lengthUnit[index]
                                 Text(unit)
                             }
@@ -681,8 +768,6 @@ struct ConverterView: View {
                     Text("Please Select a Unit Type")
                 }
                 
-                
-                
                 Spacer()
             }
             HStack{
@@ -705,7 +790,7 @@ struct ConverterView: View {
                         }
                         else{
                             Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                                ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
                                     let unit = GlobalData.lengthUnit[index]
                                     Text(unit)
                                 }
@@ -814,7 +899,7 @@ struct ConverterView: View {
                 Spacer()
                 Text("Your output is \(output)")
                     .modifier(DynamicNumberFormat(number: output))
-                //switch for text displaying the unit
+                //switch for text displaying the unit for the output
                 switch selectedUnitIndex{
                 case 1:
                     Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
@@ -852,7 +937,7 @@ struct ConverterView: View {
                     }
                     else{
                         Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.lengthUnit.count - 6, id: \.self) { index in
+                            ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
                                 let unit = GlobalData.lengthUnit[index]
                                 Text(unit)
                             }

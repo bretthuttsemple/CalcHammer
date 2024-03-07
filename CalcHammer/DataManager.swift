@@ -12,13 +12,13 @@ import SwiftData
 struct GlobalData{
     static var unitSystems:Array = ["Select Unit Type","Length", "Mass", "Speed", "Temperature","Time","Volume","Force","/Angles","/Number Systems"]
     
-    static var lengthUnit:Array = ["Micrometers", "Millimeters","Centimeters","Meters","Kilometers","Inches","Feet","Yards","Mile","Nautical Miles","Football Fields","Marathons","Furlong","Light Years","Beard Seconds","Hammer Units"]
-    static var lengthSymbol:Array = ["μm", "mm","cm","m","km", "in","ft","yd","mi","nmi","Football Fields","Marathons","Furlongs","Light Years","Beard Seconds","hu"]
+    static var lengthUnit:Array = ["Micrometers", "Millimeters","Centimeters","Meters","Kilometers","Inches","Feet","Yards","Mile","Nautical Miles","Football Fields","Marathons","Furlong","Hammer Units"]
+    static var lengthSymbol:Array = ["μm", "mm","cm","m","km", "in","ft","yd","mi","nmi","Football Fields","Marathons","Furlongs","hu"]
     
     static var massUnit:Array = ["Milligram","Grams","Kilograms","Metric Tons","Ounces","Pounds","Long Tons","Short Tons","Firkins","Bricks","Loonies"]
     static var massSymbol:Array = ["mg","g","kg","Mg","℥","lb","LT","tn","Firkins","Bricks","Loonies"]
 
-    static var speedUnit:Array = ["Meters per Second","Meters per Minute","Meters per Hour","Kilometers per Second","Kilometers per minute","Kilometers per Hour","Feet per Second","Miles per hour","knots","Light Years","Beard Seconds","Hammer Units per Second"]
+    static var speedUnit:Array = ["Meters per Second","Meters per Minute","Meters per Hour","Kilometers per Second","Kilometers per minute","Kilometers per Hour","Feet per Second","Miles per hour","Knots","Light Years","Beard Seconds","Hammer Units per Second"]
     static var speedSymbol:Array = ["m/s","m/min","m/hr","km/s","km/m","km/hr","ft/s","mi/hr","kn","light years","beard seconds","hu/s"]
 
     static var tempUnit:Array = ["Celsius (°C)","Fahrenheit (°F)","Kelvin (K)","Rankine (°Ra)"]
