@@ -12,8 +12,8 @@ struct ContentView: View {
     @StateObject var userSettings = UserSettings() // Initialize UserSettings
     
     var body: some View {
-        let clonedShowFavourites = userSettings.showFavouritesTab ?? false
-        let clonedShowHistory = userSettings.showHistoryTab ?? false
+        let clonedShowFavourites = userSettings.showFavouritesTab
+        let clonedShowHistory = userSettings.showHistoryTab
         
         VStack{
             CalcHammerHeader()

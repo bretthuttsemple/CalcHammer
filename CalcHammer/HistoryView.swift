@@ -15,19 +15,24 @@ struct HistoryView: View {
     @Query private var conversionItems: [HistoryItem]
     
     var body: some View {
-        List{
-            ForEach(conversionItems.indices.reversed(), id: \.self) { index in
-                            let item = conversionItems[index]
-                            Text("\(item.historyText)")
-                        }
-            .onDelete{ indexes in
-                for index in indexes {
-                    deleteItem(conversionItems[index])
+        if conversionItems.isEmpty {
+            Text("No history items yet")
+        } else {
+            List {
+                ForEach(conversionItems.indices.reversed(), id: \.self) { index in
+                    let item = conversionItems[index]
+                    Text("\(item.historyText)")
                 }
-                
+                .onDelete { indexes in
+                    for index in indexes {
+                        let correctIndex = conversionItems.count - index - 1
+                        deleteItem(conversionItems[correctIndex])
+                    }
+                }
             }
         }
     }
+    
     func deleteItem(_ item: HistoryItem){
         context.delete(item)
     }
