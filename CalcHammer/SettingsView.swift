@@ -23,7 +23,7 @@ struct SettingsView: View {
                         .padding(.horizontal)
                     Toggle("Show History Tab", isOn: $userSettings.showHistoryTab)
                         .padding(.horizontal)
-                    Toggle("Include Fictional Units", isOn: $userSettings.toggleFictionalUnits)
+                    Toggle("Include Non-Traditonal Units", isOn: $userSettings.toggleFictionalUnits)
                         .padding(.horizontal)
                     Toggle("Include Multi Convert Toggle", isOn: $userSettings.toggleMultiConvert)
                         .padding(.horizontal)

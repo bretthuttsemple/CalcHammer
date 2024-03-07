@@ -28,7 +28,7 @@ struct ConverterView: View {
     @State private var inputValue2:Double = 0
     @State var output:Double = 0
     
-    @State private var multiConvert:Bool = false
+    @State private var multiConvert:Bool = false //variable used the multi convert toggle
     
     @Environment(\.modelContext) private var context //links to historyItems
     
