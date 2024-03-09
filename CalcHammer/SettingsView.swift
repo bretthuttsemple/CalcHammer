@@ -16,19 +16,58 @@ class UserSettings: ObservableObject {
 
 struct SettingsView: View {
     @StateObject var userSettings = UserSettings()
+    
+    @State private var isFavouritesExpanded = false
+    @State private var isHistoryExpanded = false
+    @State private var isFictionalUnitsExpanded = false
+    @State private var isMultiConvertExpanded = false
 
     var body: some View {
-        VStack {
-                    Toggle("Show Favourites Tab:", isOn: $userSettings.showFavouritesTab)
-                        .padding(.horizontal)
-                    Toggle("Show History Tab", isOn: $userSettings.showHistoryTab)
-                        .padding(.horizontal)
-                    Toggle("Include Non-Traditonal Units", isOn: $userSettings.toggleFictionalUnits)
-                        .padding(.horizontal)
-                    Toggle("Include Multi Convert Toggle", isOn: $userSettings.toggleMultiConvert)
-                        .padding(.horizontal)
+            VStack {
+                CollapsibleSettingRow(label: "Show Favourites Tab", description: "Toggle to show or hide the Favourites tab", setting: $userSettings.showFavouritesTab, isExpanded: $isFavouritesExpanded)
+                CollapsibleSettingRow(label: "Show History Tab", description: "Toggle to show or hide the History tab", setting: $userSettings.showHistoryTab, isExpanded: $isHistoryExpanded)
+                CollapsibleSettingRow(label: "Include Non-Traditonal Units", description: "Toggle to include non-traditional units", setting: $userSettings.toggleFictionalUnits, isExpanded: $isFictionalUnitsExpanded)
+                CollapsibleSettingRow(label: "Include Multi Convert Toggle", description: "Toggle to include the Multi Convert toggle", setting: $userSettings.toggleMultiConvert, isExpanded: $isMultiConvertExpanded)
+            }
+            .padding(.horizontal)
+            .environmentObject(userSettings)
+        }
+    }
+
+struct CollapsibleSettingRow: View {
+    let label: String
+    let description: String
+    @Binding var setting: Bool
+    @Binding var isExpanded: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text(label)
+                    .font(.headline)
+                Spacer()
+                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    .foregroundColor(.accentColor)
+            }
+            .onTapGesture {
+                withAnimation {
+                    isExpanded.toggle()
                 }
-        // Provide UserSettings to the environment
-        .environmentObject(userSettings)
+            }
+            if isExpanded {
+                HStack {
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Toggle("", isOn: $setting)
+                        .padding(.trailing, 20)
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 5)
+                .contentShape(Rectangle())
+            }
+        }
     }
 }
+
