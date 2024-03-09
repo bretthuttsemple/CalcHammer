@@ -770,8 +770,9 @@ struct ConverterView: View {
                 
                 Spacer()
             }
-            HStack{
-                if $multiConvert.wrappedValue{
+            if $multiConvert.wrappedValue{
+                Text("+")
+                HStack{
                     TextField("Enter Number", value: $inputValue2, formatter: NumberFormatter().decimalNumberFormatter)
                         .padding([.top, .leading, .bottom])
                         .textFieldStyle(.roundedBorder)

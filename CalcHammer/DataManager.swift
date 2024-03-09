@@ -25,10 +25,10 @@ struct GlobalData{
     static var tempSymbol:Array = ["°C","°F","K","°Ra"]
 
     static var timeUnit:Array = ["Millisecond","Second","Minute","Hour","Week","Year","Jiffy","Nanocentury","Fortnight"]
-    static var timeSymbol:Array = ["ms","s","min","hr","week","year","jiffy","nanocentury","fortnight"]
+    static var timeSymbol:Array = ["ms","s","min","hr","weeks","years","jiffies","nanocenturies","fortnights"]
 
     static var volumeUnit:Array = ["Milliliter","Liter","Gallon","Pint","Quart","Cup","Standard Shots","Standard Cans"]
-    static var volumeSymbol:Array = ["mL","L","gal","pt","qt","US cup","shots","cans"]
+    static var volumeSymbol:Array = ["mL","L","gal","pt","qt","US cups","shots","cans"]
     
     static var forceUnit:Array = ["Newton","Kilonewton","Dyne","Pond","Kilopond","Ounce-force","Pound-Force","Poundal"]
     static var forceSymbol:Array = ["N","kN","dyn","p","kp","ozf","lbf","pdl"]
