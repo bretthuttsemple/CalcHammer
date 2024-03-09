@@ -1,6 +1,16 @@
 import SwiftUI
+import SwiftData
 
+protocol Calculators {
+    func addHistoryItem(historyText: String, context: ModelContext)
+}
 
+extension Calculators {
+    func saveToHistory(historyText: String, context: ModelContext) {
+        let item = HistoryItem(historyText: historyText)
+        context.insert(item)
+    }
+}
 
 struct CalculatorView: View {
     let calculators = [
@@ -118,11 +128,16 @@ struct CalculatorView: View {
         }
     }
 
-    struct BMICalculatorView: View {
+    struct BMICalculatorView: View, Calculators{
         @State private var weight = ""
         @State private var height = ""
         @State private var isMetric = true // Toggle for metric/imperial system
         @State private var bmi = "" // Output BMI value
+
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
 
         var body: some View {
             VStack {
@@ -171,20 +186,27 @@ struct CalculatorView: View {
             let bmiValue: Double
             if isMetric {
                 bmiValue = weight / (height * height)
+                bmi = String(format: "%.2f", bmiValue)
+                addHistoryItem(historyText: "The BMI is \(bmi), calculated from weight \(weight) kg and height \(height) m.", context: context)
             } else {
                 bmiValue = (weight / (height * height)) * 703 // Conversion for imperial system
+                bmi = String(format: "%.2f", bmiValue)
+                addHistoryItem(historyText: "The BMI is \(bmi), calculated from weight \(weight) lbs and height \(height) inches.", context: context)
             }
-            
-            bmi = String(format: "%.2f", bmiValue)
         }
     }
     
-    struct CompoundInterestCalculatorView: View {
+    struct CompoundInterestCalculatorView: View,Calculators{
         @State private var principal = ""
         @State private var interestRate = ""
         @State private var time = ""
         @State private var compoundFrequency = "Annually"
         @State private var result = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
 
         let compoundFrequencies = ["Annually", "Semi-Annually", "Quarterly", "Monthly"]
 
@@ -257,15 +279,21 @@ struct CalculatorView: View {
 
             let compoundInterest = principalValue * pow(1 + interestRateValue / (100 * n), n * timeValue) - principalValue
             result = String(format: "%.2f", compoundInterest)
+            addHistoryItem(historyText: "Principal: \(principal), Interest Rate: \(interestRate)%, Time: \(time) years, Compound Frequency: \(compoundFrequency), Result: \(result)", context: context)
         }
     }
 
-    struct CaffeineHalfLifeCalculatorView: View {
+    struct CaffeineHalfLifeCalculatorView: View,Calculators{
         @State private var initialAmount = ""
         @State private var timePassed = ""
         @State private var halfLife = "5.7" // Default half-life of caffeine in hours
         @State private var result = ""
-
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
+        
         var body: some View {
             VStack {
                 TextField("Initial Amount (mg)", text: $initialAmount)
@@ -318,6 +346,7 @@ struct CalculatorView: View {
 
             let remainingCaffeine = initialAmountValue * pow(0.5, timePassedValue / halfLifeValue)
             result = String(format: "%.2f", remainingCaffeine)
+            addHistoryItem(historyText: "There is \(remainingCaffeine) mg of caffiene left from the \(initialAmountValue) mg of caffiene consumed \(timePassedValue) hours ago", context: context)
         }
     }
 
@@ -328,10 +357,15 @@ struct CalculatorView: View {
         }
     }
 
-    struct PermutationCalculatorView: View {
+    struct PermutationCalculatorView: View, Calculators{
         @State private var nValue = ""
         @State private var rValue = ""
         @State private var result = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -376,6 +410,7 @@ struct CalculatorView: View {
                 result = "R should be less than or equal to N"
             } else {
                 result = "\(permutation(n: n, r: r))"
+                addHistoryItem(historyText: "Permuation: N = \(n), R = \(r), Result = \(result)", context: context)
             }
         }
         
@@ -392,10 +427,15 @@ struct CalculatorView: View {
         }
     }
 
-    struct RandomNumberGeneratorView: View {
+    struct RandomNumberGeneratorView: View,Calculators{
         @State private var lowerEnd = "0"
         @State private var upperEnd = "10"
         @State private var randomNumber = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -437,14 +477,20 @@ struct CalculatorView: View {
             
             let random = Int.random(in: lower...upper)
             randomNumber = "\(random)"
+            addHistoryItem(historyText: "Upper Limit = \(lower), Upper Limit = \(upper), Random Value = \(randomNumber)", context: context)
         }
     }
 
-    struct CalorieServingSizeCalculatorView: View {
+    struct CalorieServingSizeCalculatorView: View, Calculators{
         @State private var caloriesPerServing = ""
         @State private var boxServingSize = ""
         @State private var actualServingSize = ""
         @State private var caloriesInActualServing = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -453,7 +499,7 @@ struct CalculatorView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
                 
-                TextField("Serving size on box", text: $boxServingSize)
+                TextField("Serving size on Label", text: $boxServingSize)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
@@ -495,13 +541,19 @@ struct CalculatorView: View {
             
             let caloriesInActualServingValue = (caloriesPerServingValue / boxServingSizeValue) * actualServingSizeValue
             caloriesInActualServing = String(format: "%.2f", caloriesInActualServingValue)
+            addHistoryItem(historyText: "\(caloriesPerServingValue) calories per \(boxServingSizeValue) units = \(caloriesInActualServingValue) calories per \(actualServingSizeValue) units", context: context)
         }
     }
 
-    struct UnitPriceCalculatorView: View {
+    struct UnitPriceCalculatorView: View,Calculators{
         @State private var cost = ""
         @State private var amount = ""
         @State private var unitPrice = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -542,14 +594,20 @@ struct CalculatorView: View {
             
             let price = costValue / amountValue
             unitPrice = String(format: "%.2f", price)
+            addHistoryItem(historyText: "\(amountValue) items costing \(costValue) each for a total of \(unitPrice)", context: context)
         }
     }
 
-    struct PizzaAreaCalculatorView: View {
+    struct PizzaAreaCalculatorView: View,Calculators{
         @State private var pizzaSize = ""
         @State private var pizzaCost = ""
         @State private var selectedShape = "Square"
         @State private var unitCost: Double?
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -608,12 +666,18 @@ struct CalculatorView: View {
             }
             
             unitCost = cost / area
+            addHistoryItem(historyText: "Cost per Square Inch:\(String(describing: unitCost))", context: context)
         }
     }
 
-    struct ExactAgeCalculatorView: View {
+    struct ExactAgeCalculatorView: View,Calculators{
         @State private var birthDate = Date()
         @State private var exactAge = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -652,14 +716,20 @@ struct CalculatorView: View {
             
             if let years = ageComponents.year, let months = ageComponents.month, let days = ageComponents.day {
                 exactAge = "\(years) years, \(months) months, \(days) days"
+                addHistoryItem(historyText:"An exact age was calcualted for \(years) years, \(months) months, \(days) days", context: context)
             }
         }
     }
     
-    struct DateDifferenceCalculatorView: View {
+    struct DateDifferenceCalculatorView: View,Calculators {
         @State private var startDate = Date()
         @State private var endDate = Date()
         @State private var dateDifference = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -696,15 +766,21 @@ struct CalculatorView: View {
             
             if let years = components.year, let months = components.month, let days = components.day {
                 dateDifference = "\(years) years, \(months) months, \(days) days"
+                addHistoryItem(historyText: "\(components) was \(dateDifference) ago", context: context)
             }
         }
     }
 
-    struct AccumulatedDepreciationView: View {
+    struct AccumulatedDepreciationView: View,Calculators {
         @State private var initialCost = ""
         @State private var depreciationRate = ""
         @State private var years = ""
         @State private var updatedCost = ""
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
         
         var body: some View {
             VStack {
@@ -759,14 +835,20 @@ struct CalculatorView: View {
             updatedCostValue = max(updatedCostValue, 0)
             
             updatedCost = String(format: "%.2f", updatedCostValue)
+            addHistoryItem(historyText: "With an intial value of \(initialCostValue), a depreciation rate of \(depreciationRateValue), and \(yearsValue) years, the value will be \(updatedCostValue)", context: context)
         }
     }
 
-    struct GradeCalculatorView: View {
+    struct GradeCalculatorView: View,Calculators {
         @State private var currentGrade = 0.0
         @State private var examWeight = 0.0
         @State private var desiredGrade = 0.0
         @State private var isCalculateNeededGrade = true
+        
+        @Environment(\.modelContext) private var context
+        func addHistoryItem(historyText: String, context: ModelContext) {
+            saveToHistory(historyText: historyText, context: context)
+        }
         
         var body: some View {
             VStack {
@@ -840,9 +922,11 @@ struct CalculatorView: View {
             if let neededGrade = neededGrade {
                 // Show the needed grade result
                 print("To achieve \(desiredGrade)% overall, you need to score \(neededGrade)% on the final exam.")
+                addHistoryItem(historyText: "To achieve \(desiredGrade)% overall, you need to score \(neededGrade)% on the final exam.", context: context)
             } else if let finalGrade = finalGrade {
                 // Show the final grade result
                 print("If you score \(desiredGrade)% on the final exam, your overall grade will be \(finalGrade)%.")
+                addHistoryItem(historyText: "If you score \(desiredGrade)% on the final exam, your overall grade will be \(finalGrade)%.", context: context)
             }
         }
         
@@ -866,10 +950,15 @@ struct CalculatorView: View {
         }
     }
 
-    struct SpeedOfSoundCalculatorView: View {
+    struct SpeedOfSoundCalculatorView: View,Calculators {
         @State private var temperature = ""
         @State private var temperatureUnit = "Celsius"
         @State private var speedOfSound = ""
+        
+        @Environment(\.modelContext) private var context
+        func addHistoryItem(historyText: String, context: ModelContext) {
+            saveToHistory(historyText: historyText, context: context)
+        }
         
         var body: some View {
             VStack {
@@ -917,24 +1006,30 @@ struct CalculatorView: View {
             switch temperatureUnit {
             case "Celsius":
                 convertedTemperature = temperatureValue
+                let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
+                speedOfSound = String(format: "%.2f", speed)
+                addHistoryItem(historyText: "When the tempature is \(convertedTemperature) °C the speed of sound is \(speed) m/s", context: context)
             case "Fahrenheit":
                 convertedTemperature = (temperatureValue - 32) * 5/9
+                let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
+                speedOfSound = String(format: "%.2f", speed)
+                addHistoryItem(historyText: "When the tempature is \(temperatureValue) °F the speed of sound is \(speed) m/s", context: context)
             case "Kelvin":
                 convertedTemperature = temperatureValue - 273.15
+                let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
+                speedOfSound = String(format: "%.2f", speed)
+                addHistoryItem(historyText: "When the tempature is \(temperatureValue) °K the speed of sound is \(speed) m/s", context: context)
             default:
                 return
             }
-            
-            // Calculate speed of sound using formula
-            let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
-            speedOfSound = String(format: "%.2f", speed)
         }
     }
     
-    struct PercentageCalculatorView: View {
+    struct PercentageCalculatorView: View, Calculators {
         @State private var originalValue = ""
         @State private var percentage = ""
         @State private var result = ""
+        @Environment(\.modelContext) private var context
         
         var body: some View {
             VStack {
@@ -961,7 +1056,7 @@ struct CalculatorView: View {
             .padding()
             .navigationTitle("Percentage Calculator")
             .background(
-                Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard
+                Color.white.opacity(0.0001)
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
@@ -977,14 +1072,26 @@ struct CalculatorView: View {
             
             let percentageValue = originalValue * percentage / 100
             result = "\(percentageValue)"
+            
+            addHistoryItem(historyText: "\(percentage)% of \(originalValue) = \(result)", context: context)
+        }
+        
+        func addHistoryItem(historyText: String, context: ModelContext) {
+            saveToHistory(historyText: historyText, context: context)
         }
     }
     
-    struct FuelCostCalculatorView: View {
+    struct FuelCostCalculatorView: View, Calculators {
+        func addHistoryItem(historyText: String, context: ModelContext) {
+            saveToHistory(historyText: historyText, context: context)
+        }
+        
         @State private var tripDistance = ""
         @State private var fuelEfficiency = ""
         @State private var fuelPrice = ""
         @State private var result = ""
+        
+        @Environment(\.modelContext) private var context
         
         var body: some View {
             VStack {
@@ -1034,6 +1141,9 @@ struct CalculatorView: View {
             let fuelNeeded = tripDistance / fuelEfficiency
             let cost = fuelNeeded * fuelPrice
             
-            result = "Fuel needed: \(String(format: "%.2f", fuelNeeded)) liters, Cost: $\(String(format: "%.2f", cost))"        }
+            result = "Fuel needed: \(String(format: "%.2f", fuelNeeded)) liters, Cost: $\(String(format: "%.2f", cost))"
+            addHistoryItem(historyText: "A \(tripDistance) km trip will cost \(cost)", context: context)
+
+        }
     }
 }
