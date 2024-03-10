@@ -39,7 +39,6 @@ struct CalculatorView: View {
     let views: [String: AnyView] = [
         "Date Difference Calculator": AnyView(DateDifferenceCalculatorView()),
         "Accumulated Depreciation Calculator": AnyView(AccumulatedDepreciationView()),
-        "Accumulated Appreciation Calculator": AnyView(AccumulatedAppreciationCalculatorView()),
         "Grade Calculator": AnyView(GradeCalculatorView()),
         "BMI Calculator": AnyView(BMICalculatorView()),
         "Compound Interest Calculator": AnyView(CompoundInterestCalculatorView()),
@@ -108,13 +107,6 @@ struct CalculatorView: View {
         }
     }
     
-    struct AccumulatedAppreciationCalculatorView: View {
-        var body: some View {
-            Text("Accumulated Appreciation Calculator View")
-                .navigationTitle("Accumulated Appreciation Calculator")
-        }
-    }
-
     struct BMICalculatorView: View, Calculators{
         @State private var weight = ""
         @State private var height = ""
