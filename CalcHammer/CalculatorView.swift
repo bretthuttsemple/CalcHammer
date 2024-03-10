@@ -19,12 +19,11 @@ struct CalculatorView: View {
     let calculators: [String] = [
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
-        "Accumulated Appreciation Calculator",
         "Grade Calculator",
         "BMI Calculator",
         "Compound Interest Calculator",
         "Caffeine Half-Life Calculator",
-        "Liquid Dilution Calculator",
+        "Alcohol Dilution Calculator",
         "Permutation Calculator",
         "Random Number Generator",
         "Calorie Serving Size Calculator",
@@ -43,7 +42,7 @@ struct CalculatorView: View {
         "BMI Calculator": AnyView(BMICalculatorView()),
         "Compound Interest Calculator": AnyView(CompoundInterestCalculatorView()),
         "Caffeine Half-Life Calculator": AnyView(CaffeineHalfLifeCalculatorView()),
-        "Liquid Dilution Calculator": AnyView(LiquidDilutionCalculatorView()),
+        "Alcohol Dilution Calculator": AnyView(AlcoholDilutionCalculatorView()),
         "Permutation Calculator": AnyView(PermutationCalculatorView()),
         "Random Number Generator": AnyView(RandomNumberGeneratorView()),
         "Calorie Serving Size Calculator": AnyView(CalorieServingSizeCalculatorView()),
@@ -397,10 +396,96 @@ struct CalculatorView: View {
         }
     }
 
-    struct LiquidDilutionCalculatorView: View {
+    struct AlcoholDilutionCalculatorView: View, Calculators {
+        @State private var mixerAmount = ""
+        @State private var alcoholAmount = ""
+        @State private var alcoholStrength = ""
+        @State private var totalAmount = ""
+        @State private var alcoholPercentage = ""
+
+        @State private var isInfoPopoverVisible = false
+        
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
+
         var body: some View {
-            Text("Liquid Dilution Calculator View")
-                .navigationTitle("Liquid Dilution Calculator")
+            VStack {
+                VStack {
+                    TextField("Mixer Amount (ml)", text: $mixerAmount)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+
+                    TextField("Alcohol Amount (ml)", text: $alcoholAmount)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Alcohol Strength (%)", text: $alcoholStrength)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+
+                    Button("Calculate") {
+                        calculateAlcoholDilution()
+                    }
+                    .padding()
+
+                    if !totalAmount.isEmpty && !alcoholPercentage.isEmpty {
+                        Text("Total Amount: \(totalAmount) ml")
+                            .padding()
+                        Text("Alcohol Percentage: \(alcoholPercentage)%")
+                            .padding()
+                    }
+
+                    Spacer()
+                }
+                .padding()
+                .navigationTitle("Alcohol Dilution Calculator")
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        isInfoPopoverVisible.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                    }
+                    .popover(isPresented: $isInfoPopoverVisible){
+                        VStack {
+                            Text("Alcohol Dilution Calculator")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            Text("The alcohol dilution calculator helps you determine the total amount of a mixed drink and its alcohol percentage based on the amount of mixer, alcohol, and alcohol strength.")
+                                .padding()
+                                .presentationCompactAdaptation(.popover)
+                        }
+                        .frame(width: 300, height: 200) // Set preferred size for the popover
+                    }
+                )
+                .background(
+                    Color.white.opacity(0.0001)
+                        .onTapGesture {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                )
+            }
+        }
+
+        private func calculateAlcoholDilution() {
+            guard let mixerAmountValue = Double(mixerAmount),
+                  let alcoholAmountValue = Double(alcoholAmount),
+                  let alcoholStrengthValue = Double(alcoholStrength) else {
+                return
+            }
+
+            let totalAmountValue = mixerAmountValue + alcoholAmountValue
+            let totalAlcoholAmount = alcoholAmountValue * (alcoholStrengthValue / 100)
+            let totalAlcoholPercentage = (totalAlcoholAmount / totalAmountValue) * 100
+
+            totalAmount = String(format: "%.2f", totalAmountValue)
+            alcoholPercentage = String(format: "%.2f", totalAlcoholPercentage)
+
+            addHistoryItem(historyText: "Mixed \(mixerAmountValue) ml of mixer with \(alcoholAmountValue) ml of alcohol (\(alcoholStrengthValue)% alcohol), resulting in a total drink volume of \(totalAmount) ml with an alcohol percentage of \(alcoholPercentage)%", context: context)
         }
     }
 
