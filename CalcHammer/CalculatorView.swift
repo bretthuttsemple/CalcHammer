@@ -32,7 +32,8 @@ struct CalculatorView: View {
         "Exact Age Calculator",
         "Speed of Sound Calculator",
         "Percentage Calculator",
-        "Fuel Cost Calculator"
+        "Fuel Cost Calculator",
+        "Tip Calculator"
     ].sorted()
     
     let views: [String: AnyView] = [
@@ -51,7 +52,9 @@ struct CalculatorView: View {
         "Exact Age Calculator": AnyView(ExactAgeCalculatorView()),
         "Speed of Sound Calculator": AnyView(SpeedOfSoundCalculatorView()),
         "Percentage Calculator": AnyView(PercentageCalculatorView()),
-        "Fuel Cost Calculator": AnyView(FuelCostCalculatorView())
+        "Fuel Cost Calculator": AnyView(FuelCostCalculatorView()),
+        "Tip Calculator": AnyView(TipCalculatorView())
+
     ]
     
     var filteredCalculators: [String] {
@@ -130,9 +133,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("BMI (Body Mass Index)")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("BMI measures body fat based on height and weight, providing insight into health risks associated with weight categories. For more information, visit Health Canada's website.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -223,9 +223,6 @@ struct CalculatorView: View {
                             }
                             .popover(isPresented: $isInfoPopoverVisible){
                                 VStack {
-                                    Text("Compound Interest")
-                                        .font(.headline)
-                                        .padding(.bottom, 5)
                                     Text("The Compound Interest Calculator computes the accrued interest on an investment based on principal amount, interest rate, time, and compound frequency. Varying compound frequencies, such as semi-annually or monthly, impact how often interest is added to the principal, affecting overall returns.")
                                         .padding()
                                         .presentationCompactAdaptation(.popover)
@@ -330,9 +327,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Caffeine Half-Life")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("Caffeine half-life is the duration for the body to clear half of ingested caffeine, reducing its amount in the system. Varied half-lives among sources impact caffeine metabolism and its stimulating effects.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -452,9 +446,6 @@ struct CalculatorView: View {
                     }
                     .popover(isPresented: $isInfoPopoverVisible){
                         VStack {
-                            Text("Alcohol Dilution Calculator")
-                                .font(.headline)
-                                .padding(.bottom, 5)
                             Text("The alcohol dilution calculator helps you determine the total amount of a mixed drink and its alcohol percentage based on the amount of mixer, alcohol, and alcohol strength.")
                                 .padding()
                                 .presentationCompactAdaptation(.popover)
@@ -512,9 +503,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Permutation Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("A permutation calculator computes the number of ways to arrange a subset of items from a larger set, considering the order of arrangement. Inputs typically include two numbers: N (representing the total number of items) and R (representing the number of items to be arranged). The output provides the total number of permutations possible for arranging R items from a set of N items.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -605,9 +593,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Random Number Generator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The random number generator allows users to generate a random integer within a specified range defined by the upper and lower limits.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -682,9 +667,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Calorie Serving Size")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The calorie serving size calculator calculates the calorie content for a specified serving size based on the calorie count and serving size from a nutritional label, along with the actual serving size intended for consumption.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -767,9 +749,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Unit Price Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The unit price calculator helps compare prices of similar items that come in different quantities, aiding in making cost-effective purchasing decisions.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -844,9 +823,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Pizza Area Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The pizza area calculator assists in comparing the prices of pizzas of different sizes, whether circular or rectangular, enabling informed decisions on cost-effective purchases.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -936,9 +912,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Exact Age Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The exact age calculator determines your precise age in years, months, and days, providing accurate information for various purposes.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1010,9 +983,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Date Difference Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The date difference calculator calculates the precise duration between two dates, allowing you to determine the exact number of days, months, and years elapsed between them.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1084,9 +1054,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Accumulated Depreciation")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The accumulated depreciation calculator computes the total depreciation of an asset over its useful life, taking into account factors such as initial cost, salvage value, and depreciation method. It provides the accumulated depreciation amount, which represents the total reduction in the asset's value over time.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1174,9 +1141,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Grade Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The grade calculator has two modes: one predicts the final exam score needed to achieve a desired grade, and the other computes the achieved grade based on the final exam result. It requires the current grade, exam weight, and either the target grade or final exam score.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1306,9 +1270,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Speed of Sound Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The speed of sound calculator determines the speed of sound in air, which varies with temperature. It's important to note that this calculator specifically applies to sound waves traveling through air, as the speed of sound differs in other substances. Temperature affects the speed of sound because air particles move faster at higher temperatures, allowing sound waves to propagate more quickly through the medium.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1399,9 +1360,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Percentage Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The percentage calculator computes the result of a percentage value based on an original number.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1483,9 +1441,6 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Fuel Cost Calculator")
-                                            .font(.headline)
-                                            .padding(.bottom, 5)
                                         Text("The fuel cost calculator computes the total cost of fuel for a given trip based on the trip distance, fuel efficiency, and fuel price per liter. It provides the total fuel needed for the trip and the corresponding cost, making it useful for planning road trips.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
@@ -1546,4 +1501,83 @@ struct CalculatorView: View {
 
         }
     }
+    
+    struct TipCalculatorView: View, Calculators{
+        @State private var billTotal = ""
+        @State private var tipPercentage = ""
+        @State private var result = ""
+        @State private var isInfoPopoverVisible = false
+
+        @Environment(\.modelContext) private var context
+                func addHistoryItem(historyText: String, context: ModelContext) {
+                    saveToHistory(historyText: historyText, context: context)
+                }
+        
+        var body: some View {
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isInfoPopoverVisible.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .padding()
+                    }
+                    .popover(isPresented: $isInfoPopoverVisible) {
+                        VStack {
+                            Text("The Tip Calculator helps you determine the appropriate tip amount based on the bill total and your desired tip percentage. Enter the bill amount, select the tip percentage, and the calculator will compute the tip for you.")
+                                .padding()
+                                .multilineTextAlignment(.center)
+                                .presentationCompactAdaptation(.popover)
+                        }
+                        .frame(width: 300, height: 200) // Set preferred size for the popover
+                    }
+                }
+                .padding(.horizontal)
+                
+                Spacer()
+                
+                TextField("Bill Total", text: $billTotal)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                
+                TextField("Tip Percentage", text: $tipPercentage)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.numberPad)
+                
+                Button("Calculate Tip") {
+                    calculateTip()
+                }
+                .padding()
+                
+                Text("Tip Amount: \(result)")
+                    .padding()
+                
+                Spacer()
+            }
+            .navigationTitle("Tip Calculator")
+            .background(
+                Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
+            )
+        }
+        
+        private func calculateTip() {
+                guard let billTotalValue = Double(billTotal),
+                      let tipPercentageValue = Double(tipPercentage) else {
+                    result = "Invalid input"
+                    return
+                }
+                
+                let tipAmount = billTotalValue * tipPercentageValue / 100.0
+                result = String(format: "%.2f", tipAmount)
+                
+                let historyText = "Bill Total: \(billTotalValue), Tip Percentage: \(tipPercentageValue)%, Tip Amount: \(tipAmount)"
+                addHistoryItem(historyText: historyText, context: context)
+            }
+        }
 }
