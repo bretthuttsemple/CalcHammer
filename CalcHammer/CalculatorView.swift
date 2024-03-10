@@ -13,10 +13,13 @@ extension Calculators {
 }
 
 struct CalculatorView: View {
+    @State private var searchText = ""
+    @State private var selectedCalculator: Int?
+    
     let calculators = [
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
-        "Accumulated Apreciation Calculator",
+        "Accumulated Appreciation Calculator",
         "Grade Calculator",
         "BMI Calculator",
         "Compound Interest Calculator",
@@ -29,51 +32,65 @@ struct CalculatorView: View {
         "Pizza Area Cost Calculator",
         "Exact Age Calculator",
         "Speed of Sound Calculator",
-        "Percantage Calculator",
+        "Percentage Calculator",
         "Fuel Cost Calculator"
-    ]
+    ].sorted()
     
-    @State private var selectedCalculator: Int?
-        
+    var filteredCalculators: [String] {
+        if searchText.isEmpty {
+            return calculators
+        } else {
+            return calculators.filter { $0.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-                    ForEach(calculators.indices, id: \.self) { index in
-                        Button(action: {
-                            selectedCalculator = index
-                        }) {
-                            Text(calculators[index])
-                                .font(.headline)
+            VStack {
+                TextField("Search", text: $searchText)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
+                ScrollView {
+                    LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
+                        ForEach(filteredCalculators.indices, id: \.self) { index in
+                            Button(action: {
+                                selectedCalculator = index
+                            }) {
+                                Text(filteredCalculators[index])
+                                    .font(.headline)
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(width: 175, height: 150)
                                     .background(Color.blue)
                                     .cornerRadius(10)
                                     .multilineTextAlignment(.center)
-                                                }
-                                    .alignmentGuide(.leading) { _ in CGFloat(-10) }
-                                    .onTapGesture {
-                                        selectedCalculator = index                            }
                             }
+                            .onTapGesture {
+                                selectedCalculator = index
+                            }
+                        }
+                    }
+                    .padding()
                 }
-                .padding()
+                .background(Color.gray.opacity(0.1))
+                .navigationTitle("Calculators")
+                .background(
+                    NavigationLink(
+                        destination: destinationView(),
+                        tag: selectedCalculator ?? -1, // Use a default value if selectedCalculator is nil
+                        selection: $selectedCalculator,
+                        label: {
+                            EmptyView()
+                        }
+                    )
+                    .isDetailLink(false) // Add this to prevent duplicate navigation bars
+                )
             }
-            .background(Color.gray.opacity(0.1))
-            .navigationTitle("Calculators")
-            .background(
-                NavigationLink(
-                            destination: destinationView(),
-                            tag: selectedCalculator ?? -1, // Use a default value if selectedCalculator is nil
-                            selection: $selectedCalculator,
-                            label: {
-                                EmptyView()
-                            }
-                        )
-                .isDetailLink(false) // Add this to prevent duplicate navigation bars
-            )
         }
     }
+
     
     @ViewBuilder
     func destinationView() -> some View {
