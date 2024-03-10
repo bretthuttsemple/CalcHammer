@@ -14,10 +14,9 @@ extension Calculators {
 
 struct CalculatorView: View {
     @State private var searchText = ""
-    @State private var selectedCalculator: Int?
-    @State private var searchBarHidden = false
+    @State private var selectedCalculator: String?
     
-    let calculators = [
+    let calculators: [String] = [
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
         "Accumulated Appreciation Calculator",
@@ -37,6 +36,26 @@ struct CalculatorView: View {
         "Fuel Cost Calculator"
     ].sorted()
     
+    let views: [String: AnyView] = [
+        "Date Difference Calculator": AnyView(DateDifferenceCalculatorView()),
+        "Accumulated Depreciation Calculator": AnyView(AccumulatedDepreciationView()),
+        "Accumulated Appreciation Calculator": AnyView(AccumulatedAppreciationCalculatorView()),
+        "Grade Calculator": AnyView(GradeCalculatorView()),
+        "BMI Calculator": AnyView(BMICalculatorView()),
+        "Compound Interest Calculator": AnyView(CompoundInterestCalculatorView()),
+        "Caffeine Half-Life Calculator": AnyView(CaffeineHalfLifeCalculatorView()),
+        "Liquid Dilution Calculator": AnyView(LiquidDilutionCalculatorView()),
+        "Permutation Calculator": AnyView(PermutationCalculatorView()),
+        "Random Number Generator": AnyView(RandomNumberGeneratorView()),
+        "Calorie Serving Size Calculator": AnyView(CalorieServingSizeCalculatorView()),
+        "Unit Price Calculator": AnyView(UnitPriceCalculatorView()),
+        "Pizza Area Cost Calculator": AnyView(PizzaAreaCalculatorView()),
+        "Exact Age Calculator": AnyView(ExactAgeCalculatorView()),
+        "Speed of Sound Calculator": AnyView(SpeedOfSoundCalculatorView()),
+        "Percentage Calculator": AnyView(PercentageCalculatorView()),
+        "Fuel Cost Calculator": AnyView(FuelCostCalculatorView())
+    ]
+    
     var filteredCalculators: [String] {
         if searchText.isEmpty {
             return calculators
@@ -47,21 +66,19 @@ struct CalculatorView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack {
-                    if !searchBarHidden {
-                        TextField("Search", text: $searchText)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal)
-                    }
-                    
+            VStack {
+                TextField("Search", text: $searchText)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
+                
+                ScrollView {
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-                        ForEach(filteredCalculators.indices, id: \.self) { index in
+                        ForEach(filteredCalculators, id: \.self) { calculator in
                             Button(action: {
-                                selectedCalculator = index
+                                selectedCalculator = calculator
                             }) {
-                                Text(filteredCalculators[index])
+                                Text(calculator)
                                     .font(.headline)
                                     .foregroundColor(.white)
                                     .padding()
@@ -69,9 +86,6 @@ struct CalculatorView: View {
                                     .background(Color.blue)
                                     .cornerRadius(10)
                                     .multilineTextAlignment(.center)
-                            }
-                            .onTapGesture {
-                                selectedCalculator = index
                             }
                         }
                     }
@@ -81,69 +95,16 @@ struct CalculatorView: View {
                 .navigationTitle("Calculators")
                 .background(
                     NavigationLink(
-                        destination: destinationView(),
-                        tag: selectedCalculator ?? -1, // Use a default value if selectedCalculator is nil
-                        selection: $selectedCalculator,
-                        label: {
-                            EmptyView()
-                        }
+                        destination: views[selectedCalculator ?? ""] ?? AnyView(EmptyView()),
+                        isActive: Binding<Bool>(
+                            get: { selectedCalculator != nil },
+                            set: { if !$0 { selectedCalculator = nil } }
+                        ),
+                        label: { EmptyView() }
                     )
                     .isDetailLink(false) // Add this to prevent duplicate navigation bars
                 )
             }
-            .onAppear {
-                searchBarHidden = false
-            }
-            .onDisappear {
-                searchBarHidden = true
-            }
-        }
-    }
-
-    
-    @ViewBuilder
-    func destinationView() -> some View {
-        if let index = selectedCalculator {
-            switch index {
-            case 0:
-                DateDifferenceCalculatorView()
-            case 1:
-                AccumulatedDepreciationView()
-            case 2:
-                AccumulatedAppreciationCalculatorView()
-            case 3:
-                GradeCalculatorView()
-            case 4:
-                BMICalculatorView()
-            case 5:
-                CompoundInterestCalculatorView()
-            case 6:
-                CaffeineHalfLifeCalculatorView()
-            case 7:
-                LiquidDilutionCalculatorView()
-            case 8:
-                PermutationCalculatorView()
-            case 9:
-                RandomNumberGeneratorView()
-            case 10:
-                CalorieServingSizeCalculatorView()
-            case 11:
-                UnitPriceCalculatorView()
-            case 12:
-                PizzaAreaCalculatorView()
-            case 13:
-                ExactAgeCalculatorView()
-            case 14:
-                SpeedOfSoundCalculatorView()
-            case 15:
-                PercentageCalculatorView()
-            case 16:
-                FuelCostCalculatorView()
-            default:
-                EmptyView()
-            }
-        } else {
-            EmptyView()
         }
     }
     
