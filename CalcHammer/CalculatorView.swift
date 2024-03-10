@@ -133,6 +133,7 @@ struct CalculatorView: View {
         @State private var height = ""
         @State private var isMetric = true // Toggle for metric/imperial system
         @State private var bmi = "" // Output BMI value
+        @State private var isInfoPopoverVisible = false
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -141,6 +142,27 @@ struct CalculatorView: View {
 
         var body: some View {
             VStack {
+                HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("BMI (Body Mass Index)")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("BMI measures body fat based on height and weight, providing insight into health risks associated with weight categories. For more information, visit Health Canada's website.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
                 Toggle(isOn: $isMetric) {
                     Text("Metric")
                 }
@@ -203,6 +225,8 @@ struct CalculatorView: View {
         @State private var compoundFrequency = "Annually"
         @State private var result = ""
         
+        @State private var isInfoPopoverVisible = false
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -211,6 +235,27 @@ struct CalculatorView: View {
         let compoundFrequencies = ["Annually", "Semi-Annually", "Quarterly", "Monthly"]
 
         var body: some View {
+            HStack{
+                Spacer()
+                Button(action: {
+                                isInfoPopoverVisible.toggle()
+                            }) {
+                                Image(systemName: "info.circle")
+                                    .padding()
+                            }
+                            .popover(isPresented: $isInfoPopoverVisible){
+                                VStack {
+                                    Text("Compound Interest")
+                                        .font(.headline)
+                                        .padding(.bottom, 5)
+                                    Text("The Compound Interest Calculator computes the accrued interest on an investment based on principal amount, interest rate, time, and compound frequency. Varying compound frequencies, such as semi-annually or monthly, impact how often interest is added to the principal, affecting overall returns.")
+                                        .padding()
+                                        .presentationCompactAdaptation(.popover)
+
+                                }
+                                .frame(width: 300, height: 200) // Set preferred size for the popover
+                            }
+            }
             VStack {
                 TextField("Principal", text: $principal)
                     .padding()
@@ -289,12 +334,35 @@ struct CalculatorView: View {
         @State private var halfLife = "5.7" // Default half-life of caffeine in hours
         @State private var result = ""
         
+        @State private var isInfoPopoverVisible = false
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Caffeine Half-Life")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("Caffeine half-life is the duration for the body to clear half of ingested caffeine, reducing its amount in the system. Varied half-lives among sources impact caffeine metabolism and its stimulating effects.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 300) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Initial Amount (mg)", text: $initialAmount)
                     .padding()
@@ -362,12 +430,36 @@ struct CalculatorView: View {
         @State private var rValue = ""
         @State private var result = ""
         
+        @State private var isInfoPopoverVisible = false
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Permutation Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("A permutation calculator computes the number of ways to arrange a subset of items from a larger set, considering the order of arrangement. Inputs typically include two numbers: N (representing the total number of items) and R (representing the number of items to be arranged). The output provides the total number of permutations possible for arranging R items from a set of N items.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
+            
             VStack {
                 TextField("Enter N", text: $nValue)
                     .padding()
@@ -431,13 +523,35 @@ struct CalculatorView: View {
         @State private var lowerEnd = "0"
         @State private var upperEnd = "10"
         @State private var randomNumber = ""
-        
+        @State private var isInfoPopoverVisible = false
+
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Random Number Generator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The random number generator allows users to generate a random integer within a specified range defined by the upper and lower limits.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Lower end", text: $lowerEnd)
                     .padding()
@@ -486,6 +600,7 @@ struct CalculatorView: View {
         @State private var boxServingSize = ""
         @State private var actualServingSize = ""
         @State private var caloriesInActualServing = ""
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -493,6 +608,27 @@ struct CalculatorView: View {
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Calorie Serving Size")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The calorie serving size calculator calculates the calorie content for a specified serving size based on the calorie count and serving size from a nutritional label, along with the actual serving size intended for consumption.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Calories per serving", text: $caloriesPerServing)
                     .padding()
@@ -549,13 +685,35 @@ struct CalculatorView: View {
         @State private var cost = ""
         @State private var amount = ""
         @State private var unitPrice = ""
-        
+        @State private var isInfoPopoverVisible = false
+
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Unit Price Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The unit price calculator helps compare prices of similar items that come in different quantities, aiding in making cost-effective purchasing decisions.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Enter cost", text: $cost)
                     .padding()
@@ -603,6 +761,8 @@ struct CalculatorView: View {
         @State private var pizzaCost = ""
         @State private var selectedShape = "Square"
         @State private var unitCost: Double?
+        @State private var isInfoPopoverVisible = false
+
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -610,6 +770,27 @@ struct CalculatorView: View {
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Pizza Area Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The pizza area calculator assists in comparing the prices of pizzas of different sizes, whether circular or rectangular, enabling informed decisions on cost-effective purchases.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Pizza Size (inches)", text: $pizzaSize)
                     .padding()
@@ -673,6 +854,7 @@ struct CalculatorView: View {
     struct ExactAgeCalculatorView: View,Calculators{
         @State private var birthDate = Date()
         @State private var exactAge = ""
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -680,6 +862,27 @@ struct CalculatorView: View {
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Exact Age Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The exact age calculator determines your precise age in years, months, and days, providing accurate information for various purposes.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 DatePicker("Select birth date", selection: $birthDate, displayedComponents: .date)
                     .datePickerStyle(WheelDatePickerStyle())
@@ -725,6 +928,7 @@ struct CalculatorView: View {
         @State private var startDate = Date()
         @State private var endDate = Date()
         @State private var dateDifference = ""
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -732,6 +936,27 @@ struct CalculatorView: View {
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Date Difference Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The date difference calculator calculates the precise duration between two dates, allowing you to determine the exact number of days, months, and years elapsed between them.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
                     .datePickerStyle(WheelDatePickerStyle())
@@ -777,12 +1002,35 @@ struct CalculatorView: View {
         @State private var years = ""
         @State private var updatedCost = ""
         
+        @State private var isInfoPopoverVisible = false
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
                 }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Accumulated Depreciation")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The accumulated depreciation calculator computes the total depreciation of an asset over its useful life, taking into account factors such as initial cost, salvage value, and depreciation method. It provides the accumulated depreciation amount, which represents the total reduction in the asset's value over time.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Initial Cost", text: $initialCost)
                     .padding()
@@ -844,6 +1092,7 @@ struct CalculatorView: View {
         @State private var examWeight = 0.0
         @State private var desiredGrade = 0.0
         @State private var isCalculateNeededGrade = true
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
@@ -851,6 +1100,27 @@ struct CalculatorView: View {
         }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Grade Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The grade calculator has two modes: one predicts the final exam score needed to achieve a desired grade, and the other computes the achieved grade based on the final exam result. It requires the current grade, exam weight, and either the target grade or final exam score.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 // Current Grade
                 HStack {
@@ -954,6 +1224,7 @@ struct CalculatorView: View {
         @State private var temperature = ""
         @State private var temperatureUnit = "Celsius"
         @State private var speedOfSound = ""
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
@@ -961,6 +1232,27 @@ struct CalculatorView: View {
         }
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Speed of Sound Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The speed of sound calculator determines the speed of sound in air, which varies with temperature. It's important to note that this calculator specifically applies to sound waves traveling through air, as the speed of sound differs in other substances. Temperature affects the speed of sound because air particles move faster at higher temperatures, allowing sound waves to propagate more quickly through the medium.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                        }
             VStack {
                 TextField("Enter temperature", text: $temperature)
                     .padding()
@@ -1030,8 +1322,30 @@ struct CalculatorView: View {
         @State private var percentage = ""
         @State private var result = ""
         @Environment(\.modelContext) private var context
+        @State private var isInfoPopoverVisible = false
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Percentage Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The percentage calculator computes the result of a percentage value based on an original number.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Original Value", text: $originalValue)
                     .padding()
@@ -1090,10 +1404,32 @@ struct CalculatorView: View {
         @State private var fuelEfficiency = ""
         @State private var fuelPrice = ""
         @State private var result = ""
+        @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
         
         var body: some View {
+            HStack{
+                    Spacer()
+                    Button(action: {
+                                    isInfoPopoverVisible.toggle()
+                                }) {
+                                    Image(systemName: "info.circle")
+                                        .padding()
+                                }
+                                .popover(isPresented: $isInfoPopoverVisible){
+                                    VStack {
+                                        Text("Fuel Cost Calculator")
+                                            .font(.headline)
+                                            .padding(.bottom, 5)
+                                        Text("The fuel cost calculator computes the total cost of fuel for a given trip based on the trip distance, fuel efficiency, and fuel price per liter. It provides the total fuel needed for the trip and the corresponding cost, making it useful for planning road trips.")
+                                            .padding()
+                                            .presentationCompactAdaptation(.popover)
+
+                                    }
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                                }
+                }
             VStack {
                 TextField("Trip Distance (km)", text: $tripDistance)
                     .padding()
