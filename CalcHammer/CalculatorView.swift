@@ -15,8 +15,9 @@ extension Calculators {
 struct CalculatorView: View {
     @State private var searchText = ""
     @State private var selectedCalculator: String?
+    @State private var searchBarHidden = false
     
-    let calculators: [String] = [
+    let calculators = [
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
         "Grade Calculator",
@@ -54,7 +55,6 @@ struct CalculatorView: View {
         "Percentage Calculator": AnyView(PercentageCalculatorView()),
         "Fuel Cost Calculator": AnyView(FuelCostCalculatorView()),
         "Tip Calculator": AnyView(TipCalculatorView())
-
     ]
     
     var filteredCalculators: [String] {
@@ -67,13 +67,15 @@ struct CalculatorView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                TextField("Search", text: $searchText)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                
-                ScrollView {
+            ScrollView {
+                VStack {
+                    if !searchBarHidden {
+                        TextField("Search", text: $searchText)
+                            .padding()
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.horizontal)
+                    }
+                    
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
                         ForEach(filteredCalculators, id: \.self) { calculator in
                             Button(action: {
@@ -105,6 +107,12 @@ struct CalculatorView: View {
                     )
                     .isDetailLink(false) // Add this to prevent duplicate navigation bars
                 )
+            }
+            .onAppear {
+                searchBarHidden = false
+            }
+            .onDisappear {
+                searchBarHidden = true
             }
         }
     }
