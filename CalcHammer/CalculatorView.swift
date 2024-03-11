@@ -234,6 +234,10 @@ struct CalculatorView: View {
         
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+                    
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Compound Interest Calculator")
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -243,6 +247,24 @@ struct CalculatorView: View {
 
         var body: some View {
             HStack{
+                Button(action: {
+                                isFavourite.toggle()
+                                
+                                if isFavourite {
+                                    favouriteItems.addFavouriteCalculator("Compound Interest Calculator")
+                                } else {
+                                    favouriteItems.removeFavouriteCalculator("Compound Interest Calculator")
+                                }
+                            }) {
+                                Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                    .font(.title)
+                                    .foregroundColor(isFavourite ? .red : .gray)
+                            }
+                            .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Compound Interest Calculator")
+                    }
                 Spacer()
                 Button(action: {
                                 isInfoPopoverVisible.toggle()
@@ -338,6 +360,10 @@ struct CalculatorView: View {
         @State private var halfLife = "5.7" // Default half-life of caffeine in hours
         @State private var result = ""
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+                    
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Caffeine Half-Life Calculator")
+        
         @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
@@ -347,6 +373,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                                isFavourite.toggle()
+                                
+                                if isFavourite {
+                                    favouriteItems.addFavouriteCalculator("Caffeine Half-Life Calculator")
+                                } else {
+                                    favouriteItems.removeFavouriteCalculator("Caffeine Half-Life Calculator")
+                                }
+                            }) {
+                                Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                    .font(.title)
+                                    .foregroundColor(isFavourite ? .red : .gray)
+                            }
+                            .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Caffeine Half-Life Calculator")
+                    }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -425,6 +469,10 @@ struct CalculatorView: View {
         @State private var alcoholStrength = ""
         @State private var totalAmount = ""
         @State private var alcoholPercentage = ""
+        
+        @StateObject private var favouriteItems = FavouriteItems.shared
+                    
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Alcohol Dilution Calculator")
 
         @State private var isInfoPopoverVisible = false
         
@@ -434,6 +482,40 @@ struct CalculatorView: View {
                 }
 
         var body: some View {
+            HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Alcohol Dilution Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Alcohol Dilution Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Alcohol Dilution Calculator")
+                }
+                Spacer()
+                Button(action: {
+                    isInfoPopoverVisible.toggle()
+                }) {
+                    Image(systemName: "info.circle")
+                }
+                .popover(isPresented: $isInfoPopoverVisible){
+                    VStack {
+                        Text("The alcohol dilution calculator helps you determine the total amount of a mixed drink and its alcohol percentage based on the amount of mixer, alcohol, and alcohol strength.")
+                            .padding()
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    .frame(width: 300, height: 200) // Set preferred size for the popover
+                }
+            }
             VStack {
                 VStack {
                     TextField("Mixer Amount (ml)", text: $mixerAmount)
@@ -467,21 +549,6 @@ struct CalculatorView: View {
                 }
                 .padding()
                 .navigationTitle("Alcohol Dilution Calculator")
-                .navigationBarItems(trailing:
-                    Button(action: {
-                        isInfoPopoverVisible.toggle()
-                    }) {
-                        Image(systemName: "info.circle")
-                    }
-                    .popover(isPresented: $isInfoPopoverVisible){
-                        VStack {
-                            Text("The alcohol dilution calculator helps you determine the total amount of a mixed drink and its alcohol percentage based on the amount of mixer, alcohol, and alcohol strength.")
-                                .padding()
-                                .presentationCompactAdaptation(.popover)
-                        }
-                        .frame(width: 300, height: 200) // Set preferred size for the popover
-                    }
-                )
                 .background(
                     Color.white.opacity(0.0001)
                         .onTapGesture {
@@ -514,6 +581,10 @@ struct CalculatorView: View {
         @State private var rValue = ""
         @State private var result = ""
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+                    
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Permutation Calculator")
+        
         @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
@@ -523,6 +594,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Permutation Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Permutation Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Permutation Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -605,6 +694,10 @@ struct CalculatorView: View {
         @State private var upperEnd = "10"
         @State private var randomNumber = ""
         @State private var isInfoPopoverVisible = false
+        
+        @StateObject private var favouriteItems = FavouriteItems.shared
+                    
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Random Number Generator")
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -613,6 +706,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Random Number Generator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Random Number Generator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Random Number Generator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -680,6 +791,9 @@ struct CalculatorView: View {
         @State private var caloriesInActualServing = ""
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Calorie Serving Size Calculator")
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -687,6 +801,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Calorie Serving Size Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Calorie Serving Size Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Calorie Serving Size Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -761,6 +893,9 @@ struct CalculatorView: View {
         @State private var amount = ""
         @State private var unitPrice = ""
         @State private var isInfoPopoverVisible = false
+        
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Unit Price Calculator")
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -769,6 +904,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Unit Price Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Unit Price Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Unit Price Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -834,7 +987,9 @@ struct CalculatorView: View {
         @State private var selectedShape = "Square"
         @State private var unitCost: Double?
         @State private var isInfoPopoverVisible = false
-
+        
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Pizza Area Cost Calculator")
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -843,6 +998,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Pizza Area Cost Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Pizza Area Cost Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Pizza Area Cost Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -925,6 +1098,9 @@ struct CalculatorView: View {
         @State private var exactAge = ""
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Exact Age Calculator")
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -932,6 +1108,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Exact Age Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Exact Age Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Exact Age Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -996,6 +1190,9 @@ struct CalculatorView: View {
         @State private var dateDifference = ""
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Date Difference Calculator")
+        
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -1003,6 +1200,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                                isFavourite.toggle()
+                                
+                                if isFavourite {
+                                    favouriteItems.addFavouriteCalculator("Date Difference Calculator")
+                                } else {
+                                    favouriteItems.removeFavouriteCalculator("Date Difference Calculator")
+                                }
+                            }) {
+                                Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                    .font(.title)
+                                    .foregroundColor(isFavourite ? .red : .gray)
+                            }
+                            .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Date Difference Calculator")
+                    }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1065,6 +1280,9 @@ struct CalculatorView: View {
         @State private var years = ""
         @State private var updatedCost = ""
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Accumulated Depreciation Calculator")
+        
         @State private var isInfoPopoverVisible = false
         
         @Environment(\.modelContext) private var context
@@ -1074,6 +1292,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Accumulated Depreciation Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Accumulated Depreciation Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Accumulated Depreciation Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1154,6 +1390,9 @@ struct CalculatorView: View {
         @State private var isCalculateNeededGrade = true
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Grade Calculator")
+        
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
             saveToHistory(historyText: historyText, context: context)
@@ -1161,6 +1400,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Grade Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Grade Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Grade Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1283,6 +1540,9 @@ struct CalculatorView: View {
         @State private var speedOfSound = ""
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Speed of Sound Calculator")
+        
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
             saveToHistory(historyText: historyText, context: context)
@@ -1290,6 +1550,24 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Speed of Sound Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Speed of Sound Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Speed of Sound Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1378,8 +1656,29 @@ struct CalculatorView: View {
         @Environment(\.modelContext) private var context
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Percentage Calculator")
+        
         var body: some View {
             HStack{
+                Button(action: {
+                                isFavourite.toggle()
+                                
+                                if isFavourite {
+                                    favouriteItems.addFavouriteCalculator("Percentage Calculator")
+                                } else {
+                                    favouriteItems.removeFavouriteCalculator("Percentage Calculator")
+                                }
+                            }) {
+                                Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                    .font(.title)
+                                    .foregroundColor(isFavourite ? .red : .gray)
+                            }
+                            .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Percentage Calculator")
+                    }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1457,10 +1756,31 @@ struct CalculatorView: View {
         @State private var result = ""
         @State private var isInfoPopoverVisible = false
         
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Fuel Cost Calculator")
+        
         @Environment(\.modelContext) private var context
         
         var body: some View {
             HStack{
+                Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Fuel Cost Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Fuel Cost Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                .onAppear {
+                    // Update favorite status on view appear
+                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Fuel Cost Calculator")
+                }
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
