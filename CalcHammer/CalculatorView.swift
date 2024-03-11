@@ -123,7 +123,9 @@ struct CalculatorView: View {
         @State private var isMetric = true // Toggle for metric/imperial system
         @State private var bmi = "" // Output BMI value
         @State private var isInfoPopoverVisible = false
-
+        @StateObject private var favouriteItems = FavouriteItems.shared
+            
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
                     saveToHistory(historyText: historyText, context: context)
@@ -132,22 +134,41 @@ struct CalculatorView: View {
         var body: some View {
             VStack {
                 HStack{
+                    Button(action: {
+                                    isFavourite.toggle()
+                                    
+                                    if isFavourite {
+                                        favouriteItems.addFavouriteCalculator("BMI Calculator")
+                                    } else {
+                                        favouriteItems.removeFavouriteCalculator("BMI Calculator")
+                                    }
+                                }) {
+                                    Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                        .font(.title)
+                                        .foregroundColor(isFavourite ? .red : .gray)
+                                }
+                                .padding()
+                        .onAppear {
+                            // Update favorite status on view appear
+                            isFavourite = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
+                        }
+                    
                     Spacer()
                     Button(action: {
-                                    isInfoPopoverVisible.toggle()
-                                }) {
-                                    Image(systemName: "info.circle")
-                                        .padding()
-                                }
-                                .popover(isPresented: $isInfoPopoverVisible){
-                                    VStack {
-                                        Text("BMI measures body fat based on height and weight, providing insight into health risks associated with weight categories. For more information, visit Health Canada's website.")
-                                            .padding()
-                                            .presentationCompactAdaptation(.popover)
+                        isInfoPopoverVisible.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .padding()
+                    }
+                    .popover(isPresented: $isInfoPopoverVisible) {
+                        VStack {
+                            Text("BMI measures body fat based on height and weight, providing insight into health risks associated with weight categories. For more information, visit Health Canada's website.")
+                                .padding()
+                                .presentationCompactAdaptation(.popover)
 
-                                    }
-                                    .frame(width: 300, height: 200) // Set preferred size for the popover
-                                }
+                        }
+                        .frame(width: 300, height: 200) // Set preferred size for the popover
+                    }
                 }
                 Toggle(isOn: $isMetric) {
                     Text("Metric")

@@ -51,3 +51,35 @@ class HistoryItem: Identifiable {
         
     }
 }
+
+class FavouriteItems: ObservableObject {
+    static let shared = FavouriteItems()
+    
+    // Key for UserDefaults
+    private let favouritesKey = "FavouriteCalculators"
+    
+    @Published var favouriteCalculators: Set<String> {
+        didSet {
+            saveFavouriteCalculators(favouriteCalculators)
+        }
+    }
+    
+    init() {
+        self.favouriteCalculators = Set(UserDefaults.standard.stringArray(forKey: favouritesKey) ?? [])
+    }
+    
+    // Method to add a calculator to favorites
+    func addFavouriteCalculator(_ calculator: String) {
+        favouriteCalculators.insert(calculator)
+    }
+    
+    // Method to remove a calculator from favorites
+    func removeFavouriteCalculator(_ calculator: String) {
+        favouriteCalculators.remove(calculator)
+    }
+    
+    // Method to save the list of favorite calculators to UserDefaults
+    private func saveFavouriteCalculators(_ favourites: Set<String>) {
+        UserDefaults.standard.set(Array(favourites), forKey: favouritesKey)
+    }
+}
