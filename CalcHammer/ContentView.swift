@@ -19,7 +19,7 @@ struct ContentView: View {
             CalcHammerHeader()
             
             TabView {
-                if clonedShowFavourites {
+                if userSettings.showFavouritesTab {
                     FavouritesView()
                         .tabItem {
                             Image(systemName: "star")
@@ -38,7 +38,7 @@ struct ContentView: View {
                         Image(systemName: "minus.slash.plus")
                         Text("Calculators")
                     }
-                if clonedShowHistory {
+                if userSettings.showHistoryTab {
                     HistoryView()
                         .tabItem {
                             Image(systemName: "clock")

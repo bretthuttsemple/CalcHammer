@@ -13,9 +13,16 @@ import SwiftUI
 struct CalcHammerHeader: View {
     var body: some View {
         VStack {
-            Text("CalcHammer")
-                .font(.largeTitle)
-                .fontWeight(.bold)
+            HStack{
+                Image("AppHeader")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40) // Adjust the size as needed
+                    .padding(.horizontal)
+                Text("CalcHammer")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+            }
             Divider()
         }
     }

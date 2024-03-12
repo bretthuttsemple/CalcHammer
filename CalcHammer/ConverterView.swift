@@ -1077,6 +1077,8 @@ struct ConverterView: View {
             Spacer()
         }
         .padding()
+        .background(Color("BackgroundColor"))
+        .navigationTitle("Converters")
                 .background(
                     Color.white.opacity(0.0001) // colour makes it so tap gesture works, dont question it
                         .onTapGesture { //dismisses keyboard when user taps anywheres but text field

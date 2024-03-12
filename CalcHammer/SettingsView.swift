@@ -68,6 +68,8 @@ struct CollapsibleSettingRow: View {
                 .contentShape(Rectangle())
             }
         }
+        .background(Color("BackgroundColor"))
+        .navigationTitle("Settings")
     }
 }
 
