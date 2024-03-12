@@ -25,6 +25,7 @@ struct CalcHammerHeader: View {
             }
             Divider()
         }
+        .background(Color("BackgroundColor"))
     }
 }
 

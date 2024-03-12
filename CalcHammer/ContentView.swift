@@ -12,9 +12,6 @@ struct ContentView: View {
     @StateObject var userSettings = UserSettings() // Initialize UserSettings
     
     var body: some View {
-        let clonedShowFavourites = userSettings.showFavouritesTab
-        let clonedShowHistory = userSettings.showHistoryTab
-        
         VStack{
             CalcHammerHeader()
             
@@ -52,15 +49,15 @@ struct ContentView: View {
                         Text("Settings")
                     }
             }
-            
         }
+        .background(Color("BackgroundColor"))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(UserSettings()) // Provide UserSettings to ContentView
+//            .environmentObject(UserSettings()) // Provide UserSettings to ContentView
     }
 }
 
