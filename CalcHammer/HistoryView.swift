@@ -22,8 +22,10 @@ struct HistoryView: View {
             else {
                 List {
                     ForEach(conversionItems.indices.reversed(), id: \.self) { index in
-                        let item = conversionItems[index]
-                        Text("\(item.historyText)")
+                        if index < conversionItems.count { // Ensure index is within bounds
+                            let item = conversionItems[index]
+                            Text("\(item.historyText)")
+                        }
                     }
                     .onDelete { indexes in
                         for index in indexes {
