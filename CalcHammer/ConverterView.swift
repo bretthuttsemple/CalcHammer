@@ -97,6 +97,12 @@ struct ConverterView: View {
         
     }
     
+    func resetSelectedIndices() {
+        selectedUnitIndex2 = 0
+        selectedUnitIndex3 = 0
+        selectedUnitIndex4 = 0
+    }
+    
     func buttonPressMultiConvert(unitType: Int,inputUnit:Int,inputUnit2:Int,outputUnit:Int,inputNum:Double,inputNum2:Double) -> Double{
         //Function for which adds two different measurements of the same type together
         //after converting the sum of the inputs, the output is added to historyItems
@@ -638,7 +644,9 @@ struct ConverterView: View {
                 ForEach(Array(GlobalData.unitSystems.enumerated()), id: \.offset) { index, unit in
                     Text(unit)
                 }
-
+            }
+            .onChange(of: selectedUnitIndex) { newValue, _ in
+                resetSelectedIndices()
             }
             .pickerStyle(DefaultPickerStyle())
             .padding()
@@ -901,25 +909,61 @@ struct ConverterView: View {
                 Text("Your output is \(output)")
                     .modifier(DynamicNumberFormat(number: output))
                 //switch for text displaying the unit for the output
-                switch selectedUnitIndex{
+                switch selectedUnitIndex {
                 case 1:
-                    Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.lengthSymbol.count {
+                        Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 2:
-                    Text("\(GlobalData.massSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.massSymbol.count {
+                        Text("\(GlobalData.massSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 3:
-                    Text("\(GlobalData.speedSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.speedSymbol.count {
+                        Text("\(GlobalData.speedSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 4:
-                    Text("\(GlobalData.tempSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.tempSymbol.count {
+                        Text("\(GlobalData.tempSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 5:
-                    Text("\(GlobalData.timeSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.timeSymbol.count {
+                        Text("\(GlobalData.timeSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 6:
-                    Text("\(GlobalData.volumeSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.volumeSymbol.count {
+                        Text("\(GlobalData.volumeSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 7:
-                    Text("\(GlobalData.forceSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.forceSymbol.count {
+                        Text("\(GlobalData.forceSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 8:
-                    Text("\(GlobalData.angleSymbol[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.angleSymbol.count {
+                        Text("\(GlobalData.angleSymbol[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 case 9:
-                    Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
+                    if selectedUnitIndex3 < GlobalData.numberSystem.count {
+                        Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
+                    } else {
+                        Text("")
+                    }
                 default:
                     Text("")
                 }
