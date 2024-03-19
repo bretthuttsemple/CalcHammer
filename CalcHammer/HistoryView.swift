@@ -36,7 +36,7 @@ struct HistoryView: View {
                 }
             }
         }
-        .background(Color("BackgroundColor"))
+//        .background(Color("BackgroundColor"))
         .navigationTitle("History")
     }
     

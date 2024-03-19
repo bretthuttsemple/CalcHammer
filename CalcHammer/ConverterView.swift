@@ -639,6 +639,8 @@ struct ConverterView: View {
     
     var body: some View {
         VStack {
+            Spacer()
+
             // Picker that selects system of unit
             Picker("Select Unit Type", selection: $selectedUnitIndex) {
                 ForEach(Array(GlobalData.unitSystems.enumerated()), id: \.offset) { index, unit in
@@ -658,430 +660,490 @@ struct ConverterView: View {
                 Spacer()
                 //textfield for first input
                 TextField("Enter Number", value: $inputValue, formatter: NumberFormatter().decimalNumberFormatter)
-                    .padding([.top, .leading, .bottom])
-                    .textFieldStyle(.roundedBorder)
-                    .keyboardType(.decimalPad)
+                    .frame(height: 35)
+                    .background(Color("BoxColors")) // Apply BoxColors to the background
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Add overlay for stroke
+                            .stroke(Color.black) // Apply plain black color to the stroke
+                    )
 
                 //Switch for deciding which unit array for input 1
-                switch selectedUnitIndex{
-                case 1:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex2){
-                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(height: 35)
+                    .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
+                            .stroke(Color.black) // Apply plain black color to the stroke
+                    )
+                    .overlay(
+                // Switch for deciding which unit array for input 1
+                    Group {
+                        switch selectedUnitIndex{
+                        case 1:
+                            if userSettings.toggleFictionalUnits{
+                                Picker("Select Unit", selection: $selectedUnitIndex2){
+                                    ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
-                                let unit = GlobalData.lengthUnit[index]
-                                Text(unit)
+                            else{
+                                Picker("Select Unit", selection: $selectedUnitIndex2) {
+                                    ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
+                                        let unit = GlobalData.lengthUnit[index]
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                case 2:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex2){
-                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        case 2:
+                            if userSettings.toggleFictionalUnits{
+                                Picker("Select Unit", selection: $selectedUnitIndex2){
+                                    ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.massUnit[index]
-                                Text(unit)
+                            else{
+                                Picker("Select Unit", selection: $selectedUnitIndex2) {
+                                    ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                        let unit = GlobalData.massUnit[index]
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                case 3:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex2){
-                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        case 3:
+                            if userSettings.toggleFictionalUnits{
+                                Picker("Select Unit", selection: $selectedUnitIndex2){
+                                    ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.speedUnit[index]
-                                Text(unit)
+                            else{
+                                Picker("Select Unit", selection: $selectedUnitIndex2) {
+                                    ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                        let unit = GlobalData.speedUnit[index]
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                case 4:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-                    }
-                case 5:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex2){
-                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                        case 4:
+                            Picker("Select Unit", selection: $selectedUnitIndex2){
+                                ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
                             }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.timeUnit[index]
-                                Text(unit)
+                        case 5:
+                            if userSettings.toggleFictionalUnits{
+                                Picker("Select Unit", selection: $selectedUnitIndex2){
+                                    ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                case 6:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex2){
-                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                            else{
+                                Picker("Select Unit", selection: $selectedUnitIndex2) {
+                                    ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                        let unit = GlobalData.timeUnit[index]
+                                        Text(unit)
+                                    }
+                                }
                             }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex2) {
-                            ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
-                                let unit = GlobalData.volumeUnit[index]
-                                Text(unit)
+                        case 6:
+                            if userSettings.toggleFictionalUnits{
+                                Picker("Select Unit", selection: $selectedUnitIndex2){
+                                    ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
                             }
+                            else{
+                                Picker("Select Unit", selection: $selectedUnitIndex2) {
+                                    ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                        let unit = GlobalData.volumeUnit[index]
+                                        Text(unit)
+                                    }
+                                }
+                            }
+                        case 7:
+                            Picker("Select Unit", selection: $selectedUnitIndex2){
+                                ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
+                                
+                            }
+                        case 8:
+                            Picker("Select Unit", selection: $selectedUnitIndex2){
+                                ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
+                                
+                            }
+                        case 9:
+                            Picker("Select Unit", selection: $selectedUnitIndex2){
+                                ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                                    Text(unit)
+                                }
+                                
+                            }
+                        default:
+                            Text("Please Select a Unit Type")
                         }
                     }
-                case 7:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                case 8:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                case 9:
-                    Picker("Select Unit", selection: $selectedUnitIndex2){
-                        ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                default:
-                    Text("Please Select a Unit Type")
-                }
+                )
                 
                 Spacer()
             }
             if $multiConvert.wrappedValue{
                 Text("+")
+                    .font(.system(size: 24))
                 HStack{
+                    Spacer()
+
                     TextField("Enter Number", value: $inputValue2, formatter: NumberFormatter().decimalNumberFormatter)
-                        .padding([.top, .leading, .bottom])
-                        .textFieldStyle(.roundedBorder)
-                        .keyboardType(.decimalPad)
+                        .frame(height: 35)
+                        .background(Color("BoxColors")) // Apply BoxColors to the background
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10) // Add overlay for stroke
+                                .stroke(Color.black) // Apply plain black color to the stroke
+                        )
 
                     //Switch for deciding which unit array for input 2
-                    switch selectedUnitIndex{
-                    case 1:
-                        if userSettings.toggleFictionalUnits{
-                            Picker("Select Unit", selection: $selectedUnitIndex4){
-                                ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                                    Text(unit)
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: 35)
+                        .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
+                                .stroke(Color.black) // Apply plain black color to the stroke
+                        )
+                        .overlay(
+                    // Switch for deciding which unit array for input 1
+                            Group {
+                                switch selectedUnitIndex{
+                                case 1:
+                                    if userSettings.toggleFictionalUnits{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                            ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
+                                                let unit = GlobalData.lengthUnit[index]
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                case 2:
+                                    if userSettings.toggleFictionalUnits{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                            ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                                let unit = GlobalData.massUnit[index]
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                case 3:
+                                    if userSettings.toggleFictionalUnits{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                            ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                                let unit = GlobalData.speedUnit[index]
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                case 4:
+                                    Picker("Select Unit", selection: $selectedUnitIndex4){
+                                        ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                case 5:
+                                    if userSettings.toggleFictionalUnits{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                            ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                                let unit = GlobalData.timeUnit[index]
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                case 6:
+                                    if userSettings.toggleFictionalUnits{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4){
+                                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        Picker("Select Unit", selection: $selectedUnitIndex4) {
+                                            ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                                let unit = GlobalData.volumeUnit[index]
+                                                Text(unit)
+                                            }
+                                        }
+                                    }
+                                case 7:
+                                    Picker("Select Unit", selection: $selectedUnitIndex4){
+                                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                        
+                                    }
+                                case 8:
+                                    Picker("Select Unit", selection: $selectedUnitIndex4){
+                                        ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                        
+                                    }
+                                case 9:
+                                    Picker("Select Unit", selection: $selectedUnitIndex4){
+                                        ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                        
+                                    }
+                                default:
+                                    Text("Please Select a Unit Type")
                                 }
                             }
-                        }
-                        else{
-                            Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
-                                    let unit = GlobalData.lengthUnit[index]
-                                    Text(unit)
-                                }
-                            }
-                        }
-                    case 2:
-                        if userSettings.toggleFictionalUnits{
-                            Picker("Select Unit", selection: $selectedUnitIndex4){
-                                ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                                    Text(unit)
-                                }
-                            }
-                        }
-                        else{
-                            Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
-                                    let unit = GlobalData.massUnit[index]
-                                    Text(unit)
-                                }
-                            }
-                        }
-                    case 3:
-                        if userSettings.toggleFictionalUnits{
-                            Picker("Select Unit", selection: $selectedUnitIndex4){
-                                ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                                    Text(unit)
-                                }
-                            }
-                        }
-                        else{
-                            Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
-                                    let unit = GlobalData.speedUnit[index]
-                                    Text(unit)
-                                }
-                            }
-                        }
-                    case 4:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-                        }
-                    case 5:
-                        if userSettings.toggleFictionalUnits{
-                            Picker("Select Unit", selection: $selectedUnitIndex4){
-                                ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                                    Text(unit)
-                                }
-                            }
-                        }
-                        else{
-                            Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
-                                    let unit = GlobalData.timeUnit[index]
-                                    Text(unit)
-                                }
-                            }
-                        }
-                    case 6:
-                        if userSettings.toggleFictionalUnits{
-                            Picker("Select Unit", selection: $selectedUnitIndex4){
-                                ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                                    Text(unit)
-                                }
-                            }
-                        }
-                        else{
-                            Picker("Select Unit", selection: $selectedUnitIndex4) {
-                                ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
-                                    let unit = GlobalData.volumeUnit[index]
-                                    Text(unit)
-                                }
-                            }
-                        }
-                    case 7:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-
-                        }
-                    case 8:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-
-                        }
-                    case 9:
-                        Picker("Select Unit", selection: $selectedUnitIndex4){
-                            ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-
-                        }
-                    default:
-                        Text("Please Select a Unit Type")
-                    }
+                        )
                     Spacer()
                 }
+            }
+            VStack{
+                Text("=")
+                    .font(.system(size: 24))
             }
             
             HStack{
                 //Visual stack for output box and unit selection for output
                 Spacer()
-                Text("Your output is \(output)")
-                    .modifier(DynamicNumberFormat(number: output))
-                //switch for text displaying the unit for the output
-                switch selectedUnitIndex {
-                case 1:
-                    if selectedUnitIndex3 < GlobalData.lengthSymbol.count {
-                        Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
+                ZStack {
+                    HStack{
+                        Text("Your output is \(output)")
+                            .modifier(DynamicNumberFormat(number: output))
+                        switch selectedUnitIndex {
+                        case 1:
+                            if selectedUnitIndex3 < GlobalData.lengthSymbol.count {
+                                Text("\(GlobalData.lengthSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 2:
+                            if selectedUnitIndex3 < GlobalData.massSymbol.count {
+                                Text("\(GlobalData.massSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 3:
+                            if selectedUnitIndex3 < GlobalData.speedSymbol.count {
+                                Text("\(GlobalData.speedSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 4:
+                            if selectedUnitIndex3 < GlobalData.tempSymbol.count {
+                                Text("\(GlobalData.tempSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 5:
+                            if selectedUnitIndex3 < GlobalData.timeSymbol.count {
+                                Text("\(GlobalData.timeSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 6:
+                            if selectedUnitIndex3 < GlobalData.volumeSymbol.count {
+                                Text("\(GlobalData.volumeSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 7:
+                            if selectedUnitIndex3 < GlobalData.forceSymbol.count {
+                                Text("\(GlobalData.forceSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 8:
+                            if selectedUnitIndex3 < GlobalData.angleSymbol.count {
+                                Text("\(GlobalData.angleSymbol[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        case 9:
+                            if selectedUnitIndex3 < GlobalData.numberSystem.count {
+                                Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
+                            } else {
+                                Text("")
+                            }
+                        default:
+                            Text("")
+                        }
+                        Spacer()
                     }
-                case 2:
-                    if selectedUnitIndex3 < GlobalData.massSymbol.count {
-                        Text("\(GlobalData.massSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 3:
-                    if selectedUnitIndex3 < GlobalData.speedSymbol.count {
-                        Text("\(GlobalData.speedSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 4:
-                    if selectedUnitIndex3 < GlobalData.tempSymbol.count {
-                        Text("\(GlobalData.tempSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 5:
-                    if selectedUnitIndex3 < GlobalData.timeSymbol.count {
-                        Text("\(GlobalData.timeSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 6:
-                    if selectedUnitIndex3 < GlobalData.volumeSymbol.count {
-                        Text("\(GlobalData.volumeSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 7:
-                    if selectedUnitIndex3 < GlobalData.forceSymbol.count {
-                        Text("\(GlobalData.forceSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 8:
-                    if selectedUnitIndex3 < GlobalData.angleSymbol.count {
-                        Text("\(GlobalData.angleSymbol[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                case 9:
-                    if selectedUnitIndex3 < GlobalData.numberSystem.count {
-                        Text("\(GlobalData.numberSystem[selectedUnitIndex3])")
-                    } else {
-                        Text("")
-                    }
-                default:
-                    Text("")
-                }
-
-                Spacer()
+                    .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.black)
+                            .frame(width: 170, height: 35) // Adjust width and height to accommodate the text's frame and padding
+                            .foregroundColor(Color("BoxColors"))
+                    } // Set a fixed width for the output text box
+                //switch for text displaying the unit symbol for the output
+                
                 
                 //Switch for deciding which unit array for output
-                switch selectedUnitIndex{
-                case 1:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex3){
-                            ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(height: 35)
+                    .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
+                            .stroke(Color.black) // Apply plain black color to the stroke
+                    )
+                    .overlay(
+                // Switch for deciding which unit array for input 1
+                        Group {
+                            switch selectedUnitIndex{
+                            case 1:
+                                if userSettings.toggleFictionalUnits{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3){
+                                        ForEach(Array(GlobalData.lengthUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                                else{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3) {
+                                        ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
+                                            let unit = GlobalData.lengthUnit[index]
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                            case 2:
+                                if userSettings.toggleFictionalUnits{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3){
+                                        ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                                else{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3) {
+                                        ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
+                                            let unit = GlobalData.massUnit[index]
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                            case 3:
+                                if userSettings.toggleFictionalUnits{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3){
+                                        ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                                else{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3) {
+                                        ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
+                                            let unit = GlobalData.speedUnit[index]
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                            case 4:
+                                Picker("Select Unit", selection: $selectedUnitIndex3){
+                                    ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                }
+                            case 5:
+                                if userSettings.toggleFictionalUnits{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3){
+                                        ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                                else{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3) {
+                                        ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
+                                            let unit = GlobalData.timeUnit[index]
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                            case 6:
+                                if userSettings.toggleFictionalUnits{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3){
+                                        ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                                else{
+                                    Picker("Select Unit", selection: $selectedUnitIndex3) {
+                                        ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
+                                            let unit = GlobalData.volumeUnit[index]
+                                            Text(unit)
+                                        }
+                                    }
+                                }
+                            case 7:
+                                Picker("Select Unit", selection: $selectedUnitIndex3){
+                                    ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                    
+                                }
+                            case 8:
+                                Picker("Select Unit", selection: $selectedUnitIndex3){
+                                    ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                    
+                                }
+                            case 9:
+                                Picker("Select Unit", selection: $selectedUnitIndex3){
+                                    ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
+                                        Text(unit)
+                                    }
+                                    
+                                }
+                            default:
+                                Text("Please Select a Unit Type")
                             }
                         }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.lengthUnit.count - 4, id: \.self) { index in
-                                let unit = GlobalData.lengthUnit[index]
-                                Text(unit)
-                            }
-                        }
-                    }
-                case 2:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex3){
-                            ForEach(Array(GlobalData.massUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.massUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.massUnit[index]
-                                Text(unit)
-                            }
-                        }
-                    }
-                case 3:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex3){
-                            ForEach(Array(GlobalData.speedUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.speedUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.speedUnit[index]
-                                Text(unit)
-                            }
-                        }
-                    }
-                case 4:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.tempUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-                    }
-                case 5:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex3){
-                            ForEach(Array(GlobalData.timeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.timeUnit.count - 3, id: \.self) { index in
-                                let unit = GlobalData.timeUnit[index]
-                                Text(unit)
-                            }
-                        }
-                    }
-                case 6:
-                    if userSettings.toggleFictionalUnits{
-                        Picker("Select Unit", selection: $selectedUnitIndex3){
-                            ForEach(Array(GlobalData.volumeUnit.enumerated()), id: \.offset) { index, unit in
-                                Text(unit)
-                            }
-                        }
-                    }
-                    else{
-                        Picker("Select Unit", selection: $selectedUnitIndex3) {
-                            ForEach(0..<GlobalData.volumeUnit.count - 2, id: \.self) { index in
-                                let unit = GlobalData.volumeUnit[index]
-                                Text(unit)
-                            }
-                        }
-                    }
-                case 7:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.forceUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                case 8:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.angleUnit.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                case 9:
-                    Picker("Select Unit", selection: $selectedUnitIndex3){
-                        ForEach(Array(GlobalData.numberSystem.enumerated()), id: \.offset) { index, unit in
-                            Text(unit)
-                        }
-
-                    }
-                default:
-                    Text("Please Select a Unit Type")
-                }
+                    )
                 Spacer()
             }
             
@@ -1121,7 +1183,7 @@ struct ConverterView: View {
             Spacer()
         }
         .padding()
-        .background(Color("BackgroundColor"))
+//        .background(Color("BackgroundColor"))
         .navigationTitle("Converters")
                 .background(
                     Color.white.opacity(0.0001) // colour makes it so tap gesture works, dont question it

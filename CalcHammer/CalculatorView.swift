@@ -94,7 +94,7 @@ struct CalculatorView: View {
                     }
                     .padding()
                 }
-                .background(Color("BackgroundColor"))
+//                .background(Color("BackgroundColor"))
                 .navigationTitle("Calculators")
                 .background(
                     NavigationLink(
