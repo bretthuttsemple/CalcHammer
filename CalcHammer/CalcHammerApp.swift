@@ -16,6 +16,7 @@ struct CalcHammerApp: App {
         WindowGroup {
             VStack{
                 ContentView()
+                    .accentColor(userSettings.accentColor) // Apply accent color globally
             }
         }
         .modelContainer(for: HistoryItem.self)

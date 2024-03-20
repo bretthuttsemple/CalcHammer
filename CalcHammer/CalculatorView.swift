@@ -17,6 +17,8 @@ struct CalculatorView: View {
     @State private var selectedCalculator: String?
     @State private var searchBarHidden = false
     
+    @StateObject var userSettings = UserSettings() // Initialize UserSettings
+    
     let calculators = [
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
@@ -83,10 +85,10 @@ struct CalculatorView: View {
                             }) {
                                 Text(calculator)
                                     .font(.headline)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.white) //text color
                                     .padding()
                                     .frame(width: 175, height: 150)
-                                    .background(Color.blue)
+                                    .background(userSettings.accentColor) //color of boxes
                                     .cornerRadius(10)
                                     .multilineTextAlignment(.center)
                             }
@@ -115,6 +117,7 @@ struct CalculatorView: View {
                 searchBarHidden = true
             }
         }
+//        .accentColor(userSettings.accentColor)
     }
     
     struct BMICalculatorView: View, Calculators{

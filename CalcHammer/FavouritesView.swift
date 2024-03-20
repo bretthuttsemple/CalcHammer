@@ -10,6 +10,7 @@ import SwiftUI
 struct FavouritesView: View {
     @ObservedObject private var favouriteItems = FavouriteItems.shared
     //let favouriteCalculators: [String] = Array(FavouriteItems.getFavouriteCalculators())
+    @StateObject var userSettings = UserSettings() // Initialize UserSettings
     
     let views: [String: AnyView] = [
         "Date Difference Calculator": AnyView(CalculatorView.DateDifferenceCalculatorView()),
@@ -42,7 +43,7 @@ struct FavouritesView: View {
                                     .foregroundColor(.white)
                                     .padding()
                                     .frame(width: 175, height: 150)
-                                    .background(Color.blue)
+                                    .background(userSettings.accentColor) //color of boxes
                                     .cornerRadius(10)
                                     .multilineTextAlignment(.center)
                             }

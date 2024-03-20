@@ -11,7 +11,42 @@ class UserSettings: ObservableObject {
     @AppStorage("showFavouritesTab") var showFavouritesTab: Bool = false
     @AppStorage("showHistoryTab") var showHistoryTab: Bool = true
     @AppStorage("toggleFictionalUnits") var toggleFictionalUnits: Bool = false
-    @AppStorage("toggleMultiConvert") var toggleMultiConvert:Bool = false
+    @AppStorage("toggleMultiConvert") var toggleMultiConvert: Bool = false
+    @AppStorage("accentColorData") var accentColorData: Data = Color.blue.toData()
+    
+    var accentColor: Color {
+        Color.fromData(accentColorData) ?? .blue
+    }
+    
+    var accentColorBinding: Binding<Color> {
+        Binding {
+            self.accentColor
+        } set: { newValue in
+            self.accentColorData = newValue.toData()
+        }
+    }
+}
+
+extension Color {
+    func toData() -> Data {
+        let colorComponents = self.components()
+        let colorData = try! JSONEncoder().encode(colorComponents)
+        return colorData
+    }
+    
+    static func fromData(_ data: Data) -> Color? {
+        guard let colorComponents = try? JSONDecoder().decode([CGFloat].self, from: data) else {
+            return nil
+        }
+        return Color(red: Double(colorComponents[0]), green: Double(colorComponents[1]), blue: Double(colorComponents[2]), opacity: Double(colorComponents[3]))
+    }
+    
+    private func components() -> [CGFloat] {
+        guard let components = UIColor(self).cgColor.components else {
+            return []
+        }
+        return components
+    }
 }
 
 struct SettingsView: View {
@@ -27,6 +62,15 @@ struct SettingsView: View {
                 Text("Settings")
                     .myTextStyle(.title)
                     .frame(maxWidth: .infinity, alignment: .leading) // Ensure left alignment
+                
+                // Color Picker
+                            HStack {
+                                Text("Accent Color:")
+                                    .font(.headline)
+                                ColorPicker("Select Color", selection: userSettings.accentColorBinding)
+                                    .labelsHidden()
+                                    .padding(.horizontal)
+                            }
                 
                 CollapsibleSettingRow(label: "Show Favourites Tab", description: "Toggle to show or hide the Favourites tab", setting: $userSettings.showFavouritesTab, isExpanded: $isFavouritesExpanded)
                 CollapsibleSettingRow(label: "Show History Tab", description: "Toggle to show or hide the History tab", setting: $userSettings.showHistoryTab, isExpanded: $isHistoryExpanded)
