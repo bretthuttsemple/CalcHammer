@@ -646,12 +646,12 @@ struct ConverterView: View {
                 // Fill color
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 35)
-                        .foregroundColor(Color("BoxColors"))
+                        .foregroundColor(Color("BoxFillColors"))
                         .padding()
 
                     // Stroke color
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black)
+                        .stroke(Color("BoxStrokeColors"))
                         .frame(height: 35)
                         .padding() // Adjust padding as needed
                 
@@ -675,21 +675,21 @@ struct ConverterView: View {
                 //textfield for first input
                 TextField("Enter Number", value: $inputValue, formatter: NumberFormatter().decimalNumberFormatter)
                     .frame(height: 35)
-                    .background(Color("BoxColors")) // Apply BoxColors to the background
+                    .background(Color("BoxFillColors")) // Apply BoxColors to the background
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10) // Add overlay for stroke
-                            .stroke(Color.black) // Apply plain black color to the stroke
+                            .stroke(Color("BoxStrokeColors")) // Apply plain black color to the stroke
                     )
 
                 //Switch for deciding which unit array for input 1
                 RoundedRectangle(cornerRadius: 10)
                     .frame(height: 35)
-                    .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                    .foregroundColor(Color("BoxFillColors")) // Apply BoxColors to the fill color
                     .overlay(
                         RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
-                            .stroke(Color.black) // Apply plain black color to the stroke
+                            .stroke(Color("BoxStrokeColors")) // Apply plain black color to the stroke
                     )
                     .overlay(
                 // Switch for deciding which unit array for input 1
@@ -818,21 +818,21 @@ struct ConverterView: View {
 
                     TextField("Enter Number", value: $inputValue2, formatter: NumberFormatter().decimalNumberFormatter)
                         .frame(height: 35)
-                        .background(Color("BoxColors")) // Apply BoxColors to the background
+                        .background(Color("BoxFillColors")) // Apply BoxColors to the background
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10) // Add overlay for stroke
-                                .stroke(Color.black) // Apply plain black color to the stroke
+                                .stroke(Color("BoxStrokeColors")) // Apply plain black color to the stroke
                         )
 
                     //Switch for deciding which unit array for input 2
                     RoundedRectangle(cornerRadius: 10)
                         .frame(height: 35)
-                        .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                        .foregroundColor(Color("BoxFillColors")) // Apply BoxColors to the fill color
                         .overlay(
                             RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
-                                .stroke(Color.black) // Apply plain black color to the stroke
+                                .stroke(Color("BoxStrokeColors")) // Apply plain black color to the stroke
                         )
                         .overlay(
                     // Switch for deciding which unit array for input 1
@@ -1027,9 +1027,9 @@ struct ConverterView: View {
                     }
                     .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black)
+                            .stroke(Color("BoxStrokeColors"))
                             .frame(width: 170, height: 35) // Adjust width and height to accommodate the text's frame and padding
-                            .foregroundColor(Color("BoxColors"))
+                            .foregroundColor(Color("BoxFillColors"))
                     } // Set a fixed width for the output text box
                 //switch for text displaying the unit symbol for the output
                 
@@ -1037,10 +1037,10 @@ struct ConverterView: View {
                 //Switch for deciding which unit array for output
                 RoundedRectangle(cornerRadius: 10)
                     .frame(height: 35)
-                    .foregroundColor(Color("BoxColors")) // Apply BoxColors to the fill color
+                    .foregroundColor(Color("BoxFillColors")) // Apply BoxColors to the fill color
                     .overlay(
                         RoundedRectangle(cornerRadius: 10) // Add another RoundedRectangle for stroke
-                            .stroke(Color.black) // Apply plain black color to the stroke
+                            .stroke(Color("BoxStrokeColors")) // Apply plain black color to the stroke
                     )
                     .overlay(
                 // Switch for deciding which unit array for input 1
@@ -1193,26 +1193,14 @@ struct ConverterView: View {
                     output = buttonPressConvert(unitType: selectedUnitIndex, inputUnit: selectedUnitIndex2, outputUnit: selectedUnitIndex3, inputNum: inputValue)
                 }
             }) {
-                ZStack {
-                    
-                    // Fill color
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 35)
-                        .foregroundColor(Color("BoxColors"))
-
-                    // Stroke color
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black)
-                        .frame(height: 35)
-                    Text("Convert")
-                }
+                Text("Convert")
             }
+            .buttonStyle(MyButtonStyle())
             Spacer()
 
         }
         .padding()
 //        .background(Color("BackgroundColor"))
-        .navigationTitle("Converters")
                 .background(
                     Color.white.opacity(0.0001) // colour makes it so tap gesture works, dont question it
                         .onTapGesture { //dismisses keyboard when user taps anywheres but text field
@@ -1220,4 +1208,5 @@ struct ConverterView: View {
                         }
                 )
     }
+    
 }

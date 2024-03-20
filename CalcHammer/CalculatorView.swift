@@ -175,21 +175,39 @@ struct CalculatorView: View {
                 }
                 .padding()
                 
+                
                 TextField(isMetric ? "Enter weight (kg)" : "Enter weight (lbs)", text: $weight)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
+                
                 TextField(isMetric ? "Enter height (m)" : "Enter height (in)", text: $height)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
+                
                 Button("Calculate BMI") {
                     calculateBMI()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
-
-                Text("BMI: \(bmi)")
-                    .padding()
+                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                            Text("BMI: \(bmi)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                            )
                 
                 Spacer()
             }
@@ -283,20 +301,36 @@ struct CalculatorView: View {
                             }
             }
             VStack {
-                TextField("Principal", text: $principal)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
-
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        TextField("Principal", text: $principal)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
+                )
+                Spacer()
+               
                 TextField("Interest Rate (%)", text: $interestRate)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
-
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
+                        
+                Spacer()
+                
                 TextField("Time (years)", text: $time)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
+                        
 
                 Picker("Compound Frequency", selection: $compoundFrequency) {
                     ForEach(compoundFrequencies, id: \.self) {
@@ -309,11 +343,16 @@ struct CalculatorView: View {
                 Button("Calculate") {
                     calculateCompoundInterest()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
 
                 if !result.isEmpty {
-                    Text("Compound Interest: \(result)")
-                        .padding()
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                        .frame(height: 36) // Adjust height as needed
+                        .overlay(
+                            Text("Compound Interest: \(result)")
+                        )
                 }
 
                 Spacer()
@@ -410,26 +449,39 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Initial Amount (mg)", text: $initialAmount)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
 
                 TextField("Time Passed (hours)", text: $timePassed)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
 
                 HStack {
                     Text("Half-Life (hours):")
                     TextField("Half-Life", text: $halfLife)
-                        .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
                 }
 
                 Button("Calculate") {
                     calculateCaffeineHalfLife()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
 
                 if !result.isEmpty {
@@ -519,23 +571,36 @@ struct CalculatorView: View {
             VStack {
                 VStack {
                     TextField("Mixer Amount (ml)", text: $mixerAmount)
-                        .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
 
                     TextField("Alcohol Amount (ml)", text: $alcoholAmount)
-                        .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
                     
                     TextField("Alcohol Strength (%)", text: $alcoholStrength)
-                        .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
 
                     Button("Calculate") {
                         calculateAlcoholDilution()
                     }
+                    .buttonStyle(MyButtonStyle())
                     .padding()
 
                     if !totalAmount.isEmpty && !alcoholPercentage.isEmpty {
@@ -632,18 +697,27 @@ struct CalculatorView: View {
             
             VStack {
                 TextField("Enter N", text: $nValue)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Enter R", text: $rValue)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate Permutation") {
                     calculatePermutation()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Result: \(result)")
@@ -743,16 +817,25 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Lower end", text: $lowerEnd)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Upper end", text: $upperEnd)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Generate Random Number") {
                     generateRandomNumber()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Random Number: \(randomNumber)")
@@ -838,23 +921,36 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Calories per serving", text: $caloriesPerServing)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Serving size on Label", text: $boxServingSize)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Actual serving size", text: $actualServingSize)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate Calories in Actual Serving") {
                     calculateCaloriesInActualServing()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if !caloriesInActualServing.isEmpty {
@@ -941,16 +1037,25 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Enter cost", text: $cost)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Enter amount", text: $amount)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate Unit Price") {
                     calculateUnitPrice()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if !unitPrice.isEmpty {
@@ -1035,12 +1140,20 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Pizza Size (inches)", text: $pizzaSize)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Pizza Cost ($)", text: $pizzaCost)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Picker("Pizza Shape", selection: $selectedShape) {
                     Text("Square").tag("Square")
@@ -1052,6 +1165,7 @@ struct CalculatorView: View {
                 Button("Calculate Unit Cost") {
                     calculateUnitCost()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if let unitCost = unitCost {
@@ -1152,6 +1266,7 @@ struct CalculatorView: View {
                 Button("Calculate Exact Age") {
                     calculateExactAge()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if !exactAge.isEmpty {
@@ -1249,6 +1364,7 @@ struct CalculatorView: View {
                 Button("Calculate Date Difference") {
                     calculateDateDifference()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if !dateDifference.isEmpty {
@@ -1329,23 +1445,36 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Initial Cost", text: $initialCost)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Depreciation Rate (%)", text: $depreciationRate)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Number of Years", text: $years)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate") {
                     calculateDepreciation()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Updated Cost: $\(updatedCost)")
@@ -1443,6 +1572,11 @@ struct CalculatorView: View {
                     TextField("", value: $currentGrade, formatter: NumberFormatter())
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
                 }
                 .padding()
                 
@@ -1453,6 +1587,11 @@ struct CalculatorView: View {
                     TextField("", value: $examWeight, formatter: NumberFormatter())
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
                 }
                 .padding()
                 
@@ -1463,6 +1602,11 @@ struct CalculatorView: View {
                     TextField("", value: $desiredGrade, formatter: NumberFormatter())
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.decimalPad)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
                 }
                 .padding()
                 
@@ -1474,6 +1618,7 @@ struct CalculatorView: View {
                 Button("Calculate") {
                     calculateGrade()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 // Result text
@@ -1587,8 +1732,12 @@ struct CalculatorView: View {
                         }
             VStack {
                 TextField("Enter temperature", text: $temperature)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Picker("Temperature Unit", selection: $temperatureUnit) {
                     Text("Celsius").tag("Celsius")
@@ -1601,6 +1750,7 @@ struct CalculatorView: View {
                 Button("Calculate Speed of Sound") {
                     calculateSpeedOfSound()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 if !speedOfSound.isEmpty {
@@ -1698,18 +1848,27 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Original Value", text: $originalValue)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Percentage", text: $percentage)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate") {
                     calculatePercentage()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Result: \(result)")
@@ -1800,23 +1959,36 @@ struct CalculatorView: View {
                 }
             VStack {
                 TextField("Trip Distance (km)", text: $tripDistance)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Fuel Efficiency (km/l)", text: $fuelEfficiency)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Fuel Price per Liter", text: $fuelPrice)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate") {
                     calculateFuelCost()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Result: \(result)")
@@ -1856,6 +2028,9 @@ struct CalculatorView: View {
         @State private var tipPercentage = ""
         @State private var result = ""
         @State private var isInfoPopoverVisible = false
+        
+        @StateObject private var favouriteItems = FavouriteItems.shared
+        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Tip Calculator")
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
@@ -1865,6 +2040,24 @@ struct CalculatorView: View {
         var body: some View {
             VStack {
                 HStack {
+                    Button(action: {
+                                isFavourite.toggle()
+                                
+                                if isFavourite {
+                                    favouriteItems.addFavouriteCalculator("Tip Calculator")
+                                } else {
+                                    favouriteItems.removeFavouriteCalculator("Tip Calculator")
+                                }
+                            }) {
+                                Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                    .font(.title)
+                                    .foregroundColor(isFavourite ? .red : .gray)
+                            }
+                            .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Tip Calculator")
+                    }
                     Spacer()
                     Button(action: {
                         isInfoPopoverVisible.toggle()
@@ -1887,18 +2080,27 @@ struct CalculatorView: View {
                 Spacer()
                 
                 TextField("Bill Total", text: $billTotal)
-                    .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 TextField("Tip Percentage", text: $tipPercentage)
-                                .padding()
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .keyboardType(.numberPad)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                            .frame(height: 36) // Adjust height as needed
+                    )
                 
                 Button("Calculate Tip") {
                     calculateTip()
                 }
+                .buttonStyle(MyButtonStyle())
                 .padding()
                 
                 Text("Tip Amount: \(result)")
@@ -1906,6 +2108,7 @@ struct CalculatorView: View {
                 
                 Spacer()
             }
+            .padding()
             .navigationTitle("Tip Calculator")
             .background(
                 Color.white.opacity(0.0001) // Color makes it so tap gesture works, dismisses keyboard

@@ -13,6 +13,7 @@
 		B83781B12B5DA16C007FDC6C /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83781B02B5DA16C007FDC6C /* CalculatorView.swift */; };
 		B83781B32B5DA22F007FDC6C /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83781B22B5DA22F007FDC6C /* HistoryView.swift */; };
 		B83781B52B5DA256007FDC6C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83781B42B5DA256007FDC6C /* SettingsView.swift */; };
+		B853B9282BAB3DFB002A596F /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B853B9272BAB3DFB002A596F /* ButtonStyle.swift */; };
 		B8C7F1362B794FE9008BB15D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C7F1352B794FE9008BB15D /* DataManager.swift */; };
 		B8C7F1382B869BA7008BB15D /* DynamicNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C7F1372B869BA7008BB15D /* DynamicNumberFormatter.swift */; };
 		B8D9DF3C2B5851C5000651B1 /* CalcHammerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */; };
@@ -48,6 +49,7 @@
 		B83781B02B5DA16C007FDC6C /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		B83781B22B5DA22F007FDC6C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		B83781B42B5DA256007FDC6C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B853B9272BAB3DFB002A596F /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		B8C7F1352B794FE9008BB15D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B8C7F1372B869BA7008BB15D /* DynamicNumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicNumberFormatter.swift; sourceTree = "<group>"; };
 		B8D9DF382B5851C5000651B1 /* CalcHammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcHammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 				B8C7F1352B794FE9008BB15D /* DataManager.swift */,
 				B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */,
 				B8D9DF3D2B5851C5000651B1 /* ContentView.swift */,
+				B853B9272BAB3DFB002A596F /* ButtonStyle.swift */,
 				B83781AC2B5DA01E007FDC6C /* FavouritesView.swift */,
 				B83781B22B5DA22F007FDC6C /* HistoryView.swift */,
 				B83781B42B5DA256007FDC6C /* SettingsView.swift */,
@@ -290,6 +293,7 @@
 				B83781B12B5DA16C007FDC6C /* CalculatorView.swift in Sources */,
 				B8C7F1382B869BA7008BB15D /* DynamicNumberFormatter.swift in Sources */,
 				B8C7F1362B794FE9008BB15D /* DataManager.swift in Sources */,
+				B853B9282BAB3DFB002A596F /* ButtonStyle.swift in Sources */,
 				B8D9DF3C2B5851C5000651B1 /* CalcHammerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

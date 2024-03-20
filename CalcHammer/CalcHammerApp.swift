@@ -14,7 +14,9 @@ struct CalcHammerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            VStack{
+                ContentView()
+            }
 //            .background(Color("BackgroundColor"))
         }
         .modelContainer(for: HistoryItem.self)
