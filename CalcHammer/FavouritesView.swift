@@ -50,7 +50,7 @@ struct FavouritesView: View {
                     }
                     .padding()
                 }
-                .background(Color("BackgroundColor"))
+//                .background(Color("BackgroundColor"))
                 .navigationTitle("Favourites")
             }
         }

@@ -25,7 +25,34 @@ struct MyButtonStyle: ButtonStyle {
                 }
             )
             .contentShape(Rectangle()) // Make entire area tappable
-            .foregroundColor(Color.primary) // Text color
+            .foregroundColor(Color.accentColor) // Text color
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0) // Apply scale effect when pressed
+    }
+}
+
+struct MyTextStyle: ViewModifier {
+    enum Style {
+        case title
+    }
+    
+    let style: Style
+    
+    func body(content: Content) -> some View {
+        switch style {
+        case .title:
+            return content
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.horizontal, 20) // Adjust horizontal padding as needed
+                .padding(.top, 20) // Adjust vertical padding as needed
+                .foregroundColor(Color.primary) // Text color
+                .multilineTextAlignment(.leading) // Left justify text
+        }
+    }
+}
+
+extension Text {
+    func myTextStyle(_ style: MyTextStyle.Style) -> some View {
+        return self.modifier(MyTextStyle(style: style))
     }
 }

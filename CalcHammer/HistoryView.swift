@@ -16,6 +16,10 @@ struct HistoryView: View {
     
     var body: some View {
         VStack{
+            Text("History")
+                .myTextStyle(.title)
+                .frame(maxWidth: .infinity, alignment: .leading) // Ensure left alignment
+            
             if conversionItems.isEmpty {
                 Text("No history items yet")
             }
@@ -37,7 +41,7 @@ struct HistoryView: View {
             }
         }
 //        .background(Color("BackgroundColor"))
-        .navigationTitle("History")
+//        .navigationTitle("History")
     }
     
     func deleteItem(_ item: HistoryItem){

@@ -1174,7 +1174,7 @@ struct ConverterView: View {
 
                             }) {
                                 Image(systemName: "trash")
-                                    .foregroundColor(.red) // Customize the color if needed
+                                    .foregroundColor(Color.accentColor) // Customize the color if needed
                                     .font(.title) // Adjust the size if needed
                             }
                             .padding()

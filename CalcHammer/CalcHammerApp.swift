@@ -17,10 +17,8 @@ struct CalcHammerApp: App {
             VStack{
                 ContentView()
             }
-//            .background(Color("BackgroundColor"))
         }
         .modelContainer(for: HistoryItem.self)
         .environmentObject(userSettings)
-
     }
 }
