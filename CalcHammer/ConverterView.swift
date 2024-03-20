@@ -1185,13 +1185,26 @@ struct ConverterView: View {
                         .padding(.horizontal)
                 }
             }
-            Button("Convert") {
-                //Calculate value of conversion
-                if $multiConvert.wrappedValue{
+            Button(action: {
+                // Calculate value of conversion
+                if $multiConvert.wrappedValue {
                     output = buttonPressMultiConvert(unitType: selectedUnitIndex, inputUnit: selectedUnitIndex2, inputUnit2: selectedUnitIndex4, outputUnit: selectedUnitIndex3, inputNum: inputValue, inputNum2: inputValue2)
+                } else {
+                    output = buttonPressConvert(unitType: selectedUnitIndex, inputUnit: selectedUnitIndex2, outputUnit: selectedUnitIndex3, inputNum: inputValue)
                 }
-                else{
-                    output = buttonPressConvert(unitType:selectedUnitIndex,inputUnit: selectedUnitIndex2,outputUnit: selectedUnitIndex3,inputNum: inputValue)
+            }) {
+                ZStack {
+                    
+                    // Fill color
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: 35)
+                        .foregroundColor(Color("BoxColors"))
+
+                    // Stroke color
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black)
+                        .frame(height: 35)
+                    Text("Convert")
                 }
             }
             Spacer()
