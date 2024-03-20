@@ -25,7 +25,7 @@ struct MyButtonStyle: ButtonStyle {
                 }
             )
             .contentShape(Rectangle()) // Make entire area tappable
-            .foregroundColor(.black) // Text color
+            .foregroundColor(Color.primary) // Text color
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0) // Apply scale effect when pressed
     }
 }
