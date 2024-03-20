@@ -24,6 +24,10 @@ struct SettingsView: View {
 
     var body: some View {
             VStack {
+                Text("Settings")
+                    .myTextStyle(.title)
+                    .frame(maxWidth: .infinity, alignment: .leading) // Ensure left alignment
+                
                 CollapsibleSettingRow(label: "Show Favourites Tab", description: "Toggle to show or hide the Favourites tab", setting: $userSettings.showFavouritesTab, isExpanded: $isFavouritesExpanded)
                 CollapsibleSettingRow(label: "Show History Tab", description: "Toggle to show or hide the History tab", setting: $userSettings.showHistoryTab, isExpanded: $isHistoryExpanded)
                 CollapsibleSettingRow(label: "Include Non-Traditonal Units", description: "Toggle to include non-traditional units", setting: $userSettings.toggleFictionalUnits, isExpanded: $isFictionalUnitsExpanded)

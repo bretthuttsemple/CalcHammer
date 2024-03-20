@@ -639,6 +639,9 @@ struct ConverterView: View {
     
     var body: some View {
         VStack {
+            Text("Converter")
+                .myTextStyle(.title)
+                .frame(maxWidth: .infinity, alignment: .leading) // Ensure left alignment
             Spacer()
 
             // Picker that selects system of unit
