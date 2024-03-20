@@ -642,18 +642,32 @@ struct ConverterView: View {
             Spacer()
 
             // Picker that selects system of unit
-            Picker("Select Unit Type", selection: $selectedUnitIndex) {
-                ForEach(Array(GlobalData.unitSystems.enumerated()), id: \.offset) { index, unit in
-                    Text(unit)
+            ZStack{
+                // Fill color
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: 35)
+                        .foregroundColor(Color("BoxColors"))
+                        .padding()
+
+                    // Stroke color
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black)
+                        .frame(height: 35)
+                        .padding() // Adjust padding as needed
+                
+                Picker("Select Unit Type", selection: $selectedUnitIndex) {
+                    ForEach(Array(GlobalData.unitSystems.enumerated()), id: \.offset) { index, unit in
+                        Text(unit)
+                    }
                 }
+                .onChange(of: selectedUnitIndex) { newValue, _ in
+                    resetSelectedIndices()
+                }
+                .pickerStyle(DefaultPickerStyle())
+                .padding()
+                
             }
-            .onChange(of: selectedUnitIndex) { newValue, _ in
-                resetSelectedIndices()
-            }
-            .pickerStyle(DefaultPickerStyle())
-            .padding()
             
-            Spacer()
             
             HStack{
                 //Visual stack for input box and unit selection for input
@@ -1165,7 +1179,7 @@ struct ConverterView: View {
                             }
                             .padding()
                 
-                //area for dual input
+                //area for dual input toggle
                 if userSettings.toggleMultiConvert{
                     Toggle("", isOn: $multiConvert)
                         .padding(.horizontal)
@@ -1181,6 +1195,7 @@ struct ConverterView: View {
                 }
             }
             Spacer()
+
         }
         .padding()
 //        .background(Color("BackgroundColor"))
