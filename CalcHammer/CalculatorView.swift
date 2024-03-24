@@ -134,6 +134,8 @@ struct CalculatorView: View {
     struct BMICalculatorView: View, Calculators{
         @State private var weight = ""
         @State private var height = ""
+        @State private var feet = ""
+        @State private var inches = ""
         @State private var isMetric = true // Toggle for metric/imperial system
         @State private var bmi = "" // Output BMI value
         @State private var isInfoPopoverVisible = false
@@ -198,13 +200,32 @@ struct CalculatorView: View {
                             .frame(height: 36) // Adjust height as needed
                     )
                 
-                TextField(isMetric ? "Enter height (m)" : "Enter height (in)", text: $height)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                            .frame(height: 36) // Adjust height as needed
-                    )
+                if isMetric {
+                    TextField("Enter height (m)", text: $height)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                .frame(height: 36) // Adjust height as needed
+                        )
+                } else {
+                    HStack {
+                        TextField("Feet", text: $feet)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                    .frame(height: 36) // Adjust height as needed
+                            )
+                        TextField("Inches", text: $inches)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                                    .frame(height: 36) // Adjust height as needed
+                            )
+                    }
+                }
                 
                 Button("Calculate BMI") {
                     calculateBMI()
@@ -239,19 +260,25 @@ struct CalculatorView: View {
 
         private func calculateBMI() {
             guard let weight = Double(weight),
-                  let height = Double(height),
-                  height != 0 else {
+                  let heightValue = Double(height),
+                  heightValue != 0 else {
                 return
             }
             
-            let bmiValue: Double
+            var adjustedHeight = heightValue
+            
+            if !isMetric {
+                let feetValue = Double(feet) ?? 0.0
+                let inchesValue = Double(inches) ?? 0.0
+                adjustedHeight = feetValue * 12 + inchesValue
+            }
+            
+            let bmiValue = isMetric ? weight / (adjustedHeight * adjustedHeight) : (weight / (adjustedHeight * adjustedHeight)) * 703
+            bmi = String(format: "%.2f", bmiValue)
+            
             if isMetric {
-                bmiValue = weight / (height * height)
-                bmi = String(format: "%.2f", bmiValue)
                 addHistoryItem(historyText: "\(bmi) BMI calculated from \(weight) kg and \(height) m.", context: context)
             } else {
-                bmiValue = (weight / (height * height)) * 703 // Conversion for imperial system
-                bmi = String(format: "%.2f", bmiValue)
                 addHistoryItem(historyText: "\(bmi) BMI from \(weight) lbs and \(height) inches.", context: context)
             }
         }
