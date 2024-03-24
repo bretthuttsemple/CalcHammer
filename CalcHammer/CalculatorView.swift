@@ -248,11 +248,11 @@ struct CalculatorView: View {
             if isMetric {
                 bmiValue = weight / (height * height)
                 bmi = String(format: "%.2f", bmiValue)
-                addHistoryItem(historyText: "The BMI is \(bmi), calculated from weight \(weight) kg and height \(height) m.", context: context)
+                addHistoryItem(historyText: "\(bmi) BMI calculated from \(weight) kg and \(height) m.", context: context)
             } else {
                 bmiValue = (weight / (height * height)) * 703 // Conversion for imperial system
                 bmi = String(format: "%.2f", bmiValue)
-                addHistoryItem(historyText: "The BMI is \(bmi), calculated from weight \(weight) lbs and height \(height) inches.", context: context)
+                addHistoryItem(historyText: "\(bmi) BMI from \(weight) lbs and \(height) inches.", context: context)
             }
         }
     }
@@ -403,7 +403,7 @@ struct CalculatorView: View {
 
             let compoundInterest = principalValue * pow(1 + interestRateValue / (100 * n), n * timeValue) - principalValue
             result = String(format: "%.2f", compoundInterest)
-            addHistoryItem(historyText: "Principal: \(principal), Interest Rate: \(interestRate)%, Time: \(time) years, Compound Frequency: \(compoundFrequency), Result: \(result)", context: context)
+            addHistoryItem(historyText: "Principal: \(principal), Interest: \(interestRate)%, Time: \(time) years, Compound: \(compoundFrequency), Result: \(result)", context: context)
         }
     }
 
@@ -525,7 +525,7 @@ struct CalculatorView: View {
 
             let remainingCaffeine = initialAmountValue * pow(0.5, timePassedValue / halfLifeValue)
             result = String(format: "%.2f", remainingCaffeine)
-            addHistoryItem(historyText: "There is \(remainingCaffeine) mg of caffiene left from the \(initialAmountValue) mg of caffiene consumed \(timePassedValue) hours ago", context: context)
+            addHistoryItem(historyText: "\(remainingCaffeine) mg caffeine remaining from \(initialAmountValue) mg consumed \(timePassedValue) hours ago", context: context)
         }
     }
 
@@ -651,7 +651,7 @@ struct CalculatorView: View {
             totalAmount = String(format: "%.2f", totalAmountValue)
             alcoholPercentage = String(format: "%.2f", totalAlcoholPercentage)
 
-            addHistoryItem(historyText: "Mixed \(mixerAmountValue) ml of mixer with \(alcoholAmountValue) ml of alcohol (\(alcoholStrengthValue)% alcohol), resulting in a total drink volume of \(totalAmount) ml with an alcohol percentage of \(alcoholPercentage)%", context: context)
+            addHistoryItem(historyText: "Mix: \(mixerAmountValue) ml + \(alcoholAmountValue) ml \(alcoholStrengthValue)% alcohol = \(totalAmount) ml, \(alcoholPercentage)% alc.", context: context)
         }
     }
 
@@ -994,7 +994,7 @@ struct CalculatorView: View {
             
             let caloriesInActualServingValue = (caloriesPerServingValue / boxServingSizeValue) * actualServingSizeValue
             caloriesInActualServing = String(format: "%.2f", caloriesInActualServingValue)
-            addHistoryItem(historyText: "\(caloriesPerServingValue) calories per \(boxServingSizeValue) units = \(caloriesInActualServingValue) calories per \(actualServingSizeValue) units", context: context)
+            addHistoryItem(historyText: "\(caloriesPerServingValue) cal/\(boxServingSizeValue) units = \(caloriesInActualServingValue) cal/\(actualServingSizeValue) units", context: context)
         }
     }
 
@@ -1308,7 +1308,7 @@ struct CalculatorView: View {
             
             if let years = ageComponents.year, let months = ageComponents.month, let days = ageComponents.day {
                 exactAge = "\(years) years, \(months) months, \(days) days"
-                addHistoryItem(historyText:"An exact age was calcualted for \(years) years, \(months) months, \(days) days", context: context)
+                addHistoryItem(historyText: "Exact age calculated: \(years) years, \(months) months, \(days) days", context: context)
             }
         }
     }
@@ -1398,8 +1398,8 @@ struct CalculatorView: View {
             let components = calendar.dateComponents([.year, .month, .day], from: startDate, to: endDate)
             
             if let years = components.year, let months = components.month, let days = components.day {
-                dateDifference = "\(years) years, \(months) months, \(days) days"
-                addHistoryItem(historyText: "\(components) was \(dateDifference) ago", context: context)
+                let formattedDateDifference = "\(years) years, \(months) months, \(days) days"
+                addHistoryItem(historyText: "Date difference: \(formattedDateDifference)", context: context)
             }
         }
     }
@@ -1522,7 +1522,7 @@ struct CalculatorView: View {
             updatedCostValue = max(updatedCostValue, 0)
             
             updatedCost = String(format: "%.2f", updatedCostValue)
-            addHistoryItem(historyText: "With an intial value of \(initialCostValue), a depreciation rate of \(depreciationRateValue), and \(yearsValue) years, the value will be \(updatedCostValue)", context: context)
+            addHistoryItem(historyText: "Accumulated depreciation calculated for an initial cost of \(initialCostValue), \(depreciationRateValue)% depreciation rate, and \(yearsValue) years.", context: context)
         }
     }
 
@@ -1796,17 +1796,17 @@ struct CalculatorView: View {
                 convertedTemperature = temperatureValue
                 let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
                 speedOfSound = String(format: "%.2f", speed)
-                addHistoryItem(historyText: "When the tempature is \(convertedTemperature) °C the speed of sound is \(speed) m/s", context: context)
+                addHistoryItem(historyText: "Speed of sound is \(speed) m/s when the temperature is \(convertedTemperature) °C.", context: context)
             case "Fahrenheit":
                 convertedTemperature = (temperatureValue - 32) * 5/9
                 let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
                 speedOfSound = String(format: "%.2f", speed)
-                addHistoryItem(historyText: "When the tempature is \(temperatureValue) °F the speed of sound is \(speed) m/s", context: context)
+                addHistoryItem(historyText: "Speed of sound is \(speed) m/s when the temperature is \(convertedTemperature) °F.", context: context)
             case "Kelvin":
                 convertedTemperature = temperatureValue - 273.15
                 let speed = 331.3 * sqrt(1 + (convertedTemperature / 273.15))
                 speedOfSound = String(format: "%.2f", speed)
-                addHistoryItem(historyText: "When the tempature is \(temperatureValue) °K the speed of sound is \(speed) m/s", context: context)
+                addHistoryItem(historyText: "Speed of sound is \(speed) m/s when the temperature is \(convertedTemperature) °K.", context: context)
             default:
                 return
             }

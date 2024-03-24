@@ -618,7 +618,7 @@ struct ConverterView: View {
         let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
         let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
         
-        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) to \(formattedOutputNum) \(outputUnitW)")
+        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) = \(formattedOutputNum) \(outputUnitW)")
         
         context.insert(item)
     }
@@ -632,7 +632,7 @@ struct ConverterView: View {
         let formattedInputNum2 = formatter.string(from: NSNumber(value: inputNum2)) ?? ""
         let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
         
-        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) + \(formattedInputNum2) \(inputUnitW2) to \(formattedOutputNum) \(outputUnitW)")
+        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) + \(formattedInputNum2) \(inputUnitW2) = \(formattedOutputNum) \(outputUnitW)")
         
         context.insert(item)
     }
