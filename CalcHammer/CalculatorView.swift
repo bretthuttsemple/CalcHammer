@@ -72,10 +72,21 @@ struct CalculatorView: View {
             ScrollView {
                 VStack {
                     if !searchBarHidden {
-                        TextField("Search", text: $searchText)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal)
+                        ZStack(alignment: .trailing) {
+                            TextField("Search", text: $searchText)
+                                .padding()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding(.horizontal)
+                            if !searchText.isEmpty {
+                                Button(action: {
+                                    searchText = "" // Clear the search text
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.gray) // Customize the color if needed
+                                        .padding(.trailing, 45)
+                                }
+                            }
+                        }
                     }
                     
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {

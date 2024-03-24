@@ -10,7 +10,7 @@ import SwiftData
 
 //global static variables
 struct GlobalData{
-    static var unitSystems:Array = ["Select Unit Type","Length", "Mass", "Speed", "Temperature","Time","Volume","Force","/Angles","/Number Systems"]
+    static var unitSystems:Array = ["Select Unit Type","Length", "Mass", "Speed", "Temperature","Time","Volume","Force","Angles"]
     
     static var lengthUnit:Array = ["Micrometers", "Millimeters","Centimeters","Meters","Kilometers","Inches","Feet","Yards","Mile","Nautical Miles","Football Fields","Marathons","Furlong","Hammer Units"]
     static var lengthSymbol:Array = ["μm", "mm","cm","m","km", "in","ft","yd","mi","nmi","Football Fields","Marathons","Furlongs","hu"]
