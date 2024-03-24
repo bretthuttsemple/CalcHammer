@@ -1365,27 +1365,30 @@ struct CalculatorView: View {
                                 }
                 }
             VStack {
-                DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
-                    .padding(.horizontal)
-                
-                DatePicker("End Date", selection: $endDate, displayedComponents: .date)
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
-                    .padding(.horizontal)
-                
+                VStack(spacing: 150){
+                    DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .labelsHidden()
+                        .padding()
+                        .frame(height: 50)
+                    DatePicker("End Date", selection: $endDate, displayedComponents: .date)
+                        .datePickerStyle(WheelDatePickerStyle())
+                        .labelsHidden()
+                        .padding()
+                        .frame(height: 50)
+                }
+                Spacer()
                 Button("Calculate Date Difference") {
                     calculateDateDifference()
                 }
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                if !dateDifference.isEmpty {
-                    Text("Date Difference: \(dateDifference)")
-                        .padding()
-                }
+               
+                Text("Date Difference: \(dateDifference)")
+                    .padding()
                 
+                Spacer()
                 Spacer()
             }
             .padding()
@@ -1399,6 +1402,7 @@ struct CalculatorView: View {
             
             if let years = components.year, let months = components.month, let days = components.day {
                 let formattedDateDifference = "\(years) years, \(months) months, \(days) days"
+                dateDifference = formattedDateDifference
                 addHistoryItem(historyText: "Date difference: \(formattedDateDifference)", context: context)
             }
         }
