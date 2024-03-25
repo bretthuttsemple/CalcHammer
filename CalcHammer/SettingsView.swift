@@ -8,10 +8,10 @@
 import SwiftUI
 
 class UserSettings: ObservableObject {
-    @AppStorage("showFavouritesTab") var showFavouritesTab: Bool = false
+    @AppStorage("showFavouritesTab") var showFavouritesTab: Bool = true
     @AppStorage("showHistoryTab") var showHistoryTab: Bool = true
     @AppStorage("toggleFictionalUnits") var toggleFictionalUnits: Bool = false
-    @AppStorage("toggleMultiConvert") var toggleMultiConvert: Bool = false
+    @AppStorage("toggleMultiConvert") var toggleMultiConvert: Bool = true
     @AppStorage("accentColorData") var accentColorData: Data = Color.blue.toData()
     
     var accentColor: Color {
@@ -62,62 +62,82 @@ struct SettingsView: View {
                 Text("Settings")
                     .myTextStyle(.title)
                     .frame(maxWidth: .infinity, alignment: .leading) // Ensure left alignment
+                Spacer()
                 
-                // Color Picker
-                            HStack {
-                                Text("Accent Color:")
-                                    .font(.headline)
-                                ColorPicker("Select Color", selection: userSettings.accentColorBinding)
-                                    .labelsHidden()
-                                    .padding(.horizontal)
-                            }
+                VStack(alignment: .leading) {
+                    Text("Color")
+                        .font(.headline)
+                    HStack {
+                        Text("Choose a custom color to personalize CalcHammer to your liking")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        ColorPicker("Select Color", selection: userSettings.accentColorBinding)
+                            .labelsHidden()
+                            .padding(.horizontal)
+                    }
+                }
+                .padding(.vertical,4)
                 
-                CollapsibleSettingRow(label: "Show Favourites Tab", description: "Toggle to show or hide the Favourites tab", setting: $userSettings.showFavouritesTab, isExpanded: $isFavouritesExpanded)
-                CollapsibleSettingRow(label: "Show History Tab", description: "Toggle to show or hide the History tab", setting: $userSettings.showHistoryTab, isExpanded: $isHistoryExpanded)
-                CollapsibleSettingRow(label: "Include Non-Traditonal Units", description: "Toggle to include non-traditional units", setting: $userSettings.toggleFictionalUnits, isExpanded: $isFictionalUnitsExpanded)
-                CollapsibleSettingRow(label: "Include Multi Convert Toggle", description: "Toggle to include the Multi Convert toggle", setting: $userSettings.toggleMultiConvert, isExpanded: $isMultiConvertExpanded)
+                VStack(alignment: .leading) {
+                    Text("Favourites")
+                        .font(.headline)
+                    HStack {
+                        Text("The Favourites tab is where you store your preferred calculators. Turning this setting on/off enables/disables the Favourites feature. Your favourites remain saved even when this setting is turned off.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+//                        Spacer()
+                        Toggle("", isOn: $userSettings.showFavouritesTab)
+                            .frame(width: 80) // Adjust the width as needed
+                    }
+                }
+                .padding(.vertical,2)
+                
+                VStack(alignment: .leading) {
+                    Text("History")
+                        .font(.headline)
+                    HStack {
+                        Text("The History tab records your recent calculations or conversions. Enabling/disabling this setting turns the History tab on/off. When turned off, new items won't be saved, but existing ones remain.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Toggle("", isOn: $userSettings.showHistoryTab)
+                            .frame(width: 80) // Adjust the width as needed
+                    }
+                }
+                .padding(.vertical,2)
+                
+                VStack(alignment: .leading) {
+                    Text("Extra Units")
+                        .font(.headline)
+                    HStack {
+                        Text("Enabling the Extra Units setting provides access to additional, non-traditional units. Disabling it hides these units.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Toggle("", isOn: $userSettings.showHistoryTab)
+                            .frame(width: 80) // Adjust the width as needed
+                    }
+                }
+                .padding(.vertical,2)
+                
+                VStack(alignment: .leading) {
+                    Text("Multi-Convert")
+                        .font(.headline)
+                    HStack {
+                        Text("Enabling Multi-Convert allows the use of an additional toggle feature in the conversion tab. This toggle permits combining two measurements of different units to yield a sum in a different unit.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Toggle("", isOn: $userSettings.showHistoryTab)
+                            .frame(width: 80) // Adjust the width as needed
+                    }
+                }
+                .padding(.vertical,2)
+
+                Spacer()
             }
-            .padding(.horizontal)
+            .padding()
             .environmentObject(userSettings)
         }
     }
-
-struct CollapsibleSettingRow: View {
-    let label: String
-    let description: String
-    @Binding var setting: Bool
-    @Binding var isExpanded: Bool
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(label)
-                    .font(.headline)
-                Spacer()
-                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                    .foregroundColor(.accentColor)
-            }
-            .onTapGesture {
-                withAnimation {
-                    isExpanded.toggle()
-                }
-            }
-            if isExpanded {
-                HStack {
-                    Text(description)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Toggle("", isOn: $setting)
-                        .padding(.trailing, 20)
-                }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 5)
-                .contentShape(Rectangle())
-            }
-        }
-//        .background(Color("BackgroundColor"))
-        .navigationTitle("Settings")
-    }
-}
-

@@ -14,6 +14,8 @@ struct HistoryView: View {
     
     @Query private var conversionItems: [HistoryItem]
     
+    @State private var showingDeleteAlert = false
+    
     var body: some View {
         VStack{
             Text("History")
@@ -38,13 +40,38 @@ struct HistoryView: View {
                         }
                     }
                 }
+                .alert(isPresented: $showingDeleteAlert) {
+                    Alert(
+                        title: Text("Delete All History Items"),
+                        message: Text("Are you sure you want to delete all history items?"),
+                        primaryButton: .cancel(),
+                        secondaryButton: .destructive(Text("Delete All")) {
+                            deleteAllItems()
+                        }
+                    )
+                }
+                
+                Button(action: {
+                    showingDeleteAlert = true
+                }) {
+                    HStack {
+                        Image(systemName: "trash")
+                        Text("Delete All")
+                    }
+                    .foregroundColor(.red)
+                }
+                .padding()
+                .disabled(conversionItems.isEmpty)
             }
         }
-//        .background(Color("BackgroundColor"))
-//        .navigationTitle("History")
     }
     
     func deleteItem(_ item: HistoryItem){
         context.delete(item)
     }
+    func deleteAllItems() {
+            for item in conversionItems {
+                deleteItem(item)
+            }
+        }
 }
