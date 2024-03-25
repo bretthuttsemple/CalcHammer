@@ -154,24 +154,26 @@ struct CalculatorView: View {
         var body: some View {
             VStack {
                 HStack{
-                    Button(action: {
-                                    isFavourite.toggle()
-                                    
-                                    if isFavourite {
-                                        favouriteItems.addFavouriteCalculator("BMI Calculator")
-                                    } else {
-                                        favouriteItems.removeFavouriteCalculator("BMI Calculator")
-                                    }
-                                }) {
-                                    Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                        .font(.title)
-                                        .foregroundColor(isFavourite ? .red : .gray)
-                                }
-                                .padding()
+                    if userSettings.showFavouritesTab{
+                        Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("BMI Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("BMI Calculator")
+                            }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
                         .onAppear {
                             // Update favorite status on view appear
                             isFavourite = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
                         }
+                    }
                     
                     Spacer()
                     Button(action: {
@@ -314,24 +316,26 @@ struct CalculatorView: View {
 
         var body: some View {
             HStack{
-                Button(action: {
-                                isFavourite.toggle()
-                                
-                                if isFavourite {
-                                    favouriteItems.addFavouriteCalculator("Compound Interest Calculator")
-                                } else {
-                                    favouriteItems.removeFavouriteCalculator("Compound Interest Calculator")
-                                }
-                            }) {
-                                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                    .font(.title)
-                                    .foregroundColor(isFavourite ? .red : .gray)
-                            }
-                            .padding()
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Compound Interest Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Compound Interest Calculator")
+                        }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
                     .onAppear {
                         // Update favorite status on view appear
                         isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Compound Interest Calculator")
                     }
+                }
                 Spacer()
                 Button(action: {
                                 isInfoPopoverVisible.toggle()
@@ -465,24 +469,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                                isFavourite.toggle()
-                                
-                                if isFavourite {
-                                    favouriteItems.addFavouriteCalculator("Caffeine Half-Life Calculator")
-                                } else {
-                                    favouriteItems.removeFavouriteCalculator("Caffeine Half-Life Calculator")
-                                }
-                            }) {
-                                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                    .font(.title)
-                                    .foregroundColor(isFavourite ? .red : .gray)
-                            }
-                            .padding()
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Caffeine Half-Life Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Caffeine Half-Life Calculator")
+                        }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
                     .onAppear {
                         // Update favorite status on view appear
                         isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Caffeine Half-Life Calculator")
-                    }
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -592,24 +597,25 @@ struct CalculatorView: View {
 
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Alcohol Dilution Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Alcohol Dilution Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Alcohol Dilution Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Alcohol Dilution Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Alcohol Dilution Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Alcohol Dilution Calculator")
+                    }}
                 Spacer()
                 Button(action: {
                     isInfoPopoverVisible.toggle()
@@ -720,23 +726,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Permutation Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Permutation Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Permutation Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Permutation Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Permutation Calculator")
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Permutation Calculator")
+                    }
                 }
                     Spacer()
                     Button(action: {
@@ -845,24 +853,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Random Number Generator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Random Number Generator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Random Number Generator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Random Number Generator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Random Number Generator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Random Number Generator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -952,24 +961,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Calorie Serving Size Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Calorie Serving Size Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Calorie Serving Size Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Calorie Serving Size Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Calorie Serving Size Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Calorie Serving Size Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1071,24 +1081,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Unit Price Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Unit Price Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Unit Price Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Unit Price Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Unit Price Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Unit Price Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1177,24 +1188,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Pizza Area Cost Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Pizza Area Cost Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Pizza Area Cost Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Pizza Area Cost Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Pizza Area Cost Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Pizza Area Cost Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1299,24 +1311,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Exact Age Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Exact Age Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Exact Age Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Exact Age Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Exact Age Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Exact Age Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1395,24 +1408,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                                isFavourite.toggle()
-                                
-                                if isFavourite {
-                                    favouriteItems.addFavouriteCalculator("Date Difference Calculator")
-                                } else {
-                                    favouriteItems.removeFavouriteCalculator("Date Difference Calculator")
-                                }
-                            }) {
-                                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                    .font(.title)
-                                    .foregroundColor(isFavourite ? .red : .gray)
-                            }
-                            .padding()
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Date Difference Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Date Difference Calculator")
+                        }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
                     .onAppear {
                         // Update favorite status on view appear
                         isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Date Difference Calculator")
-                    }
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1495,24 +1509,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Accumulated Depreciation Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Accumulated Depreciation Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Accumulated Depreciation Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Accumulated Depreciation Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Accumulated Depreciation Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Accumulated Depreciation Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1619,24 +1634,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Grade Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Grade Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Grade Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Grade Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Grade Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Grade Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1788,24 +1804,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Speed of Sound Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Speed of Sound Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Speed of Sound Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Speed of Sound Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Speed of Sound Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Speed of Sound Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -1905,24 +1922,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                                isFavourite.toggle()
-                                
-                                if isFavourite {
-                                    favouriteItems.addFavouriteCalculator("Percentage Calculator")
-                                } else {
-                                    favouriteItems.removeFavouriteCalculator("Percentage Calculator")
-                                }
-                            }) {
-                                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                    .font(.title)
-                                    .foregroundColor(isFavourite ? .red : .gray)
-                            }
-                            .padding()
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Percentage Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Percentage Calculator")
+                        }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
                     .onAppear {
                         // Update favorite status on view appear
                         isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Percentage Calculator")
-                    }
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -2021,24 +2039,25 @@ struct CalculatorView: View {
         
         var body: some View {
             HStack{
-                Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("Fuel Cost Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("Fuel Cost Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
+                if userSettings.showFavouritesTab{
+                    Button(action: {
+                        isFavourite.toggle()
+                        
+                        if isFavourite {
+                            favouriteItems.addFavouriteCalculator("Fuel Cost Calculator")
+                        } else {
+                            favouriteItems.removeFavouriteCalculator("Fuel Cost Calculator")
                         }
-                        .padding()
-                .onAppear {
-                    // Update favorite status on view appear
-                    isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Fuel Cost Calculator")
-                }
+                    }) {
+                        Image(systemName: isFavourite ? "heart.fill" : "heart")
+                            .font(.title)
+                            .foregroundColor(isFavourite ? .red : .gray)
+                    }
+                    .padding()
+                    .onAppear {
+                        // Update favorite status on view appear
+                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Fuel Cost Calculator")
+                    }}
                     Spacer()
                     Button(action: {
                                     isInfoPopoverVisible.toggle()
@@ -2142,24 +2161,25 @@ struct CalculatorView: View {
         var body: some View {
             VStack {
                 HStack {
-                    Button(action: {
-                                isFavourite.toggle()
-                                
-                                if isFavourite {
-                                    favouriteItems.addFavouriteCalculator("Tip Calculator")
-                                } else {
-                                    favouriteItems.removeFavouriteCalculator("Tip Calculator")
-                                }
-                            }) {
-                                Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                    .font(.title)
-                                    .foregroundColor(isFavourite ? .red : .gray)
+                    if userSettings.showFavouritesTab{
+                        Button(action: {
+                            isFavourite.toggle()
+                            
+                            if isFavourite {
+                                favouriteItems.addFavouriteCalculator("Tip Calculator")
+                            } else {
+                                favouriteItems.removeFavouriteCalculator("Tip Calculator")
                             }
-                            .padding()
-                    .onAppear {
-                        // Update favorite status on view appear
-                        isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Tip Calculator")
-                    }
+                        }) {
+                            Image(systemName: isFavourite ? "heart.fill" : "heart")
+                                .font(.title)
+                                .foregroundColor(isFavourite ? .red : .gray)
+                        }
+                        .padding()
+                        .onAppear {
+                            // Update favorite status on view appear
+                            isFavourite = FavouriteItems.shared.favouriteCalculators.contains("Tip Calculator")
+                        }}
                     Spacer()
                     Button(action: {
                         isInfoPopoverVisible.toggle()
