@@ -63,6 +63,7 @@ struct HistoryView: View {
                 .padding()
                 .disabled(conversionItems.isEmpty)
             }
+            Spacer()
         }
     }
     

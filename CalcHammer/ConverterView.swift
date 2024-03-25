@@ -611,30 +611,34 @@ struct ConverterView: View {
         }
     
     func addHistoryItem(inputUnitW: String, outputUnitW: String, inputNum: Double, outputNum: Double) {
-        let formatter = NumberFormatter() //dynamic number formatter made for this local scope
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 3
-        
-        let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
-        let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
-        
-        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) = \(formattedOutputNum) \(outputUnitW)")
-        
-        context.insert(item)
+        if userSettings.showHistoryTab{
+            let formatter = NumberFormatter() //dynamic number formatter made for this local scope
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 3
+            
+            let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
+            let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
+            
+            let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) = \(formattedOutputNum) \(outputUnitW)")
+            
+            context.insert(item)
+        }
     }
     
     func addMultiHistoryItem(inputUnitW: String,inputUnitW2: String, outputUnitW: String, inputNum: Double, inputNum2: Double, outputNum: Double) {
-        let formatter = NumberFormatter() //dynamic number formatter made for this local scope
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 3
-        
-        let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
-        let formattedInputNum2 = formatter.string(from: NSNumber(value: inputNum2)) ?? ""
-        let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
-        
-        let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) + \(formattedInputNum2) \(inputUnitW2) = \(formattedOutputNum) \(outputUnitW)")
-        
-        context.insert(item)
+        if userSettings.showHistoryTab{
+            let formatter = NumberFormatter() //dynamic number formatter made for this local scope
+            formatter.minimumFractionDigits = 0
+            formatter.maximumFractionDigits = 3
+            
+            let formattedInputNum = formatter.string(from: NSNumber(value: inputNum)) ?? ""
+            let formattedInputNum2 = formatter.string(from: NSNumber(value: inputNum2)) ?? ""
+            let formattedOutputNum = formatter.string(from: NSNumber(value: outputNum)) ?? ""
+            
+            let item = HistoryItem(historyText: "\(formattedInputNum) \(inputUnitW) + \(formattedInputNum2) \(inputUnitW2) = \(formattedOutputNum) \(outputUnitW)")
+            
+            context.insert(item)
+        }
     }
     
     var body: some View {

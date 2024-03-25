@@ -140,11 +140,15 @@ struct CalculatorView: View {
         @State private var bmi = "" // Output BMI value
         @State private var isInfoPopoverVisible = false
         @StateObject private var favouriteItems = FavouriteItems.shared
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
             
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
 
         var body: some View {
@@ -296,10 +300,14 @@ struct CalculatorView: View {
         @StateObject private var favouriteItems = FavouriteItems.shared
                     
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Compound Interest Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
 
         let compoundFrequencies = ["Annually", "Semi-Annually", "Quarterly", "Monthly"]
@@ -445,10 +453,14 @@ struct CalculatorView: View {
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Caffeine Half-Life Calculator")
         
         @State private var isInfoPopoverVisible = false
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -568,10 +580,14 @@ struct CalculatorView: View {
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Alcohol Dilution Calculator")
 
         @State private var isInfoPopoverVisible = false
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
 
         var body: some View {
@@ -692,10 +708,14 @@ struct CalculatorView: View {
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Permutation Calculator")
         
         @State private var isInfoPopoverVisible = false
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -813,10 +833,14 @@ struct CalculatorView: View {
         @StateObject private var favouriteItems = FavouriteItems.shared
                     
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Random Number Generator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
+        
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -917,10 +941,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Calorie Serving Size Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1033,10 +1060,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Unit Price Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1136,10 +1166,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Pizza Area Cost Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1255,10 +1288,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Exact Age Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1348,10 +1384,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Date Difference Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1445,10 +1484,13 @@ struct CalculatorView: View {
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Accumulated Depreciation Calculator")
         
         @State private var isInfoPopoverVisible = false
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {
@@ -1566,10 +1608,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Grade Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
-            saveToHistory(historyText: historyText, context: context)
+            if userSettings.showHistoryTab{
+                saveToHistory(historyText: historyText, context: context)
+            }
         }
         
         var body: some View {
@@ -1732,10 +1777,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Speed of Sound Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
         func addHistoryItem(historyText: String, context: ModelContext) {
-            saveToHistory(historyText: historyText, context: context)
+            if userSettings.showHistoryTab{
+                saveToHistory(historyText: historyText, context: context)
+            }
         }
         
         var body: some View {
@@ -1853,6 +1901,7 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Percentage Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         var body: some View {
             HStack{
@@ -1945,13 +1994,17 @@ struct CalculatorView: View {
         }
         
         func addHistoryItem(historyText: String, context: ModelContext) {
-            saveToHistory(historyText: historyText, context: context)
+            if userSettings.showHistoryTab{
+                saveToHistory(historyText: historyText, context: context)
+            }
         }
     }
     
     struct FuelCostCalculatorView: View, Calculators {
         func addHistoryItem(historyText: String, context: ModelContext) {
-            saveToHistory(historyText: historyText, context: context)
+            if userSettings.showHistoryTab{
+                saveToHistory(historyText: historyText, context: context)
+            }
         }
         
         @State private var tripDistance = ""
@@ -1962,6 +2015,7 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Fuel Cost Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
         
         @Environment(\.modelContext) private var context
         
@@ -2076,10 +2130,13 @@ struct CalculatorView: View {
         
         @StateObject private var favouriteItems = FavouriteItems.shared
         @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("Tip Calculator")
+        @StateObject var userSettings = UserSettings() // Initialize UserSettings
 
         @Environment(\.modelContext) private var context
                 func addHistoryItem(historyText: String, context: ModelContext) {
-                    saveToHistory(historyText: historyText, context: context)
+                    if userSettings.showHistoryTab{
+                        saveToHistory(historyText: historyText, context: context)
+                    }
                 }
         
         var body: some View {

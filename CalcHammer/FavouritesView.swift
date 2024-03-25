@@ -35,6 +35,12 @@ struct FavouritesView: View {
     var body: some View {
             NavigationView {
                 ScrollView {
+                    if favouriteItems.favouriteCalculators.isEmpty {
+                        Text("No favourited calculators")
+                            .font(.headline)
+                            .padding()
+                    }
+                    
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
                         ForEach(favouriteItems.favouriteCalculators.sorted(), id: \.self) { calculator in
                             NavigationLink(destination: views[calculator] ?? AnyView(EmptyView())) {

@@ -115,7 +115,7 @@ struct SettingsView: View {
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Toggle("", isOn: $userSettings.showHistoryTab)
+                        Toggle("", isOn: $userSettings.toggleMultiConvert)
                             .frame(width: 80) // Adjust the width as needed
                     }
                 }
@@ -129,7 +129,7 @@ struct SettingsView: View {
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Toggle("", isOn: $userSettings.showHistoryTab)
+                        Toggle("", isOn: $userSettings.toggleFictionalUnits)
                             .frame(width: 80) // Adjust the width as needed
                     }
                 }
