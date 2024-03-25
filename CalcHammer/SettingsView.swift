@@ -111,11 +111,11 @@ struct SettingsView: View {
                     Text("Extra Units")
                         .font(.headline)
                     HStack {
-                        Text("Enabling the Extra Units setting provides access to additional, non-traditional units. Disabling it hides these units.")
+                        Text("Enabling the Extra Units setting provides access to extra, non-traditional units. Disabling it hides these units.")
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Toggle("", isOn: $userSettings.toggleMultiConvert)
+                        Toggle("", isOn: $userSettings.toggleFictionalUnits)
                             .frame(width: 80) // Adjust the width as needed
                     }
                 }
@@ -129,7 +129,7 @@ struct SettingsView: View {
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Toggle("", isOn: $userSettings.toggleFictionalUnits)
+                        Toggle("", isOn: $userSettings.toggleMultiConvert)
                             .frame(width: 80) // Adjust the width as needed
                     }
                 }

@@ -128,7 +128,6 @@ struct CalculatorView: View {
                 searchBarHidden = true
             }
         }
-//        .accentColor(userSettings.accentColor)
     }
     
     struct BMICalculatorView: View, Calculators{

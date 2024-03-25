@@ -652,14 +652,14 @@ struct ConverterView: View {
             ZStack{
                 // Fill color
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(height: 35)
+                        .frame(width:180, height: 35)
                         .foregroundColor(Color("BoxFillColors"))
                         .padding()
 
                     // Stroke color
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color("BoxStrokeColors"))
-                        .frame(height: 35)
+                        .frame(width:180, height: 35)
                         .padding() // Adjust padding as needed
                 
                 Picker("Select Unit Type", selection: $selectedUnitIndex) {
