@@ -199,6 +199,7 @@ struct CalculatorView: View {
                 
                 TextField(isMetric ? "Enter weight (kg)" : "Enter weight (lbs)", text: $weight)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color("BoxStrokeColors"), lineWidth: 2)
@@ -208,6 +209,7 @@ struct CalculatorView: View {
                 if isMetric {
                     TextField("Enter height (m)", text: $height)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color("BoxStrokeColors"), lineWidth: 2)
@@ -217,6 +219,7 @@ struct CalculatorView: View {
                     HStack {
                         TextField("Feet", text: $feet)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color("BoxStrokeColors"), lineWidth: 2)
@@ -224,6 +227,7 @@ struct CalculatorView: View {
                             )
                         TextField("Inches", text: $inches)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color("BoxStrokeColors"), lineWidth: 2)
@@ -264,21 +268,23 @@ struct CalculatorView: View {
         
 
         private func calculateBMI() {
-            guard let weight = Double(weight),
-                  let heightValue = Double(height),
-                  heightValue != 0 else {
+            guard let weight = Double(weight), let heightValue = Double(height), heightValue != 0 else {
                 return
             }
             
             var adjustedHeight = heightValue
+            var adjustedWeight = weight
             
             if !isMetric {
-                let feetValue = Double(feet) ?? 0.0
-                let inchesValue = Double(inches) ?? 0.0
-                adjustedHeight = feetValue * 12 + inchesValue
-            }
+                    let feetValue = Double(feet) ?? 0.0
+                    let inchesValue = Double(inches) ?? 0.0
+                    
+                    // If feet or inches is nil, set them to 0
+                    adjustedHeight = ((feetValue != 0 ? feetValue : 0) * 12 + (inchesValue != 0 ? inchesValue : 0)) * 0.0254 // Convert inches to meters
+                    adjustedWeight *= 0.453592 // Convert pounds to kilograms
+                }
             
-            let bmiValue = isMetric ? weight / (adjustedHeight * adjustedHeight) : (weight / (adjustedHeight * adjustedHeight)) * 703
+            let bmiValue = adjustedWeight / (adjustedHeight * adjustedHeight)
             bmi = String(format: "%.2f", bmiValue)
             
             if isMetric {
@@ -1170,7 +1176,7 @@ struct CalculatorView: View {
     struct PizzaAreaCalculatorView: View,Calculators{
         @State private var pizzaSize = ""
         @State private var pizzaCost = ""
-        @State private var selectedShape = "Square"
+        @State private var selectedShape = "Circular"
         @State private var unitCost: Double?
         @State private var isInfoPopoverVisible = false
         
@@ -1241,8 +1247,8 @@ struct CalculatorView: View {
                     )
                 
                 Picker("Pizza Shape", selection: $selectedShape) {
-                    Text("Square").tag("Square")
                     Text("Circular").tag("Circular")
+                    Text("Square").tag("Square")
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()

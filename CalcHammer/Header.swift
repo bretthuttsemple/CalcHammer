@@ -14,9 +14,7 @@ struct CalcHammerHeader: View {
     var body: some View {
         VStack {
             HStack{
-                Image("AppHeader")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                AdaptiveImage(light: Image("AppHeaderL"), dark: Image("AppHeaderD"))
                     .frame(width: 40, height: 40) // Adjust the size as needed
                     .padding(.horizontal)
                 Text("CalcHammer")
@@ -25,6 +23,17 @@ struct CalcHammerHeader: View {
             }
             Divider()
         }
+    }
+}
+
+struct AdaptiveImage: View {
+    @Environment(\.colorScheme) var colorScheme
+    let light: Image
+    let dark: Image
+
+    var body: some View {
+        let image = colorScheme == .light ? light : dark
+        return image.resizable()
     }
 }
 
