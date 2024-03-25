@@ -806,7 +806,7 @@ struct ConverterView: View {
                                 
                             }
                         default:
-                            Text("Please Select a Unit Type")
+                            Text("Select a Unit Type")
                         }
                     }
                 )
@@ -949,7 +949,7 @@ struct ConverterView: View {
                                         
                                     }
                                 default:
-                                    Text("Please Select a Unit Type")
+                                    Text("Select a Unit Type")
                                 }
                             }
                         )
@@ -1157,7 +1157,7 @@ struct ConverterView: View {
                                     
                                 }
                             default:
-                                Text("Please Select a Unit Type")
+                                Text("Select a Unit Type")
                             }
                         }
                     )

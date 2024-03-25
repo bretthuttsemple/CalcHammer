@@ -178,7 +178,7 @@ struct CalculatorView: View {
                     }
                     .popover(isPresented: $isInfoPopoverVisible) {
                         VStack {
-                            Text("BMI measures body fat based on height and weight, providing insight into health risks associated with weight categories. For more information, visit Health Canada's website.")
+                            Text("BMI calculates body fat using weight and height, helping assess health risks. Input weight and height to get your BMI, a key indicator for health professionals. Visit Health Canada for more info.")
                                 .padding()
                                 .presentationCompactAdaptation(.popover)
 
@@ -333,7 +333,7 @@ struct CalculatorView: View {
                             }
                             .popover(isPresented: $isInfoPopoverVisible){
                                 VStack {
-                                    Text("The Compound Interest Calculator computes the accrued interest on an investment based on principal amount, interest rate, time, and compound frequency. Varying compound frequencies, such as semi-annually or monthly, impact how often interest is added to the principal, affecting overall returns.")
+                                    Text("The Compound Interest Calculator computes interest on an investment. Enter principal, rate, time, and compound frequency. Frequency impacts how often interest is added, affecting returns.")
                                         .padding()
                                         .presentationCompactAdaptation(.popover)
 
@@ -480,12 +480,12 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("Caffeine half-life is the duration for the body to clear half of ingested caffeine, reducing its amount in the system. Varied half-lives among sources impact caffeine metabolism and its stimulating effects.")
+                                        Text("The Caffeine Calculator estimates caffeine remaining in the body. It accounts for half-life, typically 5.7 hours, influenced by caffeine source. This aids in tracking caffeine levels and managing consumption.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
                                     }
-                                    .frame(width: 300, height: 300) // Set preferred size for the popover
+                                    .frame(width: 300, height: 200) // Set preferred size for the popover
                                 }
                 }
             VStack {
@@ -602,7 +602,7 @@ struct CalculatorView: View {
                 }
                 .popover(isPresented: $isInfoPopoverVisible){
                     VStack {
-                        Text("The alcohol dilution calculator helps you determine the total amount of a mixed drink and its alcohol percentage based on the amount of mixer, alcohol, and alcohol strength.")
+                        Text("The Alcohol Dilution Calculator calculates total drink volume and alcohol percentage from mixer and alcohol amounts, considering alcohol strength. Ideal for crafting cocktails accurately.")
                             .padding()
                             .presentationCompactAdaptation(.popover)
                     }
@@ -727,7 +727,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("A permutation calculator computes the number of ways to arrange a subset of items from a larger set, considering the order of arrangement. Inputs typically include two numbers: N (representing the total number of items) and R (representing the number of items to be arranged). The output provides the total number of permutations possible for arranging R items from a set of N items.")
+                                        Text("The Permutation Calculator finds ways to arrange items from a set. Input N = total items, R = to be arranged. Output = permutations of R from N.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -848,7 +848,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The random number generator allows users to generate a random integer within a specified range defined by the upper and lower limits.")
+                                        Text("The random number generator produces integers within a specified range set by upper and lower limits.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -952,7 +952,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The calorie serving size calculator calculates the calorie content for a specified serving size based on the calorie count and serving size from a nutritional label, along with the actual serving size intended for consumption.")
+                                        Text("The calorie serving size calculator determines calorie content for a specified serving size, using calorie count and serving size from a label, compared to the intended consumption size.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -1480,7 +1480,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The accumulated depreciation calculator computes the total depreciation of an asset over its useful life, taking into account factors such as initial cost, salvage value, and depreciation method. It provides the accumulated depreciation amount, which represents the total reduction in the asset's value over time.")
+                                        Text("The accumulated depreciation calculator computes an asset's total depreciation over its life, factoring initial cost, salvage value, and depreciation method to provide the accumulated depreciation amount.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -1601,7 +1601,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The grade calculator has two modes: one predicts the final exam score needed to achieve a desired grade, and the other computes the achieved grade based on the final exam result. It requires the current grade, exam weight, and either the target grade or final exam score.")
+                                        Text("The final grade calculator features two modes: one predicts the final exam score needed for a desired grade, and the other computes the achieved grade based on the final exam result.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -1767,7 +1767,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The speed of sound calculator determines the speed of sound in air, which varies with temperature. It's important to note that this calculator specifically applies to sound waves traveling through air, as the speed of sound differs in other substances. Temperature affects the speed of sound because air particles move faster at higher temperatures, allowing sound waves to propagate more quickly through the medium.")
+                                        Text("The speed of sound calculator determines air's sound speed, affected by temperature. It's specific to air; higher temperatures mean faster sound propagation.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
@@ -1994,7 +1994,7 @@ struct CalculatorView: View {
                                 }
                                 .popover(isPresented: $isInfoPopoverVisible){
                                     VStack {
-                                        Text("The fuel cost calculator computes the total cost of fuel for a given trip based on the trip distance, fuel efficiency, and fuel price per liter. It provides the total fuel needed for the trip and the corresponding cost, making it useful for planning road trips.")
+                                        Text("The fuel cost calculator computes total fuel expense for a trip using distance, fuel efficiency, and price. It's handy for road trip planning.")
                                             .padding()
                                             .presentationCompactAdaptation(.popover)
 
