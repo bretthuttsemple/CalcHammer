@@ -404,14 +404,18 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
 
-                if !result.isEmpty {
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                        .frame(height: 36) // Adjust height as needed
-                        .overlay(
+                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
                             Text("Compound Interest: \(result)")
-                        )
-                }
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
+                
 
                 Spacer()
             }
@@ -547,11 +551,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
 
-                if !result.isEmpty {
-                    Text("Remaining Caffeine: \(result) mg")
-                        .padding()
-                }
-
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Remaining Caffeine: \(result) mg")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 Spacer()
             }
             .padding()
@@ -671,13 +680,26 @@ struct CalculatorView: View {
                     .buttonStyle(MyButtonStyle())
                     .padding()
 
-                    if !totalAmount.isEmpty && !alcoholPercentage.isEmpty {
-                        Text("Total Amount: \(totalAmount) ml")
-                            .padding()
-                        Text("Alcohol Percentage: \(alcoholPercentage)%")
-                            .padding()
-                    }
-
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                        .frame(height: 36) // Adjust height as needed
+                        .overlay(
+                            HStack{
+                            Text("Total Amount: \(totalAmount) ml")
+                                    .padding(.leading)
+                                Spacer()
+                            }
+                        )
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                        .frame(height: 36) // Adjust height as needed
+                        .overlay(
+                            HStack{
+                            Text("Alcohol Percentage: \(alcoholPercentage)%")
+                                    .padding(.leading)
+                                Spacer()
+                            }
+                        )
                     Spacer()
                 }
                 .padding()
@@ -793,10 +815,16 @@ struct CalculatorView: View {
                 }
                 .buttonStyle(MyButtonStyle())
                 .padding()
-                
-                Text("Result: \(result)")
-                    .padding()
-                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Result: \(result)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 Spacer()
             }
             .padding()
@@ -917,9 +945,17 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                Text("Random Number: \(randomNumber)")
-                    .padding()
-                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Random Number: \(randomNumber)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
+                            
                 Spacer()
             }
             .padding()
@@ -1036,11 +1072,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                if !caloriesInActualServing.isEmpty {
-                    Text("Calories in actual serving: \(caloriesInActualServing)")
-                        .padding()
-                }
-                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Calories in actual serving: \(caloriesInActualServing)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 Spacer()
             }
             .padding()
@@ -1145,11 +1186,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                if !unitPrice.isEmpty {
-                    Text("Unit price: $\(unitPrice) per unit")
-                        .padding()
-                }
-                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Unit price: $\(unitPrice) per unit")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 Spacer()
             }
             .padding()
@@ -1258,10 +1304,15 @@ struct CalculatorView: View {
                 }
                 .buttonStyle(MyButtonStyle())
                 .padding()
-                
                 if let unitCost = unitCost {
-                    Text("Cost per Square Inch: $\(String(format: "%.2f", unitCost))")
-                        .padding()
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                        .frame(height: 36) // Adjust height as needed
+                        .overlay(
+                            HStack{
+                                Text("Cost per Square Inch: $\(String(format: "%.2f", unitCost))")
+                            }
+                        )
                 }
                 
                 Spacer()
@@ -1364,10 +1415,17 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                if !exactAge.isEmpty {
-                    Text("Exact Age: \(exactAge)")
-                        .padding()
-                }
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Exact Age: \(exactAge)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
+                                    
                 
                 Spacer()
             }
@@ -1469,9 +1527,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-               
-                Text("Date Difference: \(dateDifference)")
-                    .padding()
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Date Difference: \(dateDifference)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
                 Spacer()
@@ -1584,8 +1649,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                Text("Updated Cost: $\(updatedCost)")
-                    .padding()
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Updated Cost: $\(updatedCost)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
             }
@@ -1733,8 +1806,16 @@ struct CalculatorView: View {
                 .padding()
                 
                 // Result text
-                Text(resultText())
-                    .padding()
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text(resultText())
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
             }
@@ -1773,9 +1854,9 @@ struct CalculatorView: View {
         // Function to format the result text
         private func resultText() -> String {
             if isCalculateNeededGrade {
-                return "To achieve \(desiredGrade)% overall, you need to score \(neededGrade())% on the final exam."
+                return "To reach \(desiredGrade)%, get \(neededGrade())% on the final."
             } else {
-                return "If you score \(desiredGrade)% on the final exam, your overall grade will be \(finalGrade())%."
+                return "\(desiredGrade)% on the final, your grade will be \(finalGrade())%."
             }
         }
         
@@ -1868,10 +1949,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                if !speedOfSound.isEmpty {
-                    Text("Speed of sound: \(speedOfSound) m/s")
-                        .padding()
-                }
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Speed of sound: \(speedOfSound) m/s")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
             }
@@ -1988,9 +2075,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                Text("Result: \(result)")
-                    .padding()
-                
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Result: \(result)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 Spacer()
             }
             .padding()
@@ -2114,8 +2208,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                Text("Result: \(result)")
-                    .padding()
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Result: \(result)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
             }
@@ -2230,8 +2332,16 @@ struct CalculatorView: View {
                 .buttonStyle(MyButtonStyle())
                 .padding()
                 
-                Text("Tip Amount: \(result)")
-                    .padding()
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
+                    .frame(height: 36) // Adjust height as needed
+                    .overlay(
+                        HStack{
+                        Text("Tip Amount: \(result)")
+                                .padding(.leading)
+                            Spacer()
+                        }
+                    )
                 
                 Spacer()
             }
