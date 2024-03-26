@@ -43,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B820431C2BB357E8008F84A5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B83781AA2B5D9FC1007FDC6C /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		B83781AC2B5DA01E007FDC6C /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		B83781AE2B5DA051007FDC6C /* ConverterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterView.swift; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				B8C7F1352B794FE9008BB15D /* DataManager.swift */,
+				B820431C2BB357E8008F84A5 /* PrivacyInfo.xcprivacy */,
 				B8D9DF3B2B5851C5000651B1 /* CalcHammerApp.swift */,
 				B8D9DF3D2B5851C5000651B1 /* ContentView.swift */,
 				B853B9272BAB3DFB002A596F /* ButtonStyle.swift */,
