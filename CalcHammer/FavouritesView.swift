@@ -16,7 +16,6 @@ struct FavouritesView: View {
         "Date Difference Calculator": AnyView(CalculatorView.DateDifferenceCalculatorView()),
         "Accumulated Depreciation Calculator": AnyView(CalculatorView.AccumulatedDepreciationView()),
         "Grade Calculator": AnyView(CalculatorView.GradeCalculatorView()),
-        "BMI Calculator": AnyView(CalculatorView.BMICalculatorView()),
         "Compound Interest Calculator": AnyView(CalculatorView.CompoundInterestCalculatorView()),
         "Caffeine Half-Life Calculator": AnyView(CalculatorView.CaffeineHalfLifeCalculatorView()),
         "Alcohol Dilution Calculator": AnyView(CalculatorView.AlcoholDilutionCalculatorView()),

@@ -23,7 +23,6 @@ struct CalculatorView: View {
         "Date Difference Calculator",
         "Accumulated Depreciation Calculator",
         "Grade Calculator",
-        "BMI Calculator",
         "Compound Interest Calculator",
         "Caffeine Half-Life Calculator",
         "Alcohol Dilution Calculator",
@@ -43,7 +42,6 @@ struct CalculatorView: View {
         "Date Difference Calculator": AnyView(DateDifferenceCalculatorView()),
         "Accumulated Depreciation Calculator": AnyView(AccumulatedDepreciationView()),
         "Grade Calculator": AnyView(GradeCalculatorView()),
-        "BMI Calculator": AnyView(BMICalculatorView()),
         "Compound Interest Calculator": AnyView(CompoundInterestCalculatorView()),
         "Caffeine Half-Life Calculator": AnyView(CaffeineHalfLifeCalculatorView()),
         "Alcohol Dilution Calculator": AnyView(AlcoholDilutionCalculatorView()),
@@ -126,171 +124,6 @@ struct CalculatorView: View {
             }
             .onDisappear {
                 searchBarHidden = true
-            }
-        }
-    }
-    
-    struct BMICalculatorView: View, Calculators{
-        @State private var weight = ""
-        @State private var height = ""
-        @State private var feet = ""
-        @State private var inches = ""
-        @State private var isMetric = true // Toggle for metric/imperial system
-        @State private var bmi = "" // Output BMI value
-        @State private var isInfoPopoverVisible = false
-        @StateObject private var favouriteItems = FavouriteItems.shared
-        @StateObject var userSettings = UserSettings() // Initialize UserSettings
-
-            
-        @State private var isFavourite: Bool = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
-        @Environment(\.modelContext) private var context
-                func addHistoryItem(historyText: String, context: ModelContext) {
-                    if userSettings.showHistoryTab{
-                        saveToHistory(historyText: historyText, context: context)
-                    }
-                }
-
-        var body: some View {
-            VStack {
-                HStack{
-                    if userSettings.showFavouritesTab{
-                        Button(action: {
-                            isFavourite.toggle()
-                            
-                            if isFavourite {
-                                favouriteItems.addFavouriteCalculator("BMI Calculator")
-                            } else {
-                                favouriteItems.removeFavouriteCalculator("BMI Calculator")
-                            }
-                        }) {
-                            Image(systemName: isFavourite ? "heart.fill" : "heart")
-                                .font(.title)
-                                .foregroundColor(isFavourite ? .red : .gray)
-                        }
-                        .padding()
-                        .onAppear {
-                            // Update favorite status on view appear
-                            isFavourite = FavouriteItems.shared.favouriteCalculators.contains("BMI Calculator")
-                        }
-                    }
-                    
-                    Spacer()
-                    Button(action: {
-                        isInfoPopoverVisible.toggle()
-                    }) {
-                        Image(systemName: "info.circle")
-                            .padding()
-                    }
-                    .popover(isPresented: $isInfoPopoverVisible) {
-                        VStack {
-                            Text("BMI calculates body fat using weight and height, helping assess health risks. Input weight and height to get your BMI, a key indicator for health professionals. Visit Health Canada for more info.")
-                                .padding()
-                                .presentationCompactAdaptation(.popover)
-
-                        }
-                        .frame(width: 300, height: 200) // Set preferred size for the popover
-                    }
-                }
-                Toggle(isOn: $isMetric) {
-                    Text("Metric")
-                }
-                .padding()
-                
-                
-                TextField(isMetric ? "Enter weight (kg)" : "Enter weight (lbs)", text: $weight)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                            .frame(height: 36) // Adjust height as needed
-                    )
-                
-                if isMetric {
-                    TextField("Enter height (m)", text: $height)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.decimalPad)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                                .frame(height: 36) // Adjust height as needed
-                        )
-                } else {
-                    HStack {
-                        TextField("Feet", text: $feet)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                                    .frame(height: 36) // Adjust height as needed
-                            )
-                        TextField("Inches", text: $inches)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .keyboardType(.decimalPad)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                                    .frame(height: 36) // Adjust height as needed
-                            )
-                    }
-                }
-                
-                Button("Calculate BMI") {
-                    calculateBMI()
-                }
-                .buttonStyle(MyButtonStyle())
-                .padding()
-                
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color("BoxStrokeColors"), lineWidth: 2)
-                    .frame(height: 36) // Adjust height as needed
-                    .overlay(
-                        HStack{
-                            Text("BMI: \(bmi)")
-                                .padding(.leading)
-                            Spacer()
-                        }
-                            )
-                
-                Spacer()
-            }
-            .padding()
-                    .navigationTitle("BMI Calculator")
-                    .background(
-                        Color.white.opacity(0.0001) // Color makes it so tap gesture works, don't question it
-                            .onTapGesture { // Dismisses keyboard when user taps anywhere outside text field
-                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            }
-                    )
-            
-        }
-        
-
-        private func calculateBMI() {
-            guard let weight = Double(weight), let heightValue = Double(height), heightValue != 0 else {
-                return
-            }
-            
-            var adjustedHeight = heightValue
-            var adjustedWeight = weight
-            
-            if !isMetric {
-                    let feetValue = Double(feet) ?? 0.0
-                    let inchesValue = Double(inches) ?? 0.0
-                    
-                    // If feet or inches is nil, set them to 0
-                    adjustedHeight = ((feetValue != 0 ? feetValue : 0) * 12 + (inchesValue != 0 ? inchesValue : 0)) * 0.0254 // Convert inches to meters
-                    adjustedWeight *= 0.453592 // Convert pounds to kilograms
-                }
-            
-            let bmiValue = adjustedWeight / (adjustedHeight * adjustedHeight)
-            bmi = String(format: "%.2f", bmiValue)
-            
-            if isMetric {
-                addHistoryItem(historyText: "\(bmi) BMI calculated from \(weight) kg and \(height) m.", context: context)
-            } else {
-                addHistoryItem(historyText: "\(bmi) BMI from \(weight) lbs and \(height) inches.", context: context)
             }
         }
     }
